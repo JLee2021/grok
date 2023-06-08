@@ -1,0 +1,86 @@
+[
+    {
+        "column_name": "DNUM",
+        "name": "UNKNOWN",
+        "value": 0,
+        "descr": "UNKNOWN"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "DAVE HANDRIGAN SEAFOODS INC",
+        "value": 913,
+        "descr": "DAVE HANDRIGAN SEAFOODS INC"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "OCEAN CREST SEAFOODS INC",
+        "value": 998,
+        "descr": "OCEAN CREST SEAFOODS INC"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "PORTLAND FISH EXCHANGE",
+        "value": 1078,
+        "descr": "PORTLAND FISH EXCHANGE"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "BERGIES SEAFOOD INC",
+        "value": 1393,
+        "descr": "BERGIES SEAFOOD INC"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "YANKEE FISHERMANS COOPERATIVE",
+        "value": 1478,
+        "descr": "YANKEE FISHERMANS COOPERATIVE"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "ATLANTIC COAST SEAFOOD INC",
+        "value": 1537,
+        "descr": "ATLANTIC COAST SEAFOOD INC"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "WHALING CITY DISPLAY AUCTION",
+        "value": 2110,
+        "descr": "WHALING CITY DISPLAY AUCTION"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "CAPT VINCE INC",
+        "value": 2461,
+        "descr": "CAPT VINCE INC"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "NMFS NEFSC COOP RESEARCH",
+        "value": 3827,
+        "descr": "NMFS NEFSC COOP RESEARCH"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "CAPE ANN SEAFOOD EXCHANGE INC",
+        "value": 4078,
+        "descr": "CAPE ANN SEAFOOD EXCHANGE INC"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "FISHERMANS WHARF GLOUCESTER LL",
+        "value": 4161,
+        "descr": "FISHERMANS WHARF GLOUCESTER LL"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "BLUE HARVEST MARINE SERVICES",
+        "value": 4324,
+        "descr": "BLUE HARVEST MARINE SERVICES"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "GULF OF MAINE SASHIMI INC",
+        "value": 4535,
+        "descr": "GULF OF MAINE SASHIMI INC"
+    }
+]

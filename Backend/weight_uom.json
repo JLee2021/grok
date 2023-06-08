@@ -1,0 +1,152 @@
+[
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "NULL",
+        "value": null,
+        "descr": "NULL"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "AG",
+        "value": "AG",
+        "descr": "AGRICULTURAL BUSHEL (2150.4 cu in, MAHOGANY CLAMS)"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "BG",
+        "value": "BG",
+        "descr": "BAGS OR SACKS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "BR",
+        "value": "BR",
+        "descr": "BARRELS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "BU",
+        "value": "BU",
+        "descr": "BUSHELS OR BASKETS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "BX",
+        "value": "BX",
+        "descr": "BOXES"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "CT",
+        "value": "CT",
+        "descr": "CARTON"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "DZ",
+        "value": "DZ",
+        "descr": "DOZENS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "GL",
+        "value": "GL",
+        "descr": "GALLONS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "GM",
+        "value": "GM",
+        "descr": "GRAMS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "HH",
+        "value": "HH",
+        "descr": "HOGSHEADS (1225 POUNDS; USED IN SARDINE INDUSTRY)"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "KG",
+        "value": "KG",
+        "descr": "KILOGRAMS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "LB",
+        "value": "LB",
+        "descr": "POUNDS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "LT",
+        "value": "LT",
+        "descr": "LITER"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "MP",
+        "value": "MP",
+        "descr": "MEAT POUNDS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "MT",
+        "value": "MT",
+        "descr": "METRIC TONS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "NO",
+        "value": "NO",
+        "descr": "NUMBERS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "OZ",
+        "value": "OZ",
+        "descr": "OUNCES"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "PS",
+        "value": "PS",
+        "descr": "POUNDS IN SHELL"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "QT",
+        "value": "QT",
+        "descr": "QUARTS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "TH",
+        "value": "TH",
+        "descr": "THOUSANDS OF STANDARD FISH (670 LBS MENHADEN)"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "TN",
+        "value": "TN",
+        "descr": "SHORT TONS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "TT",
+        "value": "TT",
+        "descr": "TOTES"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "TY",
+        "value": "TY",
+        "descr": "TRAYS"
+    },
+    {
+        "column_name": "UNIT_WEIGHT_UOM",
+        "name": "UK",
+        "value": "UK",
+        "descr": "UNKNOWN UNIT"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "column_name": "PORT",
+        "name": "POINT JUDITH",
+        "value": 420209,
+        "descr": "POINT JUDITH, RI"
+    },
+    {
+        "column_name": "PORT",
+        "name": "NEW BEDFORD",
+        "value": 240403,
+        "descr": "NEW BEDFORD, MA"
+    },
+    {
+        "column_name": "PORT",
+        "name": "GLOUCESTER",
+        "value": 240207,
+        "descr": "GLOUCESTER, MA"
+    },
+    {
+        "column_name": "PORT",
+        "name": "BOSTON",
+        "value": 240115,
+        "descr": "BOSTON, MA"
+    },
+    {
+        "column_name": "PORT",
+        "name": "PORTLAND",
+        "value": 220101,
+        "descr": "PORTLAND, ME"
+    }
+]

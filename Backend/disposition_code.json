@@ -1,0 +1,38 @@
+[
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "000",
+        "value": "000",
+        "descr": "DISCARDED, UNKNOWN REASON"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "031",
+        "value": "031",
+        "descr": "POOR QUALITY, REASON NOT SPECIFIED"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "043",
+        "value": "043",
+        "descr": "NOT BROUGHT ON BOARD, FELL OUT/OFF OF GEAR"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "052",
+        "value": "052",
+        "descr": "INCIDENTAL TAKE (MAMMAL, SEA TURTLE, SEA BIRD)"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "099",
+        "value": "099",
+        "descr": "DISCARDED, OTHER"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "900",
+        "value": "900",
+        "descr": "UNKNOWN KEPT OR DISCARDED"
+    }
+]
