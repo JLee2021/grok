@@ -1,0 +1,158 @@
+[
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "BIRD, NK",
+        "value": "174371",
+        "descr": "BIRD, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "COD, ATLANTIC",
+        "value": "164712",
+        "descr": "COD, ATLANTIC"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "DOLPHIN, NK (MAMMAL)",
+        "value": "180415",
+        "descr": "DOLPHIN, NK (MAMMAL)"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "FISH, NK",
+        "value": "914179",
+        "descr": "FISH, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "FLOUNDER, AMERICAN PLAICE",
+        "value": "172877",
+        "descr": "FLOUNDER, AMERICAN PLAICE"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "FLOUNDER, SAND DAB (WINDOWPANE)",
+        "value": "172746",
+        "descr": "FLOUNDER, SAND DAB (WINDOWPANE)"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "FLOUNDER, WINTER (BLACKBACK)",
+        "value": "172905",
+        "descr": "FLOUNDER, WINTER (BLACKBACK)"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "FLOUNDER, WITCH (GREY SOLE)",
+        "value": "172873",
+        "descr": "FLOUNDER, WITCH (GREY SOLE)"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "FLOUNDER, YELLOWTAIL",
+        "value": "172909",
+        "descr": "FLOUNDER, YELLOWTAIL"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "HADDOCK",
+        "value": "164744",
+        "descr": "HADDOCK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "HAKE, RED/WHITE/SPOTD/SOUTHERN MIX",
+        "value": "164729",
+        "descr": "HAKE, RED/WHITE/SPOTD/SOUTHERN MIX"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "HAKE, WHITE",
+        "value": "164732",
+        "descr": "HAKE, WHITE"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "HALIBUT, ATLANTIC",
+        "value": "172933",
+        "descr": "HALIBUT, ATLANTIC"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "OCEAN POUT",
+        "value": "630979",
+        "descr": "OCEAN POUT"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "POLLOCK",
+        "value": "164727",
+        "descr": "POLLOCK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "RAY, NK",
+        "value": "160806",
+        "descr": "RAY, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "SCORPIONFISH, NK",
+        "value": "166704",
+        "descr": "SCORPIONFISH, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "SEAL, NK",
+        "value": "180640",
+        "descr": "SEAL, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "SHARK, NK",
+        "value": "159785",
+        "descr": "SHARK, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "STURGEON, NK",
+        "value": "161064",
+        "descr": "STURGEON, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "SWORDFISH",
+        "value": "172482",
+        "descr": "SWORDFISH"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "TUNA, NK",
+        "value": "172418",
+        "descr": "TUNA, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "TURTLE, NK",
+        "value": "948936",
+        "descr": "TURTLE, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "VERTEBRATES, UNCLASSIFIED",
+        "value": "331030",
+        "descr": "VERTEBRATES, UNCLASSIFIED"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "WHALE, NK",
+        "value": "180403",
+        "descr": "WHALE, NK"
+    },
+    {
+        "column_name": "SPECIES_ITIS",
+        "name": "WOLFFISH, ATLANTIC",
+        "value": "171341",
+        "descr": "WOLFFISH, ATLANTIC"
+    }
+]

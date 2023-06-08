@@ -1,0 +1,26 @@
+[
+    {
+        "column_name": "GRADE_CODE",
+        "name": "00",
+        "value": "00",
+        "descr": "UNKNOWN"
+    },
+    {
+        "column_name": "GRADE_CODE",
+        "name": "01",
+        "value": "01",
+        "descr": "ROUND"
+    },
+    {
+        "column_name": "GRADE_CODE",
+        "name": "23",
+        "value": "23",
+        "descr": "GUTTED, HEAD ON, TAIL ON"
+    },
+    {
+        "column_name": "GRADE_CODE",
+        "name": "24",
+        "value": "24",
+        "descr": "GUTTED, HEADS OFF, TAIL ON, BELLY FLAPS ATTACHED"
+    }
+]
