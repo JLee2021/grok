@@ -1,4 +1,4 @@
-<?php require_once('includes/header.php'); ?>
+<?php include('includes/header.php'); ?>
         <section id="test-section-id" class="usa-section">
             <div class="grid-container">
         <form class="usa-form">
@@ -40,4 +40,4 @@
           </form>
         </div>
     </section>
-<?php require_once('includes/footer.php'); ?>
+<?php include('includes/footer.php'); ?>

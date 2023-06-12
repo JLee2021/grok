@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/';
+    public $baseURL = 'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/';
 
     /**
      * --------------------------------------------------------------------------
