@@ -2,3 +2,4 @@
 
 .env
 ProjectOnePHP/writable/debugbar/*
+ProjectOnePHP/writable/logs/*
