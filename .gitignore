@@ -1,4 +1,4 @@
-/* gitignore */
+/* gitignore *
 
-.env*
-ProjectOnePHP/writable/
+ProjectOnePHP/.env*
+ProjectOnePHP/writable/*
