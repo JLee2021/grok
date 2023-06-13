@@ -1,5 +1,4 @@
 /* gitignore */
 
-.env
-ProjectOnePHP/writable/debugbar/*
-ProjectOnePHP/writable/logs/*
+.env*
+ProjectOnePHP/writable/
