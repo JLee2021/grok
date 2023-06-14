@@ -2,7 +2,8 @@
 
 //TODO: Write functions to replace variables
 $app_downloaded = false;
-$token = true;
+$token = "value from server";
+$token = isset($_SESSION[$token]);
 
 if($app_downloaded && $token){
   include('dashboard-user.php');
