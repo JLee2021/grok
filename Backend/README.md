@@ -13,21 +13,24 @@ Example request:
 POST https://nefsctest.nmfs.local/grok/html/Backend/public/index.php/api/auth?email=first.lastname@noaa.gov&password=1W2q4R9V8  
 
 Example response (fail):
+```
 {
     "error": true,
     "authenticated": false
 }
+```
 
 Example response (success):
+```
 {
   "error": false,
   "authenticated": true,
   "username": "thomas.liebert",
   "token": "G8tmytdgOf02775TZtTwwRiaMDNLMxnz6iwandGa"
 }
+```
 
-
-### GET /select_aptions/{fieldname}  
+### GET /select_options/{fieldname}  
 
 This resource returns valid values for common fields/ database columns. Available fieldnames include:  
   - disposition_code
@@ -45,12 +48,15 @@ Example request:
 GET https://nefsctest.nmfs.local/grok/html/Backend/public/index.php/api/select_options/dnum  
 
 Example response (fail):
+```
 {
   "error": true,
   "message": "not authorized"
 }  
+```
 
 Example response (success):
+```
 [
     {
         "column_name": "DNUM",
@@ -71,6 +77,7 @@ Example response (success):
         "descr": "OCEAN CREST SEAFOODS INC"
     }
 ]
+```
 
 ## Change log  
 
