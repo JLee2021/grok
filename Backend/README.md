@@ -1,54 +1,78 @@
-# CodeIgniter 4 Framework
+# grok Backend Api
 
-## What is CodeIgniter?
+## Available Api Resources
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+### POST /auth
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+This resource authenticates an email, password against NOAA's ldap authentication.  
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+All responses include 'error' and 'authenticated' attributes.  
+A successful response will also include 'token' attribute, which is stored server-side in the session cookie.
 
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+Example request:
+POST https://nefsctest.nmfs.local/grok/html/Backend/public/index.php/api/auth?email=first.lastname@noaa.gov&password=1W2q4R9V8  
 
-## Important Change with index.php
+Example response (fail):
+{
+    "error": true,
+    "authenticated": false
+}
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Example response (success):
+{
+  "error": false,
+  "authenticated": true,
+  "username": "thomas.liebert",
+  "token": "G8tmytdgOf02775TZtTwwRiaMDNLMxnz6iwandGa"
+}
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
 
-**Please** read the user guide for a better explanation of how CI4 works!
+### GET /select_aptions/{fieldname}  
 
-## Repository Management
+This resource returns valid values for common fields/ database columns. Available fieldnames include:  
+  - disposition_code
+  - dnum
+  - grade_code
+  - obsid
+  - port  
+  - species_itis  
+  - vessel_permit_num  
+  - weight_uom  
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+This resource REQUIRES a valid X-API-TOKEN header value to be set when submitting (obtained when authenticating via GET /auth resource).
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Example request:
+GET https://nefsctest.nmfs.local/grok/html/Backend/public/index.php/api/select_options/dnum  
 
-## Contributing
+Example response (fail):
+{
+  "error": true,
+  "message": "not authorized"
+}  
 
-We welcome contributions from the community.
+Example response (success):
+[
+    {
+        "column_name": "DNUM",
+        "name": "UNKNOWN",
+        "value": 0,
+        "descr": "UNKNOWN"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "DAVE HANDRIGAN SEAFOODS INC",
+        "value": 913,
+        "descr": "DAVE HANDRIGAN SEAFOODS INC"
+    },
+    {
+        "column_name": "DNUM",
+        "name": "OCEAN CREST SEAFOODS INC",
+        "value": 998,
+        "descr": "OCEAN CREST SEAFOODS INC"
+    }
+]
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+## Change log  
 
-## Server Requirements
-
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+[2023-06-14]
+  - Initial deployement: POST /auth and GET /select_options

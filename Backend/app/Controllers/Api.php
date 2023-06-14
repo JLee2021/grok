@@ -15,7 +15,7 @@ class Api extends BaseController
         $this->session = \Config\Services::session();
         $token = $this->session->token;
         $headers = getallheaders();
-        $request_token = $headers['X-API-TOKEN'];
+        if(array_key_exists('X-API-TOKEN',$headers)) { $request_token = $headers['X-API-TOKEN']; }else { $request_token = NULL; };
         $this->response->setHeader('Content-type', 'application/json');
         if((isset($token))&&(isset($request_token))&&($token==$request_token))
         {
