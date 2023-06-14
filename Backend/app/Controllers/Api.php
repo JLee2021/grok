@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 class Api extends BaseController
 {
+
     public function index()
     {
         return view('welcome_message');
@@ -11,12 +12,25 @@ class Api extends BaseController
 
     public function select_options($fieldname)
     {
-        $viewname = 'lists/'.$fieldname.'.json';
+        $this->session = \Config\Services::session();
+        $token = $this->session->token;
+        $headers = getallheaders();
+        $request_token = $headers['X-API-TOKEN'];
         $this->response->setHeader('Content-type', 'application/json');
-        return view($viewname);
+        if((isset($token))&&(isset($request_token))&&($token==$request_token))
+        {
+            $viewname = 'lists/'.$fieldname.'.json';
+            $this->response->setStatusCode(200);
+            return view($viewname);
+        }else {
+          $data = array('error' => TRUE, 'message' => 'not authorized'); //, 'token' => $token, 'headers' => $this->request->headers(), 'all_headers' => getallheaders());
+          return $this->response->setJSON($data);
+        }
     }
     public function auth()
     {
+        $session = session();
+
         $return = new \stdClass;
         $return->error = TRUE;
         $return->authenticated = FALSE;
@@ -33,7 +47,9 @@ class Api extends BaseController
             $return->username = $username;
             helper('text');
             $return->token = random_string('alnum', 40);
+            $session->set('token',$return->token);
         }
+        $return->session = $_SESSION;
         $this->response->setHeader('Content-type', 'application/json');
         return json_encode($return);
 
