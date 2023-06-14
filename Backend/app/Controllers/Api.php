@@ -49,7 +49,7 @@ class Api extends BaseController
             $return->token = random_string('alnum', 40);
             $session->set('token',$return->token);
         }
-        $return->session = $_SESSION;
+
         $this->response->setHeader('Content-type', 'application/json');
         return json_encode($return);
 
