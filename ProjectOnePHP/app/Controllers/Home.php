@@ -53,4 +53,9 @@ class Home extends BaseController
   {
     return view('form-links');
   }
+
+  public function splash()
+  {
+    return view('splash');
+  }
 }
