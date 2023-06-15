@@ -11,7 +11,10 @@ class Home extends BaseController
 
   public function login()
   {
-    return view('login');
+    return view('includes/header')
+            . view('login')
+            . view('js/login.js')
+            . view('includes/footer');
   }
 
   public function dashboard()
@@ -38,7 +41,7 @@ class Home extends BaseController
   {
     return view('new-catch');
   }
-  
+
   public function log_catch()
   {
     return view('log-catch');
