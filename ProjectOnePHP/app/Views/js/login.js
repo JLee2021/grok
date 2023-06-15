@@ -22,7 +22,7 @@ function login() {
         //result => alert(JSON.stringify(result, null, 2))
         result => function(result) {
           if(result.authenticated) {
-            alert('authenticated, refresh!');
+            location.reload();
           }else {
             alert('authentication failure');
           }
