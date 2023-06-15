@@ -51,4 +51,14 @@ class Home extends BaseController
   {
     return view('end-haul');
   }
+
+  public function form_links()
+  {
+    return view('form-links');
+  }
+
+  public function splash()
+  {
+    return view('splash');
+  }
 }
