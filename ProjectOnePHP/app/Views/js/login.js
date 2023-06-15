@@ -10,9 +10,10 @@ function login() {
     });
 
     //const api_url = 'https://nefsctest.nmfs.local/grok/html/Backend/public/index.php/api';
-    const api_url = 'http://127.0.0.1:8080/grok/Backend/public/index.php/api';
+    let base_url = '<?php echo base_url(); ?>';
+        base_url = base_url.replace('ProjectOnePHP', 'Backend');
 
-    fetch(api_url + '/auth', {
+    fetch(base_url + '/public/index.php/api/auth', {
       method: 'POST',
       body: JSON.stringify(data)
     })
