@@ -13,20 +13,21 @@ function login() {
     let base_url = '<?php echo base_url(); ?>';
         base_url = base_url.replace('ProjectOnePHP', 'Backend');
 
-    fetch(base_url + '/public/index.php/api/auth', {
+    fetch(base_url + '/index.php/api/auth', {
       method: 'POST',
+      mode: 'cors',
       body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(
-        //result => alert(JSON.stringify(result, null, 2))
-        result => function(result) {
-          if(result.authenticated) {
+        result => alert(JSON.stringify(result, null, 2))
+        /*
+        if(result.authenticated) {
             location.reload();
-          }else {
+        }else {
             alert('authentication failure');
-          }
         }
+        */
     )
 
 }

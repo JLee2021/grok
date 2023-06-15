@@ -34,8 +34,11 @@ class Api extends BaseController
         $return = new \stdClass;
         $return->error = TRUE;
         $return->authenticated = FALSE;
-        $email = $this->request->getPostGet('email');
-        $password = $this->request->getPostGet('password');
+        //$email = $this->request->getPostGet('email');
+        //$password = $this->request->getPostGet('password');
+        $json = $this->request->getJSON();
+        $email = $json->email;
+        $password = $json->password;
         $username = str_replace("@noaa.gov","",strtolower($email));
         $ldapconn = ldap_connect("ldaps://whitepages.noaa.gov") or die("Could not connect");
         $ldapbind = @ldap_bind($ldapconn, "uid=".($username).",ou=people,dc=noaa,dc=gov", $password);
