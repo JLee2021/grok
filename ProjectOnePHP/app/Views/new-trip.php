@@ -1,4 +1,3 @@
-<?php require_once('includes/header.php'); ?>
 <section id="test-section-id" class="usa-section">
     <div class="grid-container">
         <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
@@ -14,4 +13,3 @@
         </div>
     </div>
 </section>
-<?php require_once('includes/footer.php'); ?>
