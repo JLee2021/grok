@@ -9,25 +9,27 @@ function login() {
       }
     });
 
-    //const api_url = 'https://nefsctest.nmfs.local/grok/html/Backend/public/index.php/api';
-    let base_url = '<?php echo base_url(); ?>';
-        base_url = base_url.replace('ProjectOnePHP', 'Backend');
+    //let base_url = '<?php echo base_url(); ?>';
+    let base_url = 'http://127.0.0.1:8080/grok/ProjectOnePHP/public';
 
-    fetch(base_url + '/index.php/api/auth', {
+    let headers = {"Content-type": "application/json;charset=UTF-8"};
+    fetch(base_url + '/index.php/auth', {
       method: 'POST',
-      mode: 'cors',
+      //headers: headers,
+      mode: 'same-origin',
       body: JSON.stringify(data)
     })
     .then(response => response.json())
-    .then(
-        result => alert(JSON.stringify(result, null, 2))
-        /*
-        if(result.authenticated) {
-            location.reload();
-        }else {
-            alert('authentication failure');
-        }
-        */
-    )
+    .then( result => gotToHere(result))
+    .catch(err => console.log('Request Failed', err)); // Catch errors
 
+}
+
+function gotToHere(json) {
+      if(json.authenticated) {
+        //location.reload();
+        alert('authentication success');
+    }else {
+        alert('authentication failure');
+    }
 }

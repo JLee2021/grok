@@ -9,21 +9,33 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
-  public function login()
-  {
-    return view('includes/header')
-            . view('login')
-            . view('js/login.js')
-            . view('includes/footer');
-  }
+    public function login()
+    {
+      $this->session = \Config\Services::session();
+      $data = array('auth_msg' => $this->session->auth_msg);
+      $this->session->destroy();
 
-  public function dashboard()
-  {
-    return view('includes/header')
-            . view('dashboard-user')
-            // . view('js/main.js')
-            . view('includes/footer');
-  }
+      return view('includes/header')
+              . view('login', $data)
+              //. view('js/login.js')
+              . view('includes/footer');
+    }
+    private function get_token_script()
+    {
+        $this->session = \Config\Services::session();
+        $token = $this->session->token;
+        return '        const token="'.$token.'";'."\n";
+    }
+
+    public function dashboard()
+    {
+      //return view('dashboard-user');
+      return view('includes/header')
+              . view('dashboard-user')
+              . $this->get_token_script()
+              . view('includes/footer');
+    }
+
 
   public function dashboard_trip()
   {

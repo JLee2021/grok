@@ -1,6 +1,7 @@
         <section id="test-section-id" class="usa-section">
             <div class="grid-container">
-        <form class="usa-form" id="grok_form_login" onsubmit="event.preventDefault();">
+            <div id="grok_fail_div"><?php echo $auth_msg; ?></div>
+        <form class="usa-form" id="grok_form_login" method="POST" action="<?php echo base_url(); ?>/index.php/auth">
             <fieldset class="usa-fieldset">
               <legend class="usa-legend usa-legend--large">ADE</legend>
               <label class="usa-label" for="email">User ID</label>
@@ -31,7 +32,7 @@
               >
                 Show password
               </button>
-              <input class="usa-button" type="submit" onclick="login();" value="Sign in" />
+              <input class="usa-button" type="submit" value="Sign in" />
               <p>
                 <a href="javascript:void()" title="Forgot password">Forgot password?</a>
               </p>
