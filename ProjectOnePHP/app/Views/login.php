@@ -1,7 +1,7 @@
         <section id="test-section-id" class="usa-section">
             <div class="grid-container">
             <div id="grok_fail_div"><?php echo $auth_msg; ?></div>
-        <form class="usa-form" id="grok_form_login" method="POST" action="./auth">
+        <form class="usa-form" id="grok_form_login" method="POST" action="<?php echo base_url(); ?>/index.php/auth">
             <fieldset class="usa-fieldset">
               <legend class="usa-legend usa-legend--large">ADE</legend>
               <label class="usa-label" for="email">User ID</label>
