@@ -19,46 +19,80 @@ class Home extends BaseController
 
   public function dashboard()
   {
-    return view('dashboard-user');
+    return view('includes/header')
+            . view('dashboard-user')
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 
   public function dashboard_trip()
   {
-    return view('dashboard-trip');
+    return view('includes/header')
+            . view('dashboard-trip')
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 
   public function new_trip()
   {
-    return view('new-trip');
+    return view('includes/header')
+            . view('new-trip')
+            . view('includes/footer');
   }
 
   public function new_haul()
   {
-    return view('new-haul');
+    return view('includes/header')
+            . view('new-haul')
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 
     public function new_catch()
   {
-    return view('new-catch');
+    return view('includes/header')
+            . view('new-catch')
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 
   public function log_catch()
   {
-    return view('log-catch');
+    return view('includes/header')
+            . view('log-catch')
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 
   public function end_haul()
   {
-    return view('end-haul');
+    return view('includes/header')
+            . view('end-haul')
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 
   public function form_links()
   {
-    return view('form-links');
+    return view('includes/header')
+            . view('form-links')
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 
   public function splash()
   {
-    return view('splash');
+    return view('includes/header')
+            . view('splash')
+            // . view('js/main.js')
+            . view('includes/footer');
+  }
+
+  public function gps()
+  {
+    return view('includes/header')
+            . view('gps')
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 }
