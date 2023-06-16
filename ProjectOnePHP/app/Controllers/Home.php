@@ -37,7 +37,6 @@ class Home extends BaseController
   {
     return view('includes/header')
             . view('new-trip')
-            // . view('js/main.js')
             . view('includes/footer');
   }
 
