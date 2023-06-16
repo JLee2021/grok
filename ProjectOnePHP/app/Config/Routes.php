@@ -40,6 +40,7 @@ $routes->get('/new-haul', 'Home::new_haul');
 $routes->get('/end-haul', 'Home::end_haul');
 $routes->get('/new-catch', 'Home::new_catch');
 $routes->get('/log-catch', 'Home::log_catch');
+$routes->post('/auth', 'Auth::index');
 
 /*
  * --------------------------------------------------------------------
