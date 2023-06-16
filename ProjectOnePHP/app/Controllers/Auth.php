@@ -40,10 +40,14 @@ class Auth extends BaseController
             //helper('text');
             //$return->token = random_string('alnum', 40);
             $session->set('token',$return->token);
+            return redirect()->to('home/dashboard');
+        }else {
+            $session->set('auth_msg','not authorized');
+            return redirect()->to('/');
         }
 
-        $this->response->setHeader('Content-type', 'application/json');
-        return json_encode($return);
+        //$this->response->setHeader('Content-type', 'application/json');
+        //return json_encode($return);
 
     }
 
