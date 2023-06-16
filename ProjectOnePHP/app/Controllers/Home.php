@@ -87,4 +87,12 @@ class Home extends BaseController
             // . view('js/main.js')
             . view('includes/footer');
   }
+
+  public function gps()
+  {
+    return view('includes/header')
+            . view('gps')
+            // . view('js/main.js')
+            . view('includes/footer');
+  }
 }
