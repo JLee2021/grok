@@ -1,36 +1,96 @@
-<?php require_once('includes/header.php'); ?>
 <section id="test-section-id" class="usa-section">
   <div class="grid-container">
     <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
       <h1 class="site-preview-heading margin-0">Start Haul</h1>
 
       <h3 class="site-preview-heading margin-0">End Datetime</h3>
-      <div class="usa-form-group">
+
+      <form class="usa-form" id="new_haul" onsubmit="event.preventDefault();">
         <label class="usa-label" id="appointment-date-label" for="appointment-date">End date</label>
         <div class="usa-hint" id="appointment-date-hint">mm/dd/yyyy</div>
         <div class="usa-date-picker">
-          <input class="usa-input" id="appointment-date" name="appointment-date" aria-labelledby="appointment-date-label" aria-describedby="appointment-date-hint" />
+          <input class="usa-input" id="haul-date" name="appointment-date" aria-labelledby="appointment-date-label" aria-describedby="appointment-date-hint" />
         </div>
       </div>
       <div class="usa-form-group">
         <label class="usa-label" id="appointment-time-label" for="appointment-time">End time</label>
         <div class="usa-hint" id="appointment-time-hint">hh:mm</div>
         <div class="usa-time-picker">
-          <input class="usa-input" id="appointment-time" name="appointment-time" aria-describedby="appointment-time-label appointment-time-hint" />
+          <input class="usa-input" id="haul-time" name="appointment-time" aria-describedby="appointment-time-label appointment-time-hint" />
         </div>
       </div>
       <br><br><br>
       <h3 class="site-preview-heading margin-0">End GPS</h3>
       <p>GPS: </p>
-      <label class="usa-label" for="input-type-text">Lat:</label><input class="usa-input" id="input-type-text" name="input-type-text" />
-      <label class="usa-label" for="input-type-text">Lon:</label><input class="usa-input" id="input-type-text" name="input-type-text" />
+      <label class="usa-label" for="input-type-text">Lat:</label>
+      <input class="usa-input" id="lat" name="input-type-text" />
+      <label class="usa-label" for="input-type-text">Lon:</label>
+      <input class="usa-input" id="lon" name="input-type-text" />
 
       <br><br>
-      <button type="button" class="usa-button usa-button--big">Start Trip</button> <br><br>
+      <button type="submit" class="usa-button usa-button--big">Start Trip</button> <br><br>
 
 
-    </div>
+      </form>
   </div>
 </section>
 
-<?php require_once('includes/footer.php'); ?>
+<script>
+  const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+function success(pos) {
+  const crd = pos.coords;
+
+  var lat = crd.latitude;
+  var lon = crd.longitude;
+  document.getElementById("lat").value = lat;
+  document.getElementById("lon").value = lon;
+
+  console.log("Your current position is:");
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+</script>
+
+
+<script>
+    let tripForm = document.getElementById("new_haul");
+
+    tripForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+    
+        let h_date = document.getElementById("haul-date");
+        let h_time = document.getElementById("haul-time");
+        let lat = document.getElementById("lat");
+        let lon = document.getElementById("lon");
+    
+        if (h_date.value == "" || h_time.value == "" || lat.value == "" || lon.value == "") {
+        alert("Ensure you input a value in all fields!");
+        } 
+        else {
+            // perform operation with form input
+            alert("This form has been successfully submitted!");
+            console.log(
+                `This form has a haul date of ${h_date.value} , a haul time of ${h_time.value} , 
+                a latitude of ${lat.value} and a longitude of ${lon.value} `
+            );
+        
+            h_date.value = "";
+            h_time.value = "";
+            lat.value = "";
+            lon.value = "";
+        }
+    });
+
+</script>

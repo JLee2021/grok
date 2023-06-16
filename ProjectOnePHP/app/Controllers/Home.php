@@ -36,6 +36,7 @@ class Home extends BaseController
               . view('includes/footer');
     }
 
+
   public function dashboard_trip()
   {
     return view('includes/header')

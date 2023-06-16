@@ -41,6 +41,9 @@ $routes->get('/end-haul', 'Home::end_haul');
 $routes->get('/new-catch', 'Home::new_catch');
 $routes->get('/log-catch', 'Home::log_catch');
 $routes->post('/auth', 'Auth::index');
+$routes->get('/form-links', 'Home::form_links');
+$routes->get('/splash', 'Home::splash');
+$routes->get('/gps', 'Home::gps');
 
 /*
  * --------------------------------------------------------------------
