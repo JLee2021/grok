@@ -14,7 +14,7 @@
     {
         $option  = '                        <option value="'.$obs->value.'" title="'.$obs->name.'"';
         if($obs->name == $username) { $option .= ' selected' ; };
-        $option .= ' disabled>'.$obs->descr.'</option>';
+        $option .= ' >'.$obs->descr.'</option>';
         echo $option;
     }
 ?>
@@ -26,7 +26,7 @@
 <?php
     foreach($vessels as $ves)
     {
-        echo '                        <option value="'.$ves->name.'" title="'.$ves->descr.'">'.$ves->name.'</option>';
+        echo '                        <option value="'.$ves->value.'" title="'.$ves->descr.'">'.$ves->name.'</option>';
     }
 ?>
                     </select>
@@ -38,7 +38,7 @@
 <?php
     foreach($ports as $port)
     {
-        echo '                        <option value="'.$port->name.'" title="'.$port->descr.'">'.$port->name.'</option>';
+        echo '                        <option value="'.$port->value.'" title="'.$port->descr.'">'.$port->name.'</option>';
     }
 ?>
                     </select>
