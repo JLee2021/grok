@@ -39,6 +39,7 @@ class Auth extends BaseController
             //$return->username = $username;
             //helper('text');
             //$return->token = random_string('alnum', 40);
+            $session->set('username',$return->username);
             $session->set('token',$return->token);
             return redirect()->to('home/dashboard');
         }else {
