@@ -9,6 +9,16 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
+    public function test($fieldname)
+    {
+      $dropdown = new \App\Models\DropdownModel();
+      $this->session = \Config\Services::session();
+      $token = $this->session->token;
+      $result = $dropdown->get_values($fieldname, $token);
+      $this->response->setHeader('Content-type', 'application/json');
+      echo json_encode($result);
+    }
+
     public function login()
     {
       $this->session = \Config\Services::session();
@@ -47,8 +57,17 @@ class Home extends BaseController
 
   public function new_trip()
   {
+    $dropdown = new \App\Models\DropdownModel();
+    $this->session = \Config\Services::session();
+    $token = $this->session->token;
+    $data = array(
+      'username' => $this->session->username,
+      'observer' => $dropdown->get_values('obsid', $token),
+      'vessels' => $dropdown->get_values('vessel_permit_num', $token),
+      'ports' => $dropdown->get_values('port', $token)
+    );
     return view('includes/header')
-            . view('new-trip')
+            . view('new-trip', $data)
             . view('includes/footer');
   }
 

@@ -12,20 +12,21 @@ class Api extends BaseController
 
     public function select_options($fieldname)
     {
-        $this->session = \Config\Services::session();
-        $token = $this->session->token;
-        $headers = getallheaders();
-        if(array_key_exists('X-API-TOKEN',$headers)) { $request_token = $headers['X-API-TOKEN']; }else { $request_token = NULL; };
+        //$this->session = \Config\Services::session();
+        //$token = $this->session->token;
+        //$headers = getallheaders();
+        //if(array_key_exists('X-API-TOKEN',$headers)) { $request_token = $headers['X-API-TOKEN']; }else { $request_token = NULL; };
         $this->response->setHeader('Content-type', 'application/json');
-        if((isset($token))&&(isset($request_token))&&($token==$request_token))
-        {
+        //if((isset($token))&&(isset($request_token))&&($token==$request_token))
+        //{
             $viewname = 'lists/'.$fieldname.'.json';
             $this->response->setStatusCode(200);
             return view($viewname);
-        }else {
-          $data = array('error' => TRUE, 'message' => 'not authorized'); //, 'token' => $token, 'headers' => $this->request->headers(), 'all_headers' => getallheaders());
+        //}else {
+        //  $data = array('error' => TRUE, 'message' => 'not authorized' //);
+        //  , 'token' => $token, 'headers' => $this->request->headers(), 'all_headers' => getallheaders(), 'session' => $_SESSION);
           return $this->response->setJSON($data);
-        }
+        //}
     }
     public function auth()
     {
