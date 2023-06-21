@@ -122,14 +122,10 @@ class Home extends BaseController
   public function splash()
   {
     $token = $this->get_token_script();
-    if(strlen($token) < 1 || $token == null){
-      return view('login');
+    if (strlen($token) < 1 || $token == null) {
+      return $this->login();
     }
-    return view('includes/header')
-      . view('dashboard-user')
-      . view('service-worker')
-      // . view('js/main.js')
-      . view('includes/footer');
+    return $this->dashboard();
   }
 
   public function gps()
@@ -140,7 +136,7 @@ class Home extends BaseController
       . view('includes/footer');
   }
 
-  public function service_worker(){
-
+  public function service_worker()
+  {
   }
 }
