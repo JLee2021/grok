@@ -9,37 +9,38 @@
                     <label class="usa-label" for="obsid">Observer ID</label>
                     <select class="usa-select" name="obsid" id="obsid">
                         <option selected="" disabled>- Select -</option>
-                        <?php
-                        foreach ($observer as $obs) {
-                            $option  = '                        <option value="' . $obs->value . '" title="' . $obs->name . '"';
-                            if ($obs->name == $username) {
-                                $option .= ' selected';
-                            };
-                            $option .= ' disabled>' . $obs->descr . '</option>';
-                            echo $option;
-                        }
-                        ?>
+<?php
+    foreach($observer as $obs)
+    {
+        $option  = '                        <option value="'.$obs->value.'" title="'.$obs->name.'"';
+        if($obs->name == $username) { $option .= ' selected' ; };
+        $option .= ' >'.$obs->descr.'</option>';
+        echo $option;
+    }
+?>
                     </select>
                     <!--vessel_permit_num -->
                     <label class="usa-label" for="vessel_permit_num">Vessel</label>
                     <select class="usa-select" name="vessel_permit_num" id="vessel_permit_num">
                         <option selected="" disabled>- Select -</option>
-                        <?php
-                        foreach ($vessels as $ves) {
-                            echo '                        <option value="' . $ves->name . '" title="' . $ves->descr . '">' . $ves->name . '</option>';
-                        }
-                        ?>
+<?php
+    foreach($vessels as $ves)
+    {
+        echo '                        <option value="'.$ves->value.'" title="'.$ves->descr.'">'.$ves->name.'</option>';
+    }
+?>
                     </select>
 
                     <!--port -->
                     <label class="usa-label" for="port">Port</label>
                     <select class="usa-select" name="port" id="port" required>
                         <option selected="" disabled>- Select -</option>
-                        <?php
-                        foreach ($ports as $port) {
-                            echo '                        <option value="' . $port->name . '" title="' . $port->descr . '">' . $port->name . '</option>';
-                        }
-                        ?>
+<?php
+    foreach($ports as $port)
+    {
+        echo '                        <option value="'.$port->value.'" title="'.$port->descr.'">'.$port->name.'</option>';
+    }
+?>
                     </select>
 
                     <label class="usa-label" for="trip_number">Trip Number</label>
