@@ -53,10 +53,16 @@ class Home extends BaseController
     }
 
 
-  public function dashboard_trip()
+  public function dashboard_trip($trip_id=null)
   {
-    return view('includes/header')
-            . view('dashboard-trip')
+    $data = array('trip_id' => $trip_id);
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => $trip_id, 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
+            . view('dashboard-trip', $data)
             // . view('js/main.js')
             . view('includes/footer');
   }
