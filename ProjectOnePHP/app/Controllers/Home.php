@@ -19,40 +19,52 @@ class Home extends BaseController
     echo json_encode($result);
   }
 
-  public function login()
-  {
-    $this->session = \Config\Services::session();
-    $data = array('auth_msg' => $this->session->auth_msg);
-    $this->session->destroy();
+    public function login()
+    {
+      $this->session = \Config\Services::session();
+      $data = array('auth_msg' => $this->session->auth_msg);
+      $this->session->destroy();
+      $breadcrumbs['nav'] =  array(
+        array('name' => 'Home', 'url' => '/'),
+        array('name' => 'Login', 'url' => null)
+      );
+      return view('includes/header', $breadcrumbs)
+              . view('login', $data)
+              //. view('js/login.js')
+              . view('includes/footer');
+    }
+    private function get_token_script()
+    {
+        $this->session = \Config\Services::session();
+        $token = $this->session->token;
+        return '        const token="'.$token.'";'."\n";
+    }
 
-    return view('includes/header')
-      . view('login', $data)
-      //. view('js/login.js')
-      . view('includes/footer');
-  }
-  private function get_token_script()
-  {
-    $this->session = \Config\Services::session();
-    $token = $this->session->token;
-    return $token;
-  }
-
-  public function dashboard()
-  {
-    //return view('dashboard-user');
-    return view('includes/header')
-      . view('dashboard-user')
-      . $this->get_token_script()
-      . view('includes/footer');
-  }
+    public function dashboard()
+    {
+      $breadcrumbs['nav'] =  array(
+        array('name' => 'Home', 'url' => '/'),
+        array('name' => 'Trips', 'url' => null)
+      );
+      return view('includes/header', $breadcrumbs)
+              . view('dashboard-user')
+              . $this->get_token_script()
+              . view('includes/footer');
+    }
 
 
-  public function dashboard_trip()
+  public function dashboard_trip($trip_id=null)
   {
-    return view('includes/header')
-      . view('dashboard-trip')
-      // . view('js/main.js')
-      . view('includes/footer');
+    $data = array('trip_id' => $trip_id);
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => $trip_id, 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
+            . view('dashboard-trip', $data)
+            // . view('js/main.js')
+            . view('includes/footer');
   }
 
   public function new_trip()
@@ -66,9 +78,14 @@ class Home extends BaseController
       'vessels' => $dropdown->get_values('vessel_permit_num', $token),
       'ports' => $dropdown->get_values('port', $token)
     );
-    return view('includes/header')
-      . view('new-trip', $data)
-      . view('includes/footer');
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'New trip', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
+            . view('new-trip', $data)
+            . view('includes/footer');
   }
 
   public function new_haul()

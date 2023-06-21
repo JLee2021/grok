@@ -5,8 +5,9 @@
                 <fieldset class="usa-fieldset">
                     <legend class="usa-legend usa-legend--small">New Trip</legend>
                     <legend class="usa-legend usa-legend--large">Atlas Data Entry</legend>
+
                     <!--obsid -->
-                    <label class="usa-label" for="obsid">Observer ID</label>
+                    <label class="usa-label" for="obsid">Observer</label>
                     <select class="usa-select" name="obsid" id="obsid">
                         <option selected="" disabled>- Select -</option>
 <?php
@@ -43,8 +44,8 @@
 ?>
                     </select>
 
-                    <label class="usa-label" for="trip_number">Trip Number</label>
-                    <input class="usa-input" id="trip_number" name="trip_number" type="text" autocapitalize="off" autocorrect="off" required />
+                    <label class="usa-label" for="trip_id">Trip ID</label>
+                    <input class="usa-input" id="trip_id" name="trip_number" type="text" title="Trip ID" placeholder="A99001" pattern="[A-Z]\d\d\d\d\d" autocapitalize="off" autocorrect="off" required />
 
 
                     <input class="usa-button" type="submit" value="Start Trip" />
