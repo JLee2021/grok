@@ -13,3 +13,21 @@
         <link rel="stylesheet" href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/assets/css/styles.css">
     </head>
     <body>
+      <div class="grid-container">
+          <nav class="usa-breadcrumb" aria-label="Breadcrumbs,,">
+            <ol class="usa-breadcrumb__list">
+<?php
+    foreach($nav as $breadcrumb)
+    {
+        if(is_null($breadcrumb['url']))
+        {
+            $html = '              <li class="usa-breadcrumb__list-item usa-current" aria-current="page"><span>'.$breadcrumb['name'].'</span></li>'."\n";
+        }else {
+            $html = '              <li class="usa-breadcrumb__list-item"><a href="'.site_url($breadcrumb['url']).'" class="usa-breadcrumb__link"><span>'.$breadcrumb['name'].'</span></a></li>'."\n";
+        }
+        echo $html;
+    }
+?>
+            </ol>
+          </nav>
+      </div>

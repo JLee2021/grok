@@ -39,8 +39,11 @@ class Home extends BaseController
 
     public function dashboard()
     {
-      //return view('dashboard-user');
-      return view('includes/header')
+      $breadcrumbs['nav'] =  array(
+        array('name' => 'Home', 'url' => '/'),
+        array('name' => 'Trips', 'url' => null)
+      );
+      return view('includes/header', $breadcrumbs)
               . view('dashboard-user')
               . $this->get_token_script()
               . view('includes/footer');
