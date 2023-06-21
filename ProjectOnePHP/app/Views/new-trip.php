@@ -62,21 +62,20 @@
     tripForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        let halt = get_form_data();
+        let halt = get_form_data(tripForm);
 
         if (halt) {
             alert("Ensure you input a value in both fields!");
         } else {
             // perform operation with form input
-            alert("This form has been successfully submitted!");
-            console.log(
-                `This form has a Observer ID of ${observerid.value} and Trip Number of ${tripNumber.value}`
-            );
+            //console.log(
+            //    `This form has a Observer ID of ${observerid.value} and Trip Number of ${tripNumber.value}`
+            //);
+            window.location.assign("<?php echo site_url('/home/dashboard_trip/'); ?>" + document.getElementById('trip_id').value);
         }
     });
 
-    function get_form_data() {
-        let form = document.querySelector('#new_trip');
+    function get_form_data(form) {
         let data = new FormData(form);
         let halt = false;
         for (let [key, value] of data) {
