@@ -24,8 +24,11 @@ class Home extends BaseController
       $this->session = \Config\Services::session();
       $data = array('auth_msg' => $this->session->auth_msg);
       $this->session->destroy();
-
-      return view('includes/header')
+      $breadcrumbs['nav'] =  array(
+        array('name' => 'Home', 'url' => '/'),
+        array('name' => 'Login', 'url' => null)
+      );
+      return view('includes/header', $breadcrumbs)
               . view('login', $data)
               //. view('js/login.js')
               . view('includes/footer');
@@ -69,7 +72,12 @@ class Home extends BaseController
       'vessels' => $dropdown->get_values('vessel_permit_num', $token),
       'ports' => $dropdown->get_values('port', $token)
     );
-    return view('includes/header')
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'New trip', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
             . view('new-trip', $data)
             . view('includes/footer');
   }
