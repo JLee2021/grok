@@ -34,7 +34,7 @@ class Home extends BaseController
   {
     $this->session = \Config\Services::session();
     $token = $this->session->token;
-    return '        const token="' . $token . '";' . "\n";
+    return $token;
   }
 
   public function dashboard()
@@ -121,8 +121,13 @@ class Home extends BaseController
 
   public function splash()
   {
+    $token = $this->get_token_script();
+    if(strlen($token) < 1 || $token == null){
+      return view('login');
+    }
     return view('includes/header')
-      . view('splash')
+      . view('dashboard-user')
+      . view('service-worker')
       // . view('js/main.js')
       . view('includes/footer');
   }
@@ -133,5 +138,9 @@ class Home extends BaseController
       . view('gps')
       // . view('js/main.js')
       . view('includes/footer');
+  }
+
+  public function service_worker(){
+
   }
 }
