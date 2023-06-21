@@ -44,6 +44,7 @@ $routes->post('/auth', 'Auth::index');
 $routes->get('/form-links', 'Home::form_links');
 $routes->get('/splash', 'Home::splash');
 $routes->get('/gps', 'Home::gps');
+$routes->get('/service-worker', 'Home::service_worker');
 
 /*
  * --------------------------------------------------------------------
