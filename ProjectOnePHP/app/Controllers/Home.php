@@ -67,6 +67,19 @@ class Home extends BaseController
             . view('includes/footer');
   }
 
+  public function dashboard_haul()
+  {
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'Hauls', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
+            . view('dashboard-haul')
+            // . view('js/main.js')
+            . view('includes/footer');
+  }
+
   public function new_trip()
   {
     $dropdown = new \App\Models\DropdownModel();
@@ -91,7 +104,12 @@ class Home extends BaseController
 
   public function new_haul()
   {
-    return view('includes/header')
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'New Haul', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
       . view('new-haul')
       // . view('js/main.js')
       . view('includes/footer');
@@ -107,7 +125,13 @@ class Home extends BaseController
       'species' => $dropdown->get_values('species_itis', $token),
       'ports' => $dropdown->get_values('port', $token)
     );
-    return view('includes/header')
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'Hauls', 'url' => '/home/dashboard_haul'),
+      array('name' => 'New Catch', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
       . view('new-catch', $data)
       // . view('js/main.js')
       . view('includes/footer');
@@ -115,7 +139,13 @@ class Home extends BaseController
 
   public function log_catch()
   {
-    return view('includes/header')
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'Hauls', 'url' => '/home/dashboard_haul'),
+      array('name' => 'New Catch', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
       . view('log-catch')
       // . view('js/main.js')
       . view('includes/footer');
@@ -123,7 +153,13 @@ class Home extends BaseController
 
   public function end_haul()
   {
-    return view('includes/header')
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'Hauls', 'url' => '/home/dashboard_haul'),
+      array('name' => 'End Haul', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
       . view('end-haul')
       // . view('js/main.js')
       . view('includes/footer');
@@ -131,7 +167,11 @@ class Home extends BaseController
 
   public function form_links()
   {
-    return view('includes/header')
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Form Links', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
       . view('form-links')
       // . view('js/main.js')
       . view('includes/footer');
@@ -156,5 +196,26 @@ class Home extends BaseController
 
   public function service_worker()
   {
+  }
+
+  public function new_trip_test()
+  {
+    $dropdown = new \App\Models\DropdownModel();
+    $this->session = \Config\Services::session();
+    $token = $this->session->token;
+    $data = array(
+      'username' => $this->session->username,
+      'observer' => $dropdown->get_values('obsid', $token),
+      'vessels' => $dropdown->get_values('vessel_permit_num', $token),
+      'ports' => $dropdown->get_values('port', $token)
+    );
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'New trip', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
+            . view('new-trip-test', $data);
+            // . view('includes/footer');
   }
 }
