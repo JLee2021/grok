@@ -9,7 +9,7 @@
                 <label class="usa-label" for="boat-name">Boat Name</label>
                 <input class="usa-input" id="boat-name" name="boat-name" />
 
-                <br><br>
+                
                 <button type="submit" class="usa-button usa-button--big">Create Boat</button>
             </form>
         

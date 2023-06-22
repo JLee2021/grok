@@ -12,7 +12,7 @@
              ?>
             </ul>
             <br>
-            <a href="create"><button type="button" class="usa-button usa-button--big">Add Boat</button></a>
+            <a href="create"><button type="button" class="usa-button">Add Boat</button></a> <a href="delete"><button type="button" class="usa-button usa-button--secondary">Delete Boat</button></a>
         </div>
     </div>
 </section>

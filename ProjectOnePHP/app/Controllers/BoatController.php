@@ -15,7 +15,7 @@ class BoatController extends BaseController
 
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
-      array('name' => 'Boats', 'url' => null)
+      array('name' => 'All Boats', 'url' => null)
     );
 
     return view('includes/header', $breadcrumbs)
@@ -43,8 +43,6 @@ class BoatController extends BaseController
     $file = "/var/www/html/grok/html/ProjectOnePHP/public/boat/boats.csv";
     file_put_contents($file, $name, FILE_APPEND);
 
-    // return $this->index();
-    
     return redirect()->back();
   }
 
@@ -58,8 +56,35 @@ class BoatController extends BaseController
     // TODO: save update to JSON 
   }
 
-  public function delete($id)
+  public function delete()
   {
-    // TODO: hard delete from JSON
+    $boat = new \App\Models\BoatModel();
+    $file = "https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/boat/boats.csv";
+    $readfile = $boat->read_file($file); 
+    $data = array(
+      'boats' => $readfile
+    );
+
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'All Boats', 'url' => 'BoatController/index'),
+      array('name' => 'Delete Boats', 'url' => null)
+    );
+
+    return view('includes/header', $breadcrumbs)
+      . view('boats/delete', $data)
+      . view('includes/footer');
+  }
+
+  public function remove(){
+    $boat_name = $this->request->getPost(['boat-name']);
+    $implode = implode($boat_name);
+    $needle = $implode . ",";
+    $file = "/var/www/html/grok/html/ProjectOnePHP/public/boat/boats.csv";
+    $haystack = fopen($file, 'r+');
+    $replace = str_replace($needle, "", $haystack);
+    file_put_contents($file, $replace);
+
+    return redirect()->back();
   }
 }
