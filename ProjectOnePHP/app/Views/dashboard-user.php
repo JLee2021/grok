@@ -74,8 +74,6 @@
                 card_bod.innerHTML = '<p>'+obj.vessel_name+' ('+obj.vessel_permit_num+')</p>';
             let card_foot = document.createElement('div');
                 card_foot.classList.add('usa-card__footer');
-                //card_foot.innerHTML = '<div style="width:40% !important;"><a href="dashboard_trip/'+obj.trip_id+'" ><button type="button" class="usa-button" >EDIT</button></a></div>';
-                //card_foot.innerHTML += '<div style="width:40% !important;"><a href="dashboard_trip/'+obj.trip_id+'" ><button type="button" class="usa-button" >EDIT</button></a></div>';
                 card_foot.innerHTML = '<a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
                 card_foot.innerHTML += '&nbsp;<a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a>';
             card.append(card_head);
