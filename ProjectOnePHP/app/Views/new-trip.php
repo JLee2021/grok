@@ -80,8 +80,8 @@
     function get_form_data(form) {
         let data = new FormData(form);
         let halt = false;
-        console.log(formData.length);
-        for (const [key, value] of formData) {
+        console.log(data.length);
+        for (const [key, value] of data) {
             console.log(key, value);
             if (value.length == 0) {
                 halt = true;
@@ -145,4 +145,3 @@
 
 </script>
 <script>
-
