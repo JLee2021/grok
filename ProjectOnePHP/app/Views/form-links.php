@@ -14,6 +14,7 @@
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/end_haul" target="_blank">End Haul</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/new_catch" target="_blank">New Catch</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/log_catch" target="_blank">Log Catch</a></li>
+                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/BoatController/index" target="_blank">CRUD Demo</a></li>
                 
                 
                 

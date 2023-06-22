@@ -196,4 +196,25 @@ class Home extends BaseController
   public function service_worker()
   {
   }
+
+  public function new_trip_test()
+  {
+    $dropdown = new \App\Models\DropdownModel();
+    $this->session = \Config\Services::session();
+    $token = $this->session->token;
+    $data = array(
+      'username' => $this->session->username,
+      'observer' => $dropdown->get_values('obsid', $token),
+      'vessels' => $dropdown->get_values('vessel_permit_num', $token),
+      'ports' => $dropdown->get_values('port', $token)
+    );
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => 'New trip', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
+            . view('new-trip-test', $data);
+            // . view('includes/footer');
+  }
 }
