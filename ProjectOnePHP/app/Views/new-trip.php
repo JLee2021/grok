@@ -44,6 +44,23 @@
 ?>
                     </select>
 
+                    <!-- sail_date -->
+                    <div class="usa-form-group">
+                      <label class="usa-label" id="sail_date-label" for="sail_date"
+                        >Sail date</label
+                      >
+                      <!--<div class="usa-hint" id="appointment-date-hint">mm/dd/yyyy</div>-->
+                      <div class="usa-date-picker">
+                        <input
+                          class="usa-input"
+                          id="sail_date"
+                          name="sail_date"
+                          aria-labelledby="sail_date-label"
+                          aria-describedby="sail_date-hint"
+                        />
+                      </div>
+                    </div>
+
                     <label class="usa-label" for="trip_id">Trip ID</label>
                     <input class="usa-input" id="trip_id" name="trip_id" type="text" title="Trip ID" placeholder="A99001" pattern="[A-Z]\d\d\d\d\d" autocapitalize="off" autocorrect="off" required />
 
