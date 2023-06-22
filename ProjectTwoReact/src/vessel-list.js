@@ -2,14 +2,18 @@ import { VesselCtrl } from "./controller/vessel"
 
 const ctrl = new VesselCtrl()
 const model = ctrl.getModel()
+const store = ctrl.getStore()
 
 export function setupVesselList(element) {
-  const update = () => {
-    let vessels = model.getVessel()
+  const update = async () => {
+    let vessels = await model.getVessel()
+    console.log('vessels: %o', vessels)
     element.innerHTML = `
-      <div>
-        <button id="vessel-update">Load Vessels</button>
-      </div>
+      <div> <h3>Menu</h3>
+        <div>
+          <button id="vessel-update">Load Vessels</button>
+          <button id="vessel-cleardb" style="padding-left: 8px">Clear DB</button>
+        </div>
 
       <table>
         <thead>
@@ -29,6 +33,7 @@ export function setupVesselList(element) {
 
     // Events
     element.querySelector('#vessel-update').addEventListener('click', () => update())
+    element.querySelector('#vessel-cleardb').addEventListener('click', () => store.clearAll())
   }
 
 
