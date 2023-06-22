@@ -46,6 +46,7 @@ $routes->get('/splash', 'Home::splash');
 $routes->get('/gps', 'Home::gps');
 $routes->get('/service-worker', 'Home::service_worker');
 $routes->get('/dashboard-haul', 'Home::dashboard_haul');
+$routes->get('/boats', 'BoatsController::index');
 
 /*
  * --------------------------------------------------------------------
