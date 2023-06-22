@@ -43,7 +43,7 @@ class BoatController extends BaseController
     $file = "/var/www/html/grok/html/ProjectOnePHP/public/boat/boats.csv";
     file_put_contents($file, $name, FILE_APPEND);
 
-    return redirect()->back();
+    return redirect()->to(site_url('BoatController/index'));
   }
 
   public function edit($id)
@@ -53,7 +53,7 @@ class BoatController extends BaseController
 
   public function update($id)
   {
-    // TODO: save update to JSON 
+    // TODO: save update to CSV 
   }
 
   public function delete()
@@ -80,11 +80,11 @@ class BoatController extends BaseController
     $boat_name = $this->request->getPost(['boat-name']);
     $implode = implode($boat_name);
     $needle = $implode . ",";
-    $file = "/var/www/html/grok/html/ProjectOnePHP/public/boat/boats.csv";
-    $haystack = fopen($file, 'r+');
-    $replace = str_replace($needle, "", $haystack);
-    file_put_contents($file, $replace);
+    $locate = "/var/www/html/grok/html/ProjectOnePHP/public/boat/boats.csv";
+    $file = file_get_contents($locate);
+    $replace = str_replace($needle, "", $file);
+    file_put_contents($locate, $replace);
 
-    return redirect()->back();
+    return redirect()->to(site_url('BoatController/delete'));
   }
 }
