@@ -45,7 +45,7 @@
                     </select>
 
                     <label class="usa-label" for="trip_id">Trip ID</label>
-                    <input class="usa-input" id="trip_id" name="trip_number" type="text" title="Trip ID" placeholder="A99001" pattern="[A-Z]\d\d\d\d\d" autocapitalize="off" autocorrect="off" required />
+                    <input class="usa-input" id="trip_id" name="trip_id" type="text" title="Trip ID" placeholder="A99001" pattern="[A-Z]\d\d\d\d\d" autocapitalize="off" autocorrect="off" required />
 
 
                     <input class="usa-button" type="submit" value="Start Trip" />
@@ -71,14 +71,16 @@
             //console.log(
             //    `This form has a Observer ID of ${observerid.value} and Trip Number of ${tripNumber.value}`
             //);
-            window.location.assign("<?php echo site_url('/home/dashboard_trip/'); ?>" + document.getElementById('trip_id').value);
+            insert_trip();
+            //window.location.assign("<?php echo site_url('/home/dashboard_trip/'); ?>" + document.getElementById('trip_id').value);
         }
     });
 
     function get_form_data(form) {
-        let data = new FormData(form);
+        const formData = new FormData(form);
         let halt = false;
-        for (let [key, value] of data) {
+        console.log(formData.length);
+        for (const [key, value] of formData) {
             console.log(key, value);
             if (value.length == 0) {
                 halt = true;
@@ -86,4 +88,59 @@
         }
         return halt;
     }
+
+    async function addTrip() {
+
+    }
+    function insert_trip() {
+        let openRequest = indexedDB.open('grok', 1);
+
+        openRequest.onupgradeneeded = function() {
+          // triggers if the client had no database
+          // ...perform initialization...
+          let db = openRequest.result;
+          if (!db.objectStoreNames.contains('trips')) { // if there's no "trips" store
+            db.createObjectStore('trips', {keyPath: 'trip_id'}); // create it
+          }
+        };
+
+        openRequest.onerror = function() {
+          console.error("Error", openRequest.error);
+        };
+
+        openRequest.onsuccess = function() {
+          let db = openRequest.result;
+          // continue working with database using db object
+          let tripForm = document.getElementById("new_trip");
+          let formData = new FormData(tripForm);
+
+          let data = {};
+          for (const pair of formData.entries()) {
+              data[pair[0]] = pair[1];
+          }
+          let v = document.getElementById('vessel_permit_num');
+          data['vessel_name'] = v.options[v.selectedIndex].text;
+
+          try {
+              let tx = db.transaction('trips', 'readwrite');
+              tx.objectStore('trips').add(data);
+              console.log('got to here');
+              window.location.assign("<?php echo site_url('/home/dashboard'); ?>");
+
+          } catch(err) {
+              console.log('ERROR');
+              if (err.name == 'ConstraintError') {
+                alert("Trip exists already");
+            } else {
+                throw err;
+            }
+          }
+
+
+        };
+
+
+    }
+
 </script>
+<script>

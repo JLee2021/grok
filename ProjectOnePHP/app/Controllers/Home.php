@@ -37,7 +37,7 @@ class Home extends BaseController
     {
         $this->session = \Config\Services::session();
         $token = $this->session->token;
-        return '        const token="'.$token.'";'."\n";
+        return "\n".'        const token="'.$token.'";'."\n";
     }
 
     public function dashboard()
@@ -85,6 +85,7 @@ class Home extends BaseController
     );
     return view('includes/header', $breadcrumbs)
             . view('new-trip', $data)
+            //. view('js/indexdb.js')
             . view('includes/footer');
   }
 
