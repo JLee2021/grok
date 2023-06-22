@@ -71,7 +71,7 @@
                 card_head.append(card_title);
             let card_bod = document.createElement('div');
                 card_bod.classList.add('usa-card__body');
-                card_bod.innerHTML = '<p>'+obj.vessel_name+' ('+obj.vessel_permit_num+')</p>';
+                card_bod.innerHTML = '<p>'+obj.vessel_name+' '+obj.sail_date+'</p>';
             let card_foot = document.createElement('div');
                 card_foot.classList.add('usa-card__footer');
                 card_foot.innerHTML = '<a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
