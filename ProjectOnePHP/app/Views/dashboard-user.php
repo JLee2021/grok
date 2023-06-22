@@ -15,7 +15,7 @@
             <p>Use this button to delete the local indexDB database and start over.</p>
           </div>
           <div class="usa-card__footer">
-            <a href="" class="usa-button" onclick="delete_all();">DELETE</a><br>
+            <a href="" class="usa-button usa-button--outline" onclick="delete_all();">DELETE</a><br>
           </div>
         </div>
         <!-- DEV delete button -->
@@ -74,10 +74,8 @@
                 card_bod.innerHTML = '<p>'+obj.vessel_name+' ('+obj.vessel_permit_num+')</p>';
             let card_foot = document.createElement('div');
                 card_foot.classList.add('usa-card__footer');
-                //card_foot.innerHTML = '<div style="width:40% !important;"><a href="dashboard_trip/'+obj.trip_id+'" ><button type="button" class="usa-button" >EDIT</button></a></div>';
-                //card_foot.innerHTML += '<div style="width:40% !important;"><a href="dashboard_trip/'+obj.trip_id+'" ><button type="button" class="usa-button" >EDIT</button></a></div>';
-                card_foot.innerHTML = '<a href="dashboard_trip/'+obj.trip_id+'" class="card-link">Edit</a>';
-                card_foot.innerHTML += '&nbsp;<a href="" class="usa-card-link" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a>';
+                card_foot.innerHTML = '<a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
+                card_foot.innerHTML += '&nbsp;<a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a>';
             card.append(card_head);
             card.append(card_bod);
             card.append(card_foot);
