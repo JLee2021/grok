@@ -1,7 +1,9 @@
 import '../assets/style.css'
 import javascriptLogo from '../assets/javascript.svg'
 import viteLogo from '/vite.svg'
+
 import { setupCounter } from './counter.js'
+import { setupVesselList } from './vessel-list'
 
 document.querySelector('#app').innerHTML = `
   <div>
@@ -12,9 +14,14 @@ document.querySelector('#app').innerHTML = `
       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
     </a>
     <h1>Hello Vite!</h1>
+
     <div class="card">
       <button id="counter" type="button"></button>
     </div>
+
+    <div class="card" id="vesselList">
+    </div>
+
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
@@ -22,3 +29,4 @@ document.querySelector('#app').innerHTML = `
 `
 
 setupCounter(document.querySelector('#counter'))
+setupVesselList(document.querySelector('#vesselList'))
