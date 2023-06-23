@@ -79,10 +79,21 @@ class BoatController extends BaseController
   public function remove(){
     $boat_name = $this->request->getPost(['boat-name']);
     $implode = implode($boat_name);
-    $needle = $implode . ",";
+
+    $needle1 = "," . $implode;
+    $needle2 = $implode;
+
     $locate = "/var/www/html/grok/html/ProjectOnePHP/public/boat/boats.csv";
     $file = file_get_contents($locate);
-    $replace = str_replace($needle, "", $file);
+
+    if(strpos($file, $needle2) == 0){
+      $needle2 = $implode . ",";
+      $replace = str_replace($needle2, "", $file);
+    }
+    else{
+      $replace = str_replace($needle1, "", $file);
+    }
+
     file_put_contents($locate, $replace);
 
     return redirect()->to(site_url('BoatController/delete'));
