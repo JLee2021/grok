@@ -1,6 +1,9 @@
 import '../assets/style.css'
 import javascriptLogo from '../assets/javascript.svg'
 import viteLogo from '/vite.svg'
+// import "/uswds/dist/js/uswds-init.min.js"
+// import "/uswds/dist/css/uswds.min.css"
+
 import { setupCounter } from './counter.js'
 
 document.querySelector('#app').innerHTML = `
