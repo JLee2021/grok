@@ -102,15 +102,24 @@ class Home extends BaseController
             . view('includes/footer');
   }
 
-  public function new_haul()
+  public function new_haul($trip_id=null)
   {
+      $dropdown = new \App\Models\DropdownModel();
+      $this->session = \Config\Services::session();
+      $token = $this->session->token;
+      $data = array(
+        'username' => $this->session->username,
+        'trip_id' => $trip_id,
+        'gear' => $dropdown->get_values('accsp_gear_category', $token)
+      );
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
       array('name' => 'Trips', 'url' => '/home/dashboard'),
+      array('name' => $trip_id, 'url' => '/home/dashboard_trip/'.$trip_id),
       array('name' => 'New Haul', 'url' => null)
     );
     return view('includes/header', $breadcrumbs)
-      . view('new-haul')
+      . view('new-haul', $data)
       // . view('js/main.js')
       . view('includes/footer');
   }

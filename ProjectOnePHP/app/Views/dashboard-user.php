@@ -6,7 +6,7 @@
         <div id="grok_trip_list"></div>
         <!-- new trip button -->
         <div style="padding: 10px 10px 10px;"><a href="new_trip"><button type="button" class="usa-button usa-button--big">Add New Trip</button></a></div>
-<!-- DEV delete button 
+<!-- DEV delete button
         <div class="usa-card__container">
           <div class="usa-card__header">
             <h2 class="usa-card__heading">Delete All Trips</h2>
@@ -55,7 +55,7 @@
                   alert(JSON.stringify(trips.result));
                 } else {
                   console.log("No such trips");
-              }
+                }
               }
           };
         }
