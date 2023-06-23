@@ -1,0 +1,44 @@
+[
+    {
+        "column_name": "ACCSP_GEAR_CATEGORY",
+        "name": "000",
+        "value": "000",
+        "descr": "NOT CODED"
+    },
+    {
+        "column_name": "ACCSP_GEAR_CATEGORY",
+        "name": "030",
+        "value": "030",
+        "descr": "PURSE SEINE"
+    },
+    {
+        "column_name": "ACCSP_GEAR_CATEGORY",
+        "name": "091",
+        "value": "091",
+        "descr": "OTTER TRAWLS, BOTTOM"
+    },
+    {
+        "column_name": "ACCSP_GEAR_CATEGORY",
+        "name": "092",
+        "value": "092",
+        "descr": "OTTER TRAWLS, MIDWATER"
+    },
+    {
+        "column_name": "ACCSP_GEAR_CATEGORY",
+        "name": "200",
+        "value": "200",
+        "descr": "GILL NETS"
+    },
+    {
+        "column_name": "ACCSP_GEAR_CATEGORY",
+        "name": "400",
+        "value": "400",
+        "descr": "LONG LINES"
+    },
+    {
+        "column_name": "ACCSP_GEAR_CATEGORY",
+        "name": "700",
+        "value": "700",
+        "descr": "HAND LINE"
+    }
+]

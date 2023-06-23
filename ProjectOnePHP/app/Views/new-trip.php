@@ -65,7 +65,7 @@
                     <input class="usa-input" id="trip_id" name="trip_id" type="text" title="Trip ID" placeholder="A99001" pattern="[A-Z]\d\d\d\d\d" autocapitalize="off" autocorrect="off" required />
 
 
-                    <input class="usa-button" type="submit" value="Start Trip" />
+                    <input class="usa-button" type="submit" value="Start Trip" /> <br><br>
 
                 </fieldset>
             </form>
@@ -138,6 +138,8 @@
           }
           let v = document.getElementById('vessel_permit_num');
           data['vessel_name'] = v.options[v.selectedIndex].text;
+          data['hauls'] = [];
+          data['catch'] = [];
 
           try {
               let tx = db.transaction('trips', 'readwrite');

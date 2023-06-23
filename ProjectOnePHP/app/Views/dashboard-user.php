@@ -6,7 +6,7 @@
         <div id="grok_trip_list"></div>
         <!-- new trip button -->
         <div style="padding: 10px 10px 10px;"><a href="new_trip"><button type="button" class="usa-button usa-button--big">Add New Trip</button></a></div>
-        <!-- DEV delete button -->
+<!-- DEV delete button
         <div class="usa-card__container">
           <div class="usa-card__header">
             <h2 class="usa-card__heading">Delete All Trips</h2>
@@ -18,7 +18,7 @@
             <a href="" class="usa-button usa-button--outline" onclick="delete_all();">DELETE</a><br>
           </div>
         </div>
-        <!-- DEV delete button -->
+ DEV delete button -->
     </div>
   </div>
 </section>
@@ -55,7 +55,7 @@
                   alert(JSON.stringify(trips.result));
                 } else {
                   console.log("No such trips");
-              }
+                }
               }
           };
         }
@@ -74,8 +74,9 @@
                 card_bod.innerHTML = '<p>'+obj.vessel_name+' '+obj.sail_date+'</p>';
             let card_foot = document.createElement('div');
                 card_foot.classList.add('usa-card__footer');
-                card_foot.innerHTML = '<a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
-                card_foot.innerHTML += '&nbsp;<a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a>';
+                card_foot.innerHTML = '<p><a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
+                card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = '+obj.trip_id+' onClick="delete_trip(this.dataset.tripid); return false;">Delete</a>';
+                card_foot.innerHTML += '</p><p><a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a></p>';
             card.append(card_head);
             card.append(card_bod);
             card.append(card_foot);
@@ -117,6 +118,32 @@
             openRequest.onsuccess = function() {
               let db = openRequest.result;
               list(db);
+            };
+        }
+
+        function delete_trip(trip_id) {
+            console.log('delete_trip: '+trip_id);
+            let openRequest = indexedDB.open('grok', 1);
+
+            openRequest.onupgradeneeded = function() {
+              // triggers if the client had no database
+              // ...perform initialization...
+              let db = openRequest.result;
+              if (!db.objectStoreNames.contains('trips')) { // if there's no "trips" store
+                db.createObjectStore('trips', {keyPath: 'trip_id'}); // create it
+              }
+            };
+
+            openRequest.onerror = function() {
+              console.error("Error", openRequest.error);
+            };
+
+            openRequest.onsuccess = function() {
+              let db = openRequest.result;
+              let tx = db.transaction('trips', 'readwrite');
+              let tripsStore = tx.objectStore('trips');
+              tripsStore.delete(trip_id);
+              location.reload();
             };
         }
 
