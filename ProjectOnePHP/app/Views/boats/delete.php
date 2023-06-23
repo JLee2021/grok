@@ -1,7 +1,7 @@
 <section id="test-section-id" class="usa-section">
     <div class="grid-container">
         <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
-            <h1 class="site-preview-heading margin-0">Boats</h1>
+            <h1 class="site-preview-heading margin-0">Delete Boats</h1>
             <ul class="usa-list usa-list--unstyled">
              <?php
                 
