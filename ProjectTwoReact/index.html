@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8" />
@@ -9,14 +9,43 @@
   <meta name="description" content="Proof of Concept for Mobile 1st, PWA: offline, IndexDB and US Web Design spec." />
   <script src="/uswds/js/uswds-init.min.js" type="module"></script>
   <link rel="stylesheet" href="/uswds/css/uswds.min.css" />
-  <title>Project: Apple Butter</title>
+  <title>NOAA Fisheries - Atlas</title>
 </head>
 
 <body>
-
-  <div id="app"></div>
+  <div class="grid-container">
+    <nav class="usa-breadcrumb" aria-label="Breadcrumbs,,">
+      <ol class="usa-breadcrumb__list">
+        <li class="usa-breadcrumb__list-item"><a href="##" class="usa-breadcrumb__link"><span>Link 1</span></a></li>
+        <li class="usa-breadcrumb__list-item usa-current" aria-current="page"><span>Login</span></li>
+      </ol>
+    </nav>
   </div>
-  <script type="module" src="/src/main.js"></script>
+  <section id="test-section-id" class="usa-section">
+    <div class="grid-container">
+      <div id="auth_fail_div">Failure message here</div>
+      <form class="usa-form" id="grok_form_login" method="POST" action="/auth">
+        <fieldset class="usa-fieldset">
+          <legend class="usa-legend usa-legend--large">Atlas</legend>
+          <label class="usa-label" for="email">User ID</label>
+          <input class="usa-input" id="email" name="email" type="email" autocapitalize="off" autocorrect="off"
+            placeholder="first.last@noaa.gov" required />
+          <label class="usa-label" for="password-sign-in">Password</label>
+          <input class="usa-input" id="password-sign-in" name="password" type="password" placeholder="Password"
+            required />
+          <button title="" type="button" class="usa-show-password" aria-controls="" data-show-text="Show password"
+            data-hide-text="Hide password">Show password</button>
+          <input class="usa-button" type="submit" value="Sign in" />
+          <p>
+            <a href="javascript:void()" title="Forgot password">Forgot password?</a>
+          </p>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+  <script>
+    document.getElementById("auth_fail_div").style.visibility = "hidden";
+  </script>
 </body>
 
 </html>
