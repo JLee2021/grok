@@ -1,5 +1,7 @@
+import { ref } from "../app-lib"
 import localforage from 'localforage'
 
+export const vessel = ref([])
 const dbName = import.meta.env.VITE_DBNAME
 
 // Setup Database/Key-Value store.

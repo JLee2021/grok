@@ -5,6 +5,7 @@ import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 import { setupVesselList } from './vessel-list'
 
+
 document.querySelector('#app').innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
