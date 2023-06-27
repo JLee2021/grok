@@ -3,6 +3,15 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig ({
 	base: './',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://nefsctest.nmfs.local/grok/html/Backend/public/index.php/api',
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false, // Don't verify cert: Ref - see vite config docs:server.proxy and https://github.com/http-party/node-http-proxy#options
+      }
+    },
+  },
 	plugins: [
 		VitePWA({
 			registerType: 'autoUpdate',
