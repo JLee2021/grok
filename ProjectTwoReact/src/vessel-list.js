@@ -5,12 +5,12 @@ import { watch } from "./app-lib"
 const ctrl = new VesselCtrl()
 const store = ctrl.getStore()
 // const model = ctrl.getModel()
-let vessels = store.getRef()
 
-export function setupVesselList(element) {
-  watch(vessels, update)
+export async function setupVesselList(element) {
+  const vessels = await store.getRef()
+  watch(await vessels, update)
 
-  function update() {
+  async function update() {
     console.info('Updateing Vessel List')
 
     element.innerHTML = `
