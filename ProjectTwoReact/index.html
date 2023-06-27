@@ -21,6 +21,17 @@
       </ol>
     </nav>
   </div>
+	
+	<div class="grid-container">
+    <nav class="" aria-label="Site Nav Links">
+      <ol class="">
+        <li class="__list-item"><a href="javascript(void)" id="nav-vessel" class="__link">
+						<span>Vessel List</span></a></li>
+        <li class="__list-item" aria-current="page"><span>Login</span></li>
+      </ol>
+    </nav>
+	</div>
+
   <section id="test-section-id" class="usa-section">
     <div class="grid-container">
       <div id="auth_fail_div">Failure message here</div>
@@ -46,6 +57,10 @@
   <script>
     document.getElementById("auth_fail_div").style.visibility = "hidden";
   </script>
+
+	<div id="app"></div>
+	<script type="module" src="/src/main.js"></script>
+
 </body>
 
 </html>

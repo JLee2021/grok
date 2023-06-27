@@ -1,17 +1,22 @@
 import { VesselCtrl } from "./controller/vessel"
+import { vesselApi } from "./service/api"
+import { watch } from "./app-lib"
 
 const ctrl = new VesselCtrl()
-const model = ctrl.getModel()
 const store = ctrl.getStore()
+// const model = ctrl.getModel()
 
-export function setupVesselList(element) {
-  const update = async () => {
-    let vessels = await model.getVessel()
-    console.log('vessels: %o', vessels)
+export async function setupVesselList(element) {
+  const vessels = await store.getRef()
+  watch(await vessels, update)
+
+  async function update() {
+    console.info('Updateing Vessel List')
+
     element.innerHTML = `
       <div> <h3>Menu</h3>
         <div>
-          <button id="vessel-update">Load Vessels</button>
+          <button id="vessel-update">(demo) Load From Server</button>
           <button id="vessel-cleardb" style="padding-left: 8px">Clear DB</button>
         </div>
 
@@ -22,9 +27,9 @@ export function setupVesselList(element) {
           </tr>
         </thead>
         <tbody>
-        ${vessels.map(v => `
+        ${vessels.value.map(v => `
           <tr>
-            <td>${v?.name || 'NoName'}</td><td>${v.id || 'NoID'}</td>
+            <td>${v?.name || 'NoName'}</td><td>${v.vpNo || 'NoID'}</td>
           </tr>
         `).join('')}
         </tbody>
@@ -32,8 +37,18 @@ export function setupVesselList(element) {
     `
 
     // Events
-    element.querySelector('#vessel-update').addEventListener('click', () => update())
-    element.querySelector('#vessel-cleardb').addEventListener('click', () => store.clearAll())
+    element.querySelector('#vessel-update').addEventListener('click', vesselApi.get)
+    element.querySelector('#vessel-cleardb').addEventListener('click', store.deleteAll)
+
+    // Handle Navigation Links
+    Array.from(document.querySelectorAll('#vessel-trip')).forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        setupVesselTrip(document.querySelector('#main'))
+        return
+      })
+    })
+
   }
 
 

@@ -1,5 +1,7 @@
-import { vessel } from "../store/vessel"
+import { VesselCtrl } from "../controller/vessel"
 
+// const ctrl = new VesselCtrl()
+const vesselStore = (new VesselCtrl()).getStore()
 const service = import.meta.env.VITE_API
 
 export const vesselApi = (() => {
@@ -14,9 +16,7 @@ export const vesselApi = (() => {
         }))
 
         // Replace all vessels with new data.
-        if (rows.length > 1) {
-          vessel.value.splice(0, vessel.value.length, rows)
-        }
+        vesselStore.addMany(rows)
 
         return rows
       })
