@@ -14,6 +14,11 @@ dist-ssr
 *.local
 dev-dist
 report.html
+.env
+
+# 2nd .vite dependancy folder showed up in root today...adding to ignore.
+# It should be in node_moduals/.vite (and it also is there.)
+.vite
 
 # Editor directories and files
 .vscode/*
