@@ -6,14 +6,14 @@
            
             <ul class="usa-list usa-list--unstyled">
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/login" target="_blank">Login</a></li>
-                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/dashboard" target="_blank">User Dashboard</a></li>
-                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/dashboard_trip" target="_blank">Trip Dashboard</a></li>
-                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/dashboard_haul" target="_blank">Haul Dashboard</a></li>
+                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/dashboard" target="_blank">Trips List Page</a></li>
+                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/dashboard_trip" target="_blank">New Trip Page</a></li>
+                <!-- <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/dashboard_haul" target="_blank">Haul Dashboard</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/new_trip" target="_blank">New Trip</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/new_haul" target="_blank">New Haul</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/end_haul" target="_blank">End Haul</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/new_catch" target="_blank">New Catch</a></li>
-                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/log_catch" target="_blank">Log Catch</a></li>
+                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/log_catch" target="_blank">Log Catch</a></li> -->
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/BoatController/index" target="_blank">CRUD Demo</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/online_offline" target="_blank">Online Test</a></li>
                 
