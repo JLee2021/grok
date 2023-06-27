@@ -9,7 +9,6 @@ export function ref(obj, callback = null) {
   if (typeof callback === 'function' ) {
     intercepts = {
       set(target, prop, val, ref) {
-        console.log('tprv: %o, %o, %o, %o', target, prop, val, ref)
         callback(val, ref[prop] || null);
         target[prop] = val
         return true
@@ -33,11 +32,6 @@ export function watch(ref, callback) {
 	// Wrap the current proxy with a new proxy and callback.
 	ref.value = new Proxy(ref.value, {
 		set(target, prop, val, ref) {
-      // Not sure why this is happening.
-      if (prop == 'length') {
-        return true
-      }
-      console.log('tprv: %o, %o, %o, %o', target, prop, val, ref)
 			callback(val, ref[prop] || null)
 			target[prop] = val
 			return true

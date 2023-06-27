@@ -1,8 +1,10 @@
 import { ref } from "../app-lib"
 import localforage from 'localforage'
 
-export const vessel = ref([])
+// Setup in memory vessels reactive array.
+const vessels = ref([])
 const dbName = import.meta.env.VITE_DBNAME
+
 
 // Setup Database/Key-Value store.
 const store = localforage.createInstance({
@@ -17,30 +19,47 @@ export class VesselStore {
 	construtor() {
 	}
 
-	async getOne(id) {
-    return await store.getItem(`${id}`)
-		// inport indexDb logic.
-		// fetch a vessel form indexDb.
-	}
+	async addMany(items) {
+    // items = items.length ? items :[]
+    console.warn('addMany simply overwrites all records, atm.')
+    this.deleteAll()
 
-	async getMany() {
-    const vessels = []
-    await store.iterate((value, key) => {
-      // console.warn('Vessel: %o, %o', value, key)
-      vessels.push(value)
+		// Update indexDB
+    items.forEach(vessel => {
+      this.addOne(vessel)
     })
-    return vessels
 	}
 
-  async addOne(vessel) {
-    if (! vessel.name || ! vessel.id) {
-      console.error('Missing vessel.name or vessel.id param.')
-    } else {
-      await store.setItem(`${vessel.id}`, vessel)
+  /**
+   * Load vessels from indexDB, return a proxy (Reactive).
+   * @returns Vessels Proxy.
+   */
+  async getRef() {
+    if (! vessels.value.length) {
+      // load Vessels from indexDB.
+      await store.iterate((value, key) => {
+        vessels.value.push(value)
+      })
     }
+
+    return vessels
   }
 
-  async clearAll() {
-    return await store.clear((err) => console.log('Store Error Detected'))
+  async addOne(vessel) {
+    if (! vessel.name || ! vessel.vpNo) {
+      console.error('Missing vessel.name or vessel.vpNo param.')
+    } else {
+      await store.setItem(`${vessel.vpNo}`, vessel)
+    }
+
+    vessels.value.push(vessel)
+  }
+
+  async deleteAll() {
+    // Clear the proxy; Notify watchers.
+    vessels.value.splice(0)
+
+    // Update indexDB??
+    return await store.clear((err) => console.log('Store Error Detected: %o', err))
   }
 }

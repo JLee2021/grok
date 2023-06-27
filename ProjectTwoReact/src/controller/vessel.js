@@ -4,16 +4,10 @@ import { VesselStore } from '../store/vessel.js'
 const store = new VesselStore()
 
 export class VesselCtrl {
-	constructor() {
-	}
+	constructor() {}
 
-	getModel() {
-		return new VesselModel(store)
-	}
+	getModel() { return new VesselModel(store) }
 
-  getStore() {
-    return store
-  }
+  getStore() { return store }
 }
-
 
