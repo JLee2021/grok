@@ -1,7 +1,7 @@
 <section id="test-section-id" class="usa-section">
     <div class="grid-container">
         <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
-            <h1 class="site-preview-heading margin-0">Delete Vessells</h1>
+            <h1 class="site-preview-heading margin-0">Delete Vessels</h1>
             <h3>Network Connection: <span id="status"></span></h3>
             <ul class="usa-list usa-list--unstyled" id="boats">
              <?php
