@@ -139,7 +139,7 @@
 
 
     }
-/*
+
     const options = {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -151,8 +151,8 @@ function success(pos) {
 
   var lat = crd.latitude;
   var lon = crd.longitude;
-  document.getElementById("lat").value = lat;
-  document.getElementById("lon").value = lon;
+  document.getElementById("haul_start_lat").value = lat;
+  document.getElementById("haul_start_lon").value = lon;
 
   console.log("Your current position is:");
   console.log(`Latitude : ${crd.latitude}`);
@@ -165,7 +165,7 @@ function error(err) {
 }
 
 navigator.geolocation.getCurrentPosition(success, error, options);
-*/
+
 </script>
 
 

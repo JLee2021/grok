@@ -43,7 +43,7 @@
         alert("Ensure you input a value in both fields!");
       } else {
         // perform operation with form input
-        alert("This form has been successfully submitted!");
+        alert(`This form has a species name of ${species.value} and disposition code of ${disposition.value}`);
         console.log(
           `This form has a species name of ${species.value} and disposition code of ${disposition.value}`
         );
