@@ -1,17 +1,17 @@
 <section id="test-section-id" class="usa-section">
     <div class="grid-container">
         <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
-            <h1 class="site-preview-heading margin-0">New Vessell</h1>
+            <h1 class="site-preview-heading margin-0">New Vessel</h1>
             <h3>Network Connection: <span id="status"></span></h3>
 
             <form class="usa-form" id="new_boat" action=<?= site_url("/BoatController/store"); ?> method="post">
             <?= csrf_field() ?>
 
-                <label class="usa-label" for="boat-name">Boat Name</label>
+                <label class="usa-label" for="boat-name">Vessel Name</label>
                 <input class="usa-input" id="boat-name" name="boat-name" />
 
                 
-                <button type="submit" class="usa-button usa-button--big" id="button">Create Boat</button>
+                <button type="submit" class="usa-button usa-button--big" id="button">Create Vessel</button>
             </form>
         
         

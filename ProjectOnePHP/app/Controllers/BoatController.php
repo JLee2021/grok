@@ -15,7 +15,7 @@ class BoatController extends BaseController
 
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
-      array('name' => 'All Boats', 'url' => null)
+      array('name' => 'All Vessels', 'url' => null)
     );
 
     return view('includes/header', $breadcrumbs)
@@ -27,8 +27,8 @@ class BoatController extends BaseController
   {
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
-      array('name' => 'All Boats', 'url' => 'BoatController/index'),
-      array('name' => 'New Boat', 'url' => null)
+      array('name' => 'All Vessels', 'url' => 'BoatController/index'),
+      array('name' => 'New Vessel', 'url' => null)
     );
     return view('includes/header', $breadcrumbs)
       . view('boats/create')
@@ -57,8 +57,8 @@ class BoatController extends BaseController
 
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
-      array('name' => 'All Boats', 'url' => 'BoatController/index'),
-      array('name' => 'Edit Boats', 'url' => null)
+      array('name' => 'All Vessels', 'url' => 'BoatController/index'),
+      array('name' => 'Edit Vessels', 'url' => null)
     );
 
     return view('includes/header', $breadcrumbs)
@@ -95,8 +95,8 @@ class BoatController extends BaseController
 
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
-      array('name' => 'All Boats', 'url' => 'BoatController/index'),
-      array('name' => 'Delete Boats', 'url' => null)
+      array('name' => 'All Vessels', 'url' => 'BoatController/index'),
+      array('name' => 'Delete Vessels', 'url' => null)
     );
 
     return view('includes/header', $breadcrumbs)
