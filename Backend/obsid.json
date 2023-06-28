@@ -26,13 +26,13 @@
     {
         "column_name": "OBSID",
         "name": "tyler.gillispie",
-        "value": "Z02", // temp
+        "value": "Z02",
         "descr": "Tyler Gillispie"
     },
     {
         "column_name": "OBSID",
         "name": "michael.stratton",
-        "value": "Z01", // temp
+        "value": "Z01",
         "descr": "Michael Stratton"
     }
 ]
