@@ -1,35 +1,31 @@
-// import '../assets/style.css'
 
-import { setupVesselList } from './vessel-list'
+import { LoginCtrl } from "./controller/login"
 
-// Handle Navigation Links
-document.querySelector('#nav-vessel').addEventListener('click', (e) => {
-	e.preventDefault();
-	setupVesselList(document.querySelector('#main'))
-	return
-})
+const ctrl = new LoginCtrl()
+const login = ctrl.login()
 
-// Setup the First component inside the #app element.
+// setup the login component inside the #app element
 document.querySelector('#app').innerHTML = `
-  <div>
-
-		<div id="main">
-		</div>
-
-    <!--
-		<div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-
-    <div class="card" id="vesselList">
-    </div>
-
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-		-->
-  </div>
+<section id="test-section-id" class="usa-section">
+<div class="grid-container">
+  <div id="auth_fail_div">Failure message here</div>
+  <form class="usa-form" id="grok_form_login" method="POST" action="${login}">
+    <fieldset class="usa-fieldset">
+      <legend class="usa-legend usa-legend--large">Atlas</legend>
+      <label class="usa-label" for="email">User ID</label>
+      <input class="usa-input" id="email" name="email" type="email" autocapitalize="off" autocorrect="off"
+        placeholder="first.last@noaa.gov" required />
+      <label class="usa-label" for="password-sign-in">Password</label>
+      <input class="usa-input" id="password-sign-in" name="password" type="password" placeholder="Password"
+        required />
+      <button title="" type="button" class="usa-show-password" aria-controls="" data-show-text="Show password"
+        data-hide-text="Hide password">Show password</button>
+      <input class="usa-button" type="submit" value="Sign in" />
+      <p>
+        <a href="javascript:void()" title="Forgot password">Forgot password?</a>
+      </p>
+    </fieldset>
+  </form>
+</div>
+</section>
 `
-
-// setupCounter(document.querySelector('#counter'))
-

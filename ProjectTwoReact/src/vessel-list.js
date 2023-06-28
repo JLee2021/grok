@@ -4,14 +4,13 @@ import { watch } from "./app-lib"
 
 const ctrl = new VesselCtrl()
 const store = ctrl.getStore()
-// const model = ctrl.getModel()
 
 export async function setupVesselList(element) {
   const vessels = await store.getRef()
   watch(await vessels, update)
 
   async function update() {
-    console.info('Updateing Vessel List')
+    console.info('Updating Vessel List')
 
     element.innerHTML = `
       <div> <h3>Menu</h3>
@@ -41,16 +40,15 @@ export async function setupVesselList(element) {
     element.querySelector('#vessel-cleardb').addEventListener('click', store.deleteAll)
 
     // Handle Navigation Links
-    Array.from(document.querySelectorAll('#vessel-trip')).forEach((el) => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        setupVesselTrip(document.querySelector('#main'))
-        return
-      })
-    })
+    // Array.from(document.querySelectorAll('#vessel-trip')).forEach((el) => {
+    //   el.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     setupVesselTrip(document.querySelector('#main'))
+    //     return
+    //   })
+    // })
 
   }
-
 
   update()
 }

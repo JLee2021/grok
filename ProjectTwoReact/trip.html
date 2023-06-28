@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0054a4" />
+    <meta name="description" content="Proof of Concept for Mobile 1st, PWA: offline, IndexDB and US Web Design spec." />
+    <script src="/uswds/js/uswds-init.min.js" type="module"></script>
+    <link rel="stylesheet" href="/uswds/css/uswds.min.css" />
+    <title>NOAA Fisheries - Atlas</title>
+</head>
+
+<body>
+    <script src="/uswds/js/uswds.min.js" type="module"></script>
+    <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+
+    <div class="usa-section">
+        <div class="grid-container">
+            <!-- <div class="grid-row grid-gap">
+                <div class="usa-layout-docs__sidenav desktop:grid-col-3">
+                    <nav aria-label="Secondary navigation">
+                        <ul class="usa-sidenav">
+                            <li class="usa-sidenav__item">
+                                <a href="/" class="usa-current">Welcome</a>
+                            </li>
+                            <li class="usa-sidenav__item">
+                                <a href="login">Login Page</a>
+                            </li>
+                            <li class="usa-sidenav__item">
+                                <a href="app">CRUD App</a>
+                            </li>
+                            <li class="usa-sidenav__item">
+                                <a href="404">404 Page</a>
+                            </li>
+                            <li class="usa-sidenav__item">
+                                <a href="https://designsystem.digital.gov/components/overview/" target="_blank"
+                                    class="usa-link usa-link--external">USWDS Components</a>
+                            </li>
+                            <li class="usa-sidenav__item">
+                                <a href="https://designsystem.digital.gov/components/utilities/" target="_blank"
+                                    class="usa-link usa-link--external">USWDS Utilities</a>
+                            </li>
+                            <li class="usa-sidenav__item">
+                                <a href="https://designsystem.digital.gov/components/templates/" target="_blank"
+                                    class="usa-link usa-link--external">USWDS Templates</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div> -->
+
+            <main class="usa-layout-docs__main desktop:grid-col-9 usa-prose usa-layout-docs" id="main-content">
+                <h1>Trip Page</h1>
+
+                <p class="usa-intro">
+                    Here we list trip numbers and have a button to add a new trip.
+                </p>
+
+
+
+                <p>
+                    For now, here's a list of vessels...
+                </p>
+
+                <div id="vessel-list"></div>
+            </main>
+        </div>
+    </div>
+    </div>
+    <script type="module" src="/src/trip.js"></script>
+</body>
+
+</html>

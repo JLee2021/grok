@@ -8,6 +8,6 @@ export class VesselCtrl {
 
 	getModel() { return new VesselModel(store) }
 
-  getStore() { return store }
+	getStore() { return store }
 }
 
