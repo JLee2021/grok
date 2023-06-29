@@ -11,6 +11,7 @@
                     <select class="usa-select" name="obsid" id="obsid">
                         <option selected="" disabled>- Select -</option>
 <?php
+    sort($observer);
     foreach($observer as $obs)
     {
         $option  = '                        <option value="'.$obs->value.'" title="'.$obs->name.'"';
