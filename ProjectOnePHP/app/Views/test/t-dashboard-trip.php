@@ -5,8 +5,9 @@
             <div id="grok_trip_info"></div>
             <div id="grok_hauls_list"></div>
 
-            <a href="<?php echo site_url('/test/new_haul/'.$trip_id); ?>"><button type="button" class="usa-button usa-button--big">Add New Haul</button></a> <br><br>
+            <a href="<?php echo site_url('/test/new_haul/' . $trip_id); ?>"><button type="button" class="usa-button usa-button--big">Add New Haul</button></a> <br><br>
 
+            <div id="grok_trip_list"></div>
         </div>
     </div>
 </section>
@@ -19,22 +20,24 @@
 
         let trip = tripsStore.get(trip_id);
 
-        trip.onsuccess = await function() {
-          if (trip.result !== undefined) {
-              //trip.result.forEach(make_info_section(trip.result));
-              make_info_section(trip.result);
-          } else {
-            console.log("No such trip");
-          }
+        trip.onsuccess = await
+        function() {
+            if (trip.result !== undefined) {
+                //trip.result.forEach(make_info_section(trip.result));
+                make_info_section(trip.result);
+            } else {
+                console.log("No such trip");
+            }
         };
 
     }
+
     function make_info_section(obj) {
         let div = document.getElementById('grok_trip_info');
         let sail_date = document.createElement('span');
-            sail_date.innerHTML = ' '+obj.sail_date;
+        sail_date.innerHTML = ' ' + obj.sail_date;
         let vessel = document.createElement('p');
-            vessel.innerHTML = obj.vessel_name;
+        vessel.innerHTML = obj.vessel_name;
         vessel.appendChild(sail_date);
         div.appendChild(vessel);
 
@@ -46,33 +49,36 @@
 
         let trip = tripsStore.get(trip_id);
 
-        trip.onsuccess = await function() {
-          if (trip.result !== undefined) {
-              //trip.result.forEach(grok_haul_card(trip.result.hauls));
-              grok_hauls_list(trip.result.hauls);
+        trip.onsuccess = await
+        function() {
+            if (trip.result !== undefined) {
+                //trip.result.forEach(grok_haul_card(trip.result.hauls));
+                grok_hauls_list(trip.result.hauls);
 
-          } else {
-            console.log("No such trip");
-          }
+            } else {
+                console.log("No such trip");
+            }
         };
 
     }
+
     function grok_hauls_list(array) {
         array.forEach(grok_haul_card);
     }
+
     function grok_haul_card(obj) {
         let card = document.createElement('div');
-            card.classList.add('usa-card__container');
+        card.classList.add('usa-card__container');
         let card_head = document.createElement('div');
-            card_head.classList.add('usa-card__header');
+        card_head.classList.add('usa-card__header');
         let card_title = document.createElement('h2');
-            card_title.classList.add('usa-card__heading');
-            card_title.innerHTML = 'haul_num: '+obj.haul_num;
-            card_head.append(card_title);
+        card_title.classList.add('usa-card__heading');
+        card_title.innerHTML = 'haul_num: ' + obj.haul_num;
+        card_head.append(card_title);
         let card_bod = document.createElement('div');
-            card_bod.classList.add('usa-card__body');
-            card_bod.innerHTML  = '<p>gear_cat: '+obj.accsp_gear_category+'<br>';
-            card_bod.innerHTML += '   haul_start_date: '+obj.haul_start_date+'</p>';
+        card_bod.classList.add('usa-card__body');
+        card_bod.innerHTML = '<p>gear_cat: ' + obj.accsp_gear_category + '<br>';
+        card_bod.innerHTML += '   haul_start_date: ' + obj.haul_start_date + '</p>';
         //let card_foot = document.createElement('div');
         //    card_foot.classList.add('usa-card__footer');
         //    card_foot.innerHTML = '<p><a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
@@ -82,32 +88,55 @@
         card.append(card_bod);
         //card.append(card_foot);
         document.getElementById('grok_hauls_list').append(card);
+    }
 
-
-
-
+    function make_button(obj) {
+        console.log(obj.vessel_permit_num);
+        let card = document.createElement('div');
+            card.classList.add('usa-card__container');
+        let card_head = document.createElement('div');
+            card_head.classList.add('usa-card__header');
+        let card_title = document.createElement('h2');
+            card_title.classList.add('usa-card__heading');
+            card_title.innerHTML = obj.trip_id;
+            card_head.append(card_title);
+        let card_bod = document.createElement('div');
+            card_bod.classList.add('usa-card__body');
+            card_bod.innerHTML = '<p>' + obj.vessel_name + ' ' + obj.sail_date + '</p>';
+        let card_foot = document.createElement('div');
+            card_foot.classList.add('usa-card__footer');
+            card_foot.innerHTML = '<p><a href="dashboard_haul/' + obj.trip_id + '" class="usa-button">Edit</a>';
+            card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = ' + obj.trip_id + ' onClick="delete_trip(this.dataset.tripid); return false;">Delete</a>';
+            card_foot.innerHTML += '</p><p><a href="" class=" usa-button usa-button--accent-warm" data-tripid = ' + obj.trip_id + ' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a></p>';
+        card.append(card_head);
+        card.append(card_bod);
+        card.append(card_foot);
+        document.getElementById('grok_trip_list').append(card);
 
     }
+
     function get_trip_db() {
         let openRequest = indexedDB.open('grok', 1);
 
         openRequest.onupgradeneeded = function() {
-          // triggers if the client had no database
-          // ...perform initialization...
-          let db = openRequest.result;
-          if (!db.objectStoreNames.contains('trips')) { // if there's no "trips" store
-            db.createObjectStore('trips', {keyPath: 'trip_id'}); // create it
-          }
+            // triggers if the client had no database
+            // ...perform initialization...
+            let db = openRequest.result;
+            if (!db.objectStoreNames.contains('trips')) { // if there's no "trips" store
+                db.createObjectStore('trips', {
+                    keyPath: 'trip_id'
+                }); // create it
+            }
         };
 
         openRequest.onerror = function() {
-          console.error("Error", openRequest.error);
+            console.error("Error", openRequest.error);
         };
 
         openRequest.onsuccess = function() {
-          let db = openRequest.result;
-          build_trip_info(db);
-          build_hauls_list(db);
+            let db = openRequest.result;
+            build_trip_info(db);
+            build_hauls_list(db);
         };
     }
 
@@ -119,5 +148,9 @@
         console.log('Page Loaded');
         init();
     };
+</script>
+
+<script>
+
 
 </script>
