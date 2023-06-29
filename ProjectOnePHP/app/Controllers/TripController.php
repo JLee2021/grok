@@ -11,7 +11,16 @@ class TripController extends BaseController
 
     public function create()
     {
-        return view('test/indexed-db/trip/create');
+        $dropdown = new \App\Models\DropdownModel();
+        $this->session = \Config\Services::session();
+        $token = $this->session->token;
+        $data = array(
+            'username' => $this->session->username,
+            'observer' => $dropdown->get_values('obsid', $token),
+            'vessels' => $dropdown->get_values('vessel_permit_num', $token),
+            'ports' => $dropdown->get_values('port', $token)
+        );
+        return view('test/indexed-db/trip/create', $data);
     }
 
     public function edit()
@@ -24,3 +33,4 @@ class TripController extends BaseController
         return view('test/indexed-db/trip/delete');
     }
 }
+
