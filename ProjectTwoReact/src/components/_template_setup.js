@@ -1,25 +1,22 @@
 /*
-  This is a tmeplate componet.
+  This is an example component layout template.
+  
+	$name - component name; name of setup function, camelCase
   $html - html file for this components layout
-  $name - name of setup function, camelCase
-  $ref - prxy reference var from store
-  $frag - example of inline func that builds and returns html
-  to$nameOther - example of loading another component (setupFunction)
+
+  $ref - proxy reference var from store; reactive object or array
+  $frag - example of inline func that builds and returns html fragments
+  to$nameOther - nav example of loading another component (setupFunction)
 */
 
 import template from './$html.html?raw'
 
-function setup$name(el) {
-  el.innerHTML = template
 
-  // Update Sometehing
-  el.querySelector('#thing-one').innerHTML = thingOne()
-  el.querySelector('#thing-two').innerHTML = thingTwo()
-}
+// Setup: Setup a compnent, Load it to the provided el.
+async function setup$name(el, { $prop = 'default' } = { $prop: 'default' } ) {
+  console.info('Do something with passed in property: $prop')
 
-// Setup
-async function setup$name(el) {
-  // example: get proxy reference
+	// example: get proxy reference
   const $ref = await (new TripCtrl()).getStore().getRef()
 
   // Update Component
@@ -38,7 +35,7 @@ async function setup$name(el) {
 
 
 
-// Fragments
+// Fragments: functions that return small sections of HTML.
 function $frag(items) {
   return `
     <di>
@@ -47,7 +44,7 @@ function $frag(items) {
   `
 }
 
-// Actions
+// Actions: navigation, updating the store, none template stuff, etc.
 function to$nameOther() {
   setup$nameOther(document.querySelector('#main'))
 }
