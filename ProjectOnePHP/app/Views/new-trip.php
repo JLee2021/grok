@@ -16,6 +16,7 @@
         $option  = '                        <option value="'.$obs->value.'" title="'.$obs->name.'"';
         if($obs->name == $username) { $option .= ' selected' ; };
         $option .= ' >' . $obs->descr . ' ( ' . $obs->value . ' )</option>';
+
         echo $option;
     }
 ?>
