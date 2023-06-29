@@ -77,18 +77,23 @@
     </div>
 
     <script>
-        const request = indexedDB.open('tripsDatabase', 1);
+        const dbName = "grokDatabase";
+        const request = indexedDB.open(dbName, 1, function(upgradeDb){
+            if(!upgradeDb.objectStoreNames.contains('firstOS')){
+                upgradeDb.createObjectStore('firstOS');
+            }
+        });
 
-        //upgrade event
-        request.onupgradeneeded = () => {
-            alert("upgrade needed")
-        }
+        request.onerror = (event) => {
+            console.log(request.errorcode);
+        };
+        request.onsuccess = (event) => {
+            console.log(request.result);
+        };
 
-        //on success
-        request.onsuccess = () => {
-            alert("success is called")
-        }
     </script>
+
+
 </body>
 
 </html>
