@@ -21,8 +21,7 @@ export class VesselStore {
 
 	async addMany(items) {
     // items = items.length ? items :[]
-    console.warn('addMany simply overwrites all records, atm.')
-    this.deleteAll()
+    // this.deleteAll()
 
 		// Update indexDB
     items.forEach(vessel => {
