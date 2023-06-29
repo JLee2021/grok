@@ -1,0 +1,8 @@
+{
+  "catch": {
+    "id": 1,
+    "haul_id": 1, 
+    "species": "name",
+    "disposition": "description"
+  }
+}
