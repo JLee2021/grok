@@ -1,6 +1,6 @@
 // import '../assets/style.css'
 
-import { setupVesselList } from './vessel-list'
+import { setupVesselList } from './components/vessel-list'
 
 // Handle Navigation Links
 document.querySelector('#nav-vessel').addEventListener('click', (e) => {
@@ -28,8 +28,14 @@ document.querySelector('#app').innerHTML = `
       Click on the Vite logo to learn more
     </p>
 		-->
+
+    <div id="test">
+
+    </div>
   </div>
 `
 
-// setupCounter(document.querySelector('#counter'))
+// setupCatchAdd(document.querySelector('#test'))
+// setupVesselList(document.querySelector('#main'))
 
+// setupCounter(document.querySelector('#counter'))

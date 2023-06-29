@@ -30,7 +30,7 @@ export function ref(obj, callback = null) {
  */
 export function watch(ref, callback) {
 	// Wrap the current proxy with a new proxy and callback.
-	ref.value = new Proxy(ref.value, {
+	ref.value = new Proxy(ref.target, {
 		set(target, prop, val, ref) {
 			callback(val, ref[prop] || null)
 			target[prop] = val
