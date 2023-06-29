@@ -197,7 +197,11 @@ class Test extends BaseController
 
   public function gps()
   {
-    return view('includes/header')
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'GPS', 'url' => null)
+    );
+    return view('includes/header', $breadcrumbs)
       . view('test/gps')
       // . view('js/main.js')
       . view('includes/footer');

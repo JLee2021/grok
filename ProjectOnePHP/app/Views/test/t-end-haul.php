@@ -3,28 +3,21 @@
     <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
       <h1 class="site-preview-heading margin-0">End Haul</h1>
 
-      <h3 class="site-preview-heading margin-0">End Datetime</h3>
-
       <form class="usa-form" id="end_haul" onsubmit="event.preventDefault();">
         <label class="usa-label" id="appointment-date-label" for="appointment-date">End date</label>
-        <div class="usa-hint" id="appointment-date-hint">mm/dd/yyyy</div>
-
-        <input class="usa-input" id="haul-date" name="appointment-date" aria-labelledby="appointment-date-label" aria-describedby="appointment-date-hint" />
+        <input class="usa-input--small" id="haul-date" name="appointment-date"  />
 
     </div>
     <div class="usa-form-group">
       <label class="usa-label" id="appointment-time-label" for="appointment-time">End time</label>
-      <div class="usa-hint" id="appointment-time-hint">hh:mm</div>
-      
-        <input class="usa-input--xs" id="haul-time" name="appointment-time" aria-describedby="appointment-time-label appointment-time-hint" />
+      <input class="usa-input--small" id="haul-time" name="appointment-time"  />
       
     </div>
     <br><br><br>
     <h3 class="site-preview-heading margin-0">End GPS</h3>
-    <p>GPS: </p>
-    <label class="usa-label" for="input-type-text">Lat:</label>
+    <label class="usa-label" for="input-type-text">Latitude:</label>
     <input class="usa-input" id="lat" name="input-type-text" />
-    <label class="usa-label" for="input-type-text">Lon:</label>
+    <label class="usa-label" for="input-type-text">Longitude:</label>
     <input class="usa-input" id="lon" name="input-type-text" />
 
     <br><br>
@@ -98,10 +91,8 @@
   document.getElementById("haul-date").value = date;
   console.log(date);
 
-  const currentDate = new Date();
-  const currentHour = currentDate.getHours();
-  const currentMinute = currentDate.getMinutes();
-  const time = `${currentHour}:${currentMinute}`;
+  var d = new Date();
+  var time = d.toLocaleTimeString();
   document.getElementById("haul-time").value = time;
   console.log(`Current time - ${currentHour}:${currentMinute}`);
 </script>
