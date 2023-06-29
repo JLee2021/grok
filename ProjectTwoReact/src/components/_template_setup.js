@@ -1,6 +1,6 @@
 /*
   This is an example component layout template.
-  
+
 	$name - component name; name of setup function, camelCase
   $html - html file for this components layout
 
@@ -12,7 +12,7 @@
 import template from './$html.html?raw'
 
 
-// Setup: Setup a compnent, Load it to the provided el.
+// Setup: Setup a compnent, Loadit to the provided el.
 async function setup$name(el, { $prop = 'default' } = { $prop: 'default' } ) {
   console.info('Do something with passed in property: $prop')
 
