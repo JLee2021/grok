@@ -77,21 +77,15 @@
     </div>
 
     <script>
-        const dbName = "grokDatabase";
-        const request = indexedDB.open(dbName, 1, function(upgradeDb){
-            if(!upgradeDb.objectStoreNames.contains('firstOS')){
-                upgradeDb.createObjectStore('firstOS');
-            }
-        });
+        let key = 'Item 1';
+        localStorage.setItem(key, 'Storage Value');
 
-        request.onerror = (event) => {
-            console.log(request.errorcode);
-        };
-        request.onsuccess = (event) => {
-            console.log(request.result);
-        };
+        let myItem = localStorage.getItem(key);
 
+        console.log(myItem);
     </script>
+
+
 
 
 </body>
