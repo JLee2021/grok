@@ -77,18 +77,17 @@
     </div>
 
     <script>
-        const request = indexedDB.open('tripsDatabase', 1);
+        let key = 'Item 1';
+        localStorage.setItem(key, 'Storage Value');
 
-        //upgrade event
-        request.onupgradeneeded = () => {
-            alert("upgrade needed")
-        }
+        let myItem = localStorage.getItem(key);
 
-        //on success
-        request.onsuccess = () => {
-            alert("success is called")
-        }
+        console.log(myItem);
     </script>
+
+
+
+
 </body>
 
 </html>
