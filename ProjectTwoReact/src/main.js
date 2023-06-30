@@ -12,6 +12,8 @@ document.querySelector('#app').innerHTML = /*html*/`
     <div id="app-nav"></div>
 
 		<div id="main"></div>
+
+    <main class="usa-layout-docs__main desktop:grid-col-9 usa-prose usa-layout-docs" id="main-content">
   </div>
 `
 
@@ -22,7 +24,7 @@ setupAppNav(document.querySelector('#app-nav'))
 // Handle Navigation Links
 document.querySelector('#nav-vessel').addEventListener('click', (e) => {
 	e.preventDefault();
-	setupVesselList(document.querySelector('#main'))
+	setupVesselList(document.querySelector('#main-content'))
 	return
 })
 
