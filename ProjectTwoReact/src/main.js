@@ -1,6 +1,23 @@
 // import '../assets/style.css'
-
+import { setupLogin } from './components/login';
 import { setupVesselList } from './components/vessel-list'
+import { setupAppCrumbs } from './components/app-crumbs';
+import { setupAppNav } from './components/app-nav';
+
+// Setup the First component inside the #app element.
+document.querySelector('#app').innerHTML = /*html*/`
+  <div>
+    <div id="app-crumbs"></div>
+
+    <div id="app-nav"></div>
+
+		<div id="main"></div>
+  </div>
+`
+
+setupLogin(document.querySelector('#main'))
+setupAppCrumbs(document.querySelector('#app-crumbs'))
+setupAppNav(document.querySelector('#app-nav'))
 
 // Handle Navigation Links
 document.querySelector('#nav-vessel').addEventListener('click', (e) => {
@@ -8,32 +25,6 @@ document.querySelector('#nav-vessel').addEventListener('click', (e) => {
 	setupVesselList(document.querySelector('#main'))
 	return
 })
-
-// Setup the First component inside the #app element.
-document.querySelector('#app').innerHTML = `
-  <div>
-
-		<div id="main">
-		</div>
-
-    <!--
-		<div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-
-    <div class="card" id="vesselList">
-    </div>
-
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-		-->
-
-    <div id="test">
-
-    </div>
-  </div>
-`
 
 // setupCatchAdd(document.querySelector('#test'))
 // setupVesselList(document.querySelector('#main'))
