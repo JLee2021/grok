@@ -1,22 +1,56 @@
-<!--
-  Start Trip
-  Btn: Add New Trip;
-   - start-trip
-  List: Trip -> haul-list.js
-   - trip-list
--->
+<!DOCTYPE html>
+<html lang="en">
 
-<div>
-  <div>
-    <h3>Trip List</h3>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0054a4" />
+  <meta name="description" content="Proof of Concept for Mobile 1st, PWA: offline, IndexDB and US Web Design spec." />
+  <script src="/uswds/js/uswds-init.min.js" type="module"></script>
+  <link rel="stylesheet" href="/uswds/css/uswds.min.css" />
+  <title>NOAA Fisheries - Atlas</title>
+</head>
+
+<body>
+  <script src="/uswds/js/uswds.min.js" type="module"></script>
+  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+
+  <div class="usa-section">
+    <div class="grid-container">
+
+
+      <main class="usa-layout-docs__main desktop:grid-col-9 usa-prose usa-layout-docs" id="main-content">
+        <h1>Trip List</h1>
+
+        <p class="usa-intro">
+          Some text about the trip list
+        </p>
+        <!--
+          Start Trip
+          Btn: Add New Trip;
+          - start-trip
+          List: Trip -> haul-list.js
+          - trip-list
+          -->
+        <div>
+          <div>
+            <h3>Trip List</h3>
+          </div>
+
+          <div>
+            <button id="start-trip" name="start-trip" type="button">Start Trip</button>
+            <!--<a id="start-trip" name="start-trip" type="button" href="void(0)">Start Trip</a>-->
+          </div>
+
+          <div id="trip-list">
+          </div>
+
+        </div>
+      </main>
+    </div>
   </div>
-
-  <div>
-    <button id="start-trip" name="start-trip" type="button">Start Trip</button>
-    <!--<a id="start-trip" name="start-trip" type="button" href="void(0)">Start Trip</a>-->
   </div>
+</body>
 
-  <div id="trip-list">
-  </div>
-
-</div>
+</html>
