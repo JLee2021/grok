@@ -47,7 +47,7 @@
                     <div class="usa-form-group">
                         <label class="usa-label" id="sail_date-label" for="sail_date">Sail date</label>
                         <!--<div class="usa-hint" id="appointment-date-hint">mm/dd/yyyy</div>-->
-                        <input class="usa-input" name="haul_start_date" id="haul_start_date" />
+                        <input class="usa-input" name="sail_date" id="sail_date" />
                     </div>
        
 
@@ -157,6 +157,6 @@
 </script>
 <script>
     var date = new Date().toLocaleDateString();
-    document.getElementById("haul_start_date").value = date;
+    document.getElementById("sail_date").value = date;
     console.log(date);
 </script>
