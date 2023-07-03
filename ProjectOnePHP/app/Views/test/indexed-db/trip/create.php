@@ -67,7 +67,7 @@
                             <input class="usa-input" id="trip_id" name="trip_number" type="text" title="Trip ID" placeholder="A99001" pattern="[A-Z]\d\d\d\d\d" autocapitalize="off" autocorrect="off" required />
 
 
-                            <input class="usa-button" type="submit" value="Start Trip" />
+                            <input  onclick="addTrip()" class="usa-button" type="submit" value="Start Trip" />
 
                         </fieldset>
                     </form>
@@ -77,12 +77,78 @@
     </div>
 
     <script>
-        let key = 'Item 1';
-        localStorage.setItem(key, 'Storage Value');
+        const dbName = "grokDb";
+        const request = window.indexedDB.open(dbName, 1);
 
-        let myItem = localStorage.getItem(key);
+        request.onerror = (event) => {
+            console.error("Error: ", request.error);
+        };
+        request.onsuccess = (event) => {
+            db = event.target.result;
+            console.log("Success! ", request.result);
+        };
 
-        console.log(myItem);
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+
+            // Create an objectStore to hold information about our trips. We're
+            // going to use "observer" as our key path because it's 
+            // unique 
+            const objectStore = db.createObjectStore("trips", {
+                autoIncrement: true
+            });
+
+            objectStore.createIndex("observer", "observer", {
+                unique: false
+            });
+            objectStore.createIndex("vessel", "vessel", {
+                unique: false
+            });
+            objectStore.createIndex("port", "port", {
+                unique: false
+            });
+            objectStore.createIndex("tripId", "tripId", {
+                unique: false
+            });
+
+            // Use transaction oncomplete to make sure the objectStore creation is
+            // finished before adding data into it.
+            objectStore.transaction.oncomplete = (event) => {
+                // Store values in the newly created objectStore.
+                const customerObjectStore = db
+                    .transaction("trips", "readwrite")
+                    .objectStore("trips");
+                tripData.forEach((trip) => {
+                    tripObjectStore.add(trip);
+                });
+            };
+        };
+
+        async function addTrip() {
+            let observer = document.getElementById('obsid').value;
+            let vessel = document.getElementById('vessel_permit_num').value;
+            let port = document.getElementById('port').value;
+            let tripId = document.getElementById('trip_id').value;
+            
+            let tx = db.transaction('trips', 'readwrite');
+            try {
+                await tx.objectStore('trips')
+                    .add({
+                        observer,
+                        vessel,
+                        port,
+                        tripId
+                    });
+                await list();
+            } catch (err) {
+                if (err.name == 'ConstraintError') {
+                    alert("Such trips exists already");
+                    await addLesson();
+                } else {
+                    throw err;
+                }
+            }
+        }
     </script>
 
 

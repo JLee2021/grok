@@ -17,6 +17,7 @@
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/end_haul" target="_blank">End Haul - Autofill</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/online_offline" target="_blank">Online Test</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/BoatController/index" target="_blank">CSV CRUD Demo</a></li>
+                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/TripController/create" target="_blank">IndexedDB Autoincrement</a></li>
                 <!-- <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/demo/grok_erd.pdf" target="_blank">Entity Relationship Diagram</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/demo/trip.json" target="_blank">Trip - JSON format</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/demo/haul.json" target="_blank">Haul - JSON format</a></li>

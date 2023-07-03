@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>NOAA - Atlas Data Entry</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?php echo base_url('/assets/css/styles.css'); ?>">
+  <title>Trip List</title>
+  <div id="results"></div>
+
 </head>
 
 <body>
-    <div class="grid-container">
-        <h1>Trip List</h1>
-    </div>
+
+  <p>Trip list:</p>
+  <ul id="listElem"></ul>
+  <script>
+    let results = [];
+    let openDbRequest = indexedDB.open('grokDb');
+    openDbRequest.onsuccess = function(e) {
+      let db = e.target.result;
+      let tran2 = db.transaction("trips");
+      tran2.objectStore("trips").openCursor().onsuccess = function(e) {
+        var cursor = e.target.result;
+        if (cursor) {
+          results.push(cursor.value)
+          cursor.continue();
+        };
+      };
+    };
+    console.log(results);
+    
+  </script>
 </body>
 
 </html>

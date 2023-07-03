@@ -82,7 +82,7 @@
         let card_foot = document.createElement('div');
            card_foot.classList.add('usa-card__footer');
            card_foot.innerHTML = '<p><a href="../end_haul" class="usa-button">End Haul</a>';
-           card_foot.innerHTML += '<a href="../new_catch" class="usa-button">Add Catch</a><br><br>';
+           card_foot.innerHTML += '<a href="../new_catch/'+obj.trip_id+'" class="usa-button">Add Catch</a><br><br>';
         //    card_foot.innerHTML = '<p><a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
            card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = '+obj.trip_id+' onClick="#">Delete</a>';
         //    card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = '+obj.trip_id+' onClick="delete_trip(this.dataset.tripid); return false;">Delete</a>';
