@@ -67,11 +67,14 @@
                             <input class="usa-input" id="trip_id" name="trip_number" type="text" title="Trip ID" placeholder="A99001" pattern="[A-Z]\d\d\d\d\d" autocapitalize="off" autocorrect="off" required />
 
 
-                            <input  onclick="addTrip()" class="usa-button" type="submit" value="Start Trip" />
+                            <input  onclick="addTrip();" class="usa-button" type="submit" value="Start Trip" />
 
                         </fieldset>
                     </form>
                 </div>
+                <ul id="tripList">
+
+                </ul>
             </div>
         </section>
     </div>
@@ -114,13 +117,14 @@
             // Use transaction oncomplete to make sure the objectStore creation is
             // finished before adding data into it.
             objectStore.transaction.oncomplete = (event) => {
+            
                 // Store values in the newly created objectStore.
                 const customerObjectStore = db
                     .transaction("trips", "readwrite")
                     .objectStore("trips");
                 tripData.forEach((trip) => {
                     tripObjectStore.add(trip);
-                });
+                });  
             };
         };
 
@@ -149,6 +153,8 @@
                 }
             }
         }
+
+
     </script>
 
 
