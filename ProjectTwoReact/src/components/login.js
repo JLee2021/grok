@@ -1,7 +1,7 @@
-import template from './login.html?raw'
-import { LoginCtrl } from "../controller/login"
-import { setupVesselList } from './vessel-list'
-import { watch, ref } from '../app-lib'
+import template from "./login.html?raw";
+import { LoginCtrl } from "../controller/login";
+import { setupVesselList } from "./vessel-list";
+import { watch, ref } from "../app-lib";
 // import { setupTripList } from './trip-list'
 
 /*
@@ -10,35 +10,31 @@ import { watch, ref } from '../app-lib'
 */
 // const ctrl = new LoginCtrl()
 // const login = ctrl.login()
-const login = ref({})
-
-
+const login = ref({});
 
 // Setup: Setup a compnent, Load it to the provided el.
-async function setupLogin(el, { $prop = 'default' } = { $prop: 'default' } ) {
-  console.info('Do something with passed in property: $prop')
+async function setupLogin(el, { $prop = "default" } = { $prop: "default" }) {
+  console.info("Do something with passed in property: $prop");
 
-	// example: get proxy reference
+  // example: get proxy reference
   // const login = await (new LoginCtrl()).getStore().getRef()
 
   // Update Component
   async function update(el) {
-    console.info('Updateing Login List')
-    el.innerHTML = template
+    console.info("Updating Login List");
+    el.innerHTML = template;
 
     // Show/Hide failed auth.  ToDo: The Show part.
     document.getElementById("auth_fail_div").style.visibility = "hidden";
 
     // Add Actions
     // el.querySelector('#frag').innerHTML = $frag(login.value || [])
-    el.querySelector('#submit-login').addEventListener('click', toVesselList)
+    el.querySelector("#submit-login").addEventListener("click", toVesselList);
   }
 
-  watch(login, (n, o) => update(el))
-  update(el)
+  watch(login, (n, o) => update(el));
+  update(el);
 }
-
-
 
 // Fragments: functions that return small sections of HTML.
 // function $frag(items) {
@@ -51,11 +47,8 @@ async function setupLogin(el, { $prop = 'default' } = { $prop: 'default' } ) {
 
 // Actions: navigation, updating the store, none template stuff, etc.
 function toVesselList(el) {
-  el.preventDefault()
-  setupVesselList(document.querySelector('#main'))
+  el.preventDefault();
+  setupVesselList(document.querySelector("#main"));
 }
 
-
-export {
-  setupLogin
-}
+export { setupLogin };

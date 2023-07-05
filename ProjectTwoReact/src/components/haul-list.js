@@ -1,7 +1,7 @@
-import template from './haul-list.html?raw'
-import { setupHaulStart } from './haul-start'
-import { HaulCtrl } from '../controller/haul'
-import { watch } from '../app-lib'
+import template from "./haul-list.html?raw";
+import { setupHaulStart } from "./haul-start";
+import { HaulCtrl } from "../controller/haul";
+import { watch } from "../app-lib";
 
 /*
   List Haul
@@ -13,37 +13,34 @@ import { watch } from '../app-lib'
 
 // Setup
 async function setupHaulList(el) {
-  const hauls = await (new HaulCtrl().getStore().getRef())
+  const hauls = await new HaulCtrl().getStore().getRef();
 
   // Update Component
   async function update(el) {
-    console.info('Updateing Haul List')
-    el.innerHTML = template
+    console.info("Updating Haul List");
+    el.innerHTML = template;
 
     // Update Trip List
-    el.querySelector('#haul-list').innerHTML = listHauls(hauls.value || [])
-    el.querySelector('#add-haul').addEventListener('click', toStartHaul)
+    el.querySelector("#haul-list").innerHTML = listHauls(hauls.value || []);
+    el.querySelector("#add-haul").addEventListener("click", toStartHaul);
   }
 
-  watch(hauls, (n, o) => update(el))
-  update(el)
+  watch(hauls, (n, o) => update(el));
+  update(el);
 }
 
 // Fragments
 function listHauls(items) {
   return `
     <di>
-      ${items.map(item => `<li>${item.name} - ${item.id}</li>`).join('')}
+      ${items.map((item) => `<li>${item.name} - ${item.id}</li>`).join("")}
     </di>
-  `
+  `;
 }
 
 // Actions
 function toStartHaul() {
-  setupHaulStart(document.querySelector('#main'))
+  setupHaulStart(document.querySelector("#main"));
 }
 
-
-export {
-  setupHaulList
-}
+export { setupHaulList };
