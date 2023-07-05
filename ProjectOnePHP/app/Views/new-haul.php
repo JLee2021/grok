@@ -31,25 +31,48 @@
                 </select>
 
         <label class="usa-label" id="appointment-date-label" for="haul_start_date">Haul start date</label>
-        <div class="usa-hint" id="haul_start_date-hint">mm/dd/yyyy</div>
+        <!-- <div class="usa-hint" id="haul_start_date-hint">mm/dd/yyyy</div> -->
         <div class="usa-date-picker">
           <input class="usa-input" id="haul_start_date" name="haul_start_date" aria-labelledby="haul_start_date-label" aria-describedby="haul_start_date-hint" />
         </div>
       </div>
       <div class="usa-form-group">
         <label class="usa-label" id="haul_start_time-label" for="haul_start_time">Haul start time</label>
-        <div class="usa-hint" id="haul_start_time-hint">hh:mm</div>
-        <div class="usa-time-picker">
+        <input class="usa-input" id="haul_start_time" name="haul_start_time" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"/>
+        <!-- <div class="usa-hint" id="haul_start_time-hint">hh:mm</div> -->
+        <!-- <div class="usa-time-picker">
           <input class="usa-input" id="haul_start_time" name="haul_start_time" aria-labelledby="haul_start_time-label" aria-describedby="haul_start_time-hint" />
-        </div>
-      </div>
+      </div> -->
+    </div>
+    <div class="usa-form-group">
       <label class="usa-label" for="haul_start_lat">Haul start lat:</label>
       <input class="usa-input" id="haul_start_lat" name="haul_start_lat" />
       <label class="usa-label" for="haul_start_lon">Haul start lon:</label>
       <input class="usa-input" id="haul_start_lon" name="haul_start_lon" />
+     </div>
 
       <br><br>
       <button type="submit" class="usa-button">Start Haul</button> <br><br>
+
+      <div class="usa-form-group">
+      <!-- ENd Haul -->
+      <label class="usa-label" id="haul_end_date-label" for="haul_end_date">Haul end date</label>
+      <div class="usa-date-picker">
+        <input class="usa-input" id="haul_end_date" name="haul_end_date" aria-labelledby="haul_end_date-label" aria-describedby="haul_end_date-hint" />
+      </div>
+    </div>
+    <div class="usa-form-group">
+      <label class="usa-label" id="haul_end_time-label" for="haul_end_time">Haul end time</label>
+      <input class="usa-input" id="haul_end_time" name="haul_end_time" pattern="/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/"/>
+  </div>
+  <div class="usa-form-group">
+        <label class="usa-label" for="haul_end_lat">Haul end lat:</label>
+        <input class="usa-input" id="haul_end_lat" name="haul_end_lat" />
+        <label class="usa-label" for="haul_end_lon">Haul end lon:</label>
+        <input class="usa-input" id="haul_end_lon" name="haul_end_lon" />
+    </div>
+    <br><br>
+    <button type="submit" class="usa-button">End Haul</button> <br><br>
 
 
       </form>
@@ -139,63 +162,50 @@
 
 
     }
-/*
+
     const options = {
         enableHighAccuracy: true,
         timeout: 5000,
         maximumAge: 0,
     };
 
-function success(pos) {
-  const crd = pos.coords;
+    function success(pos) {
+      const crd = pos.coords;
 
-  var lat = crd.latitude;
-  var lon = crd.longitude;
-  document.getElementById("lat").value = lat;
-  document.getElementById("lon").value = lon;
+      var lat = crd.latitude;
+      var lon = crd.longitude;
+      document.getElementById("haul_start_lat").value = lat;
+      document.getElementById("haul_start_lon").value = lon;
 
-  console.log("Your current position is:");
-  console.log(`Latitude : ${crd.latitude}`);
-  console.log(`Longitude: ${crd.longitude}`);
-  console.log(`More or less ${crd.accuracy} meters.`);
-}
+      console.log("Your current position is:");
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+    }
 
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-}
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
 
-navigator.geolocation.getCurrentPosition(success, error, options);
-*/
-</script>
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+    function getDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if(dd<10) { dd = '0'+dd };
+      if(mm<10) { mm = '0'+mm };
+
+      document.getElementById("haul_start_date").value = yyyy + '/' + mm + '/' + dd;
+      document.getElementById("haul_start_time").value = ('0' + today.getHours()).slice(-2) + ":" + ('0' + today.getMinutes()).slice(-2);
+
+    }
 
 
-<script>
-/*    let tripForm = document.getElementById("new_haul");
+    window.onload = function() {
+      getDate();
+    };
 
-    tripForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        let h_date = document.getElementById("haul-date");
-        let h_time = document.getElementById("haul-time");
-        let lat = document.getElementById("lat");
-        let lon = document.getElementById("lon");
-
-        if (h_date.value == "" || h_time.value == "" || lat.value == "" || lon.value == "") {
-        alert("Ensure you input a value in all fields!");
-        }
-        else {
-            // perform operation with form input
-            alert("This form has been successfully submitted!");
-            console.log(
-                `This form has a haul date of ${h_date.value} , a haul time of ${h_time.value} ,
-                a latitude of ${lat.value} and a longitude of ${lon.value} `
-            );
-
-            h_date.value = "";
-            h_time.value = "";
-            lat.value = "";
-            lon.value = "";
-        }
-    });
-*/
 </script>
