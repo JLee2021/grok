@@ -126,15 +126,18 @@ class Home extends BaseController
       . view('includes/footer');
   }
 
-  public function new_catch()
+  public function new_catch($trip_id=null, $haulnum=null)
   {
     $dropdown = new \App\Models\DropdownModel();
     $this->session = \Config\Services::session();
     $token = $this->session->token;
     $data = array(
-      'disposition' => $dropdown->get_values('disposition_code', $token),
-      'species' => $dropdown->get_values('species_itis', $token),
-      'ports' => $dropdown->get_values('port', $token)
+        'trip_id' => $trip_id,
+        'haulnum' => $haulnum,
+        'disposition' => $dropdown->get_values('disposition_code', $token),
+        'species' => $dropdown->get_values('species_itis', $token),
+        'weight_uom' => $dropdown->get_values('weight_uom', $token),
+        'grade' => $dropdown->get_values('grade_code', $token)
     );
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),

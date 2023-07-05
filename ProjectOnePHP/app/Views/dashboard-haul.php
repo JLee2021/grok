@@ -63,33 +63,33 @@
         array.forEach(grok_catch_card);
     }
     function grok_catch_card(obj) {
-        let card = document.createElement('div');
-            card.classList.add('usa-card__container');
-        let card_head = document.createElement('div');
-            card_head.classList.add('usa-card__header');
-        let card_title = document.createElement('h2');
-            card_title.classList.add('usa-card__heading');
-            card_title.innerHTML = 'haul_num: '+obj.haul_num;
-            card_head.append(card_title);
-        let card_bod = document.createElement('div');
-            card_bod.classList.add('usa-card__body');
-            card_bod.innerHTML  = '<p style="margin-bottom:0px;">gear_cat: '+obj.accsp_gear_category+'<br>';
-            card_bod.innerHTML += '   haul_start_date: '+obj.haul_start_date+'</p>';
-            card_bod.innerHTML += '<p><a href="dashboard_catch/'+obj.trip_id+'/'+obj.haul_num+'" class="usa-button">Catch</a></p>';
-        //let card_foot = document.createElement('div');
-        //    card_foot.classList.add('usa-card__footer');
-        //    card_foot.innerHTML = '<p><a href="dashboard_catch/'+obj.trip_id+'/'+obj.haul_num+'" class="usa-button">Catch</a>';
-        //    card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = '+obj.trip_id+' onClick="delete_trip(this.dataset.tripid); return false;">Delete</a>';
-        //    card_foot.innerHTML += '</p><p><a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a></p>';
-        card.append(card_head);
-        card.append(card_bod);
-        //card.append(card_foot);
-        document.getElementById('grok_hauls_list').append(card);
-
-
-
-
-
+        if(obj.haulnum==document.getElementById('grok_haulnum').innerHTML) {
+            let card = document.createElement('div');
+                card.classList.add('usa-card__container');
+            let card_head = document.createElement('div');
+                card_head.classList.add('usa-card__header');
+            let card_title = document.createElement('h2');
+                card_title.classList.add('usa-card__heading');
+                card_title.innerHTML = 'species: '+obj.species_itis;
+                card_head.append(card_title);
+            let card_bod = document.createElement('div');
+                card_bod.classList.add('usa-card__body');
+                card_bod.innerHTML  = '<p style="margin-bottom:0px;">';
+                card_bod.innerHTML += '  grade: '+obj.grade_code+'<br>';
+                card_bod.innerHTML += '  disposition: '+obj.disposition_code+'<br>';
+                card_bod.innerHTML += '  weight: '+obj.weight+' '+obj.weight_uom+'<br>';
+                card_bod.innerHTML +='</p>';
+                //card_bod.innerHTML += '<p><a href="dashboard_catch/'+obj.trip_id+'/'+obj.haul_num+'" class="usa-button">Catch</a></p>';
+            //let card_foot = document.createElement('div');
+            //    card_foot.classList.add('usa-card__footer');
+            //    card_foot.innerHTML = '<p><a href="dashboard_catch/'+obj.trip_id+'/'+obj.haul_num+'" class="usa-button">Catch</a>';
+            //    card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = '+obj.trip_id+' onClick="delete_trip(this.dataset.tripid); return false;">Delete</a>';
+            //    card_foot.innerHTML += '</p><p><a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a></p>';
+            card.append(card_head);
+            card.append(card_bod);
+            //card.append(card_foot);
+            document.getElementById('grok_catch_list').append(card);
+        }
     }
     function get_trip_db() {
         let openRequest = indexedDB.open('grok', 1);
@@ -110,7 +110,7 @@
         openRequest.onsuccess = function() {
           let db = openRequest.result;
           build_trip_info(db);
-          build_hauls_list(db);
+          build_catch_list(db);
         };
     }
 
