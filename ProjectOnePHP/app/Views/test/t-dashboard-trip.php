@@ -79,41 +79,21 @@
         card_bod.classList.add('usa-card__body');
         card_bod.innerHTML = '<p>gear_cat: ' + obj.accsp_gear_category + '<br>';
         card_bod.innerHTML += '   haul_start_date: ' + obj.haul_start_date + '</p>';
-        //let card_foot = document.createElement('div');
-        //    card_foot.classList.add('usa-card__footer');
+        let card_foot = document.createElement('div');
+           card_foot.classList.add('usa-card__footer');
+           card_foot.innerHTML = '<p><a href="../end_haul" class="usa-button">End Haul</a>';
+           card_foot.innerHTML += '<a href="../new_catch/'+obj.trip_id+'" class="usa-button">Add Catch</a><br><br>';
         //    card_foot.innerHTML = '<p><a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
+           card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = '+obj.trip_id+' onClick="#">Delete</a>';
         //    card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = '+obj.trip_id+' onClick="delete_trip(this.dataset.tripid); return false;">Delete</a>';
+           card_foot.innerHTML += '</p><p><a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="#">Submit</a></p>';
         //    card_foot.innerHTML += '</p><p><a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a></p>';
         card.append(card_head);
         card.append(card_bod);
-        //card.append(card_foot);
+        card.append(card_foot);
         document.getElementById('grok_hauls_list').append(card);
     }
 
-    function make_button(obj) {
-        console.log(obj.vessel_permit_num);
-        let card = document.createElement('div');
-            card.classList.add('usa-card__container');
-        let card_head = document.createElement('div');
-            card_head.classList.add('usa-card__header');
-        let card_title = document.createElement('h2');
-            card_title.classList.add('usa-card__heading');
-            card_title.innerHTML = obj.trip_id;
-            card_head.append(card_title);
-        let card_bod = document.createElement('div');
-            card_bod.classList.add('usa-card__body');
-            card_bod.innerHTML = '<p>' + obj.vessel_name + ' ' + obj.sail_date + '</p>';
-        let card_foot = document.createElement('div');
-            card_foot.classList.add('usa-card__footer');
-            card_foot.innerHTML = '<p><a href="dashboard_haul/' + obj.trip_id + '" class="usa-button">Edit</a>';
-            card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = ' + obj.trip_id + ' onClick="delete_trip(this.dataset.tripid); return false;">Delete</a>';
-            card_foot.innerHTML += '</p><p><a href="" class=" usa-button usa-button--accent-warm" data-tripid = ' + obj.trip_id + ' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a></p>';
-        card.append(card_head);
-        card.append(card_bod);
-        card.append(card_foot);
-        document.getElementById('grok_trip_list').append(card);
-
-    }
 
     function get_trip_db() {
         let openRequest = indexedDB.open('grok', 1);

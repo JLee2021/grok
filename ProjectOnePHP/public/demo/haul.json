@@ -1,0 +1,14 @@
+{
+  "haul": {
+    "id": 1,
+    "trip_id": 1, 
+    "start_date": "date",
+    "start_time": "time",
+    "start_latitude": "latitude",
+    "start_longitude": "longitude",
+    "end_date": "date",
+    "end_time": "time",
+    "end_latitude": "latitude",
+    "end_longitude": "longitude"
+  }
+}

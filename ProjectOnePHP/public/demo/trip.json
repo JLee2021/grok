@@ -1,0 +1,9 @@
+{
+  "trip": {
+    "id": 1,
+    "observer": "name",
+    "vessell": "name",
+    "port": "name",
+    "trip_no": "id string"
+  }
+}
