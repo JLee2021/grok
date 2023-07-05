@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
 
 <head>
@@ -21,7 +17,7 @@
         <section id="test-section-id" class="usa-section">
             <div class="grid-container">
                 <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
-                    <form class="usa-form" id="new_trip" onsubmit="event.preventDefault();">
+                    <form class="usa-form" id="new_trip" onsubmit="event.preventDefault();addTrip();">
                         <fieldset class="usa-fieldset">
                             <legend class="usa-legend usa-legend--small">New Trip</legend>
                             <legend class="usa-legend usa-legend--large">Atlas Data Entry</legend>
@@ -67,11 +63,14 @@
                             <input class="usa-input" id="trip_id" name="trip_number" type="text" title="Trip ID" placeholder="A99001" pattern="[A-Z]\d\d\d\d\d" autocapitalize="off" autocorrect="off" required />
 
 
-                            <input  onclick="addTrip()" class="usa-button" type="submit" value="Start Trip" />
+                            <input class="usa-button" type="submit" value="Start Trip" />
 
                         </fieldset>
                     </form>
                 </div>
+                <ul id="tripList">
+
+                </ul>
             </div>
         </section>
     </div>
@@ -114,13 +113,14 @@
             // Use transaction oncomplete to make sure the objectStore creation is
             // finished before adding data into it.
             objectStore.transaction.oncomplete = (event) => {
+             
                 // Store values in the newly created objectStore.
-                const customerObjectStore = db
+                const tripObjectStore = db
                     .transaction("trips", "readwrite")
                     .objectStore("trips");
                 tripData.forEach((trip) => {
                     tripObjectStore.add(trip);
-                });
+                });  
             };
         };
 
@@ -149,6 +149,8 @@
                 }
             }
         }
+
+
     </script>
 
 
