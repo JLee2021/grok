@@ -67,15 +67,17 @@ class Home extends BaseController
             . view('includes/footer');
   }
 
-  public function dashboard_haul()
+  public function dashboard_haul($trip_id=null, $haulnum=null)
   {
+     $data = array('trip_id' => $trip_id, 'haulnum' => $haulnum);
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
       array('name' => 'Trips', 'url' => '/home/dashboard'),
-      array('name' => 'Hauls', 'url' => null)
+      array('name' => 'Hauls', 'url' => '/home/dashboard_trip/'.$trip_id),
+      array('name' => $haulnum, 'url' => null)
     );
     return view('includes/header', $breadcrumbs)
-            . view('dashboard-haul')
+            . view('dashboard-haul', $data)
             // . view('js/main.js')
             . view('includes/footer');
   }
@@ -124,15 +126,18 @@ class Home extends BaseController
       . view('includes/footer');
   }
 
-  public function new_catch()
+  public function new_catch($trip_id=null, $haulnum=null)
   {
     $dropdown = new \App\Models\DropdownModel();
     $this->session = \Config\Services::session();
     $token = $this->session->token;
     $data = array(
-      'disposition' => $dropdown->get_values('disposition_code', $token),
-      'species' => $dropdown->get_values('species_itis', $token),
-      'ports' => $dropdown->get_values('port', $token)
+        'trip_id' => $trip_id,
+        'haulnum' => $haulnum,
+        'disposition' => $dropdown->get_values('disposition_code', $token),
+        'species' => $dropdown->get_values('species_itis', $token),
+        'weight_uom' => $dropdown->get_values('weight_uom', $token),
+        'grade' => $dropdown->get_values('grade_code', $token)
     );
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),

@@ -52,7 +52,8 @@
               trips.onsuccess = function() {
                   console.log(trips.result);
                 if (trips.result !== undefined) {
-                  alert(JSON.stringify(trips.result));
+                  //alert(JSON.stringify(trips.result));
+                  alert(JSON.stringify(trips.result, null, 2));
                 } else {
                   console.log("No such trips");
                 }

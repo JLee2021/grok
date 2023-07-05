@@ -71,11 +71,12 @@
             card_head.append(card_title);
         let card_bod = document.createElement('div');
             card_bod.classList.add('usa-card__body');
-            card_bod.innerHTML  = '<p>gear_cat: '+obj.accsp_gear_category+'<br>';
+            card_bod.innerHTML  = '<p style="margin-bottom:0px;">gear_cat: '+obj.accsp_gear_category+'<br>';
             card_bod.innerHTML += '   haul_start_date: '+obj.haul_start_date+'</p>';
+            card_bod.innerHTML += '<p><a href="<?php echo site_url('/home/dashboard_haul/'); ?>'+obj.trip_id+'/'+obj.haul_num+'" class="usa-button">Catch</a></p>';
         //let card_foot = document.createElement('div');
         //    card_foot.classList.add('usa-card__footer');
-        //    card_foot.innerHTML = '<p><a href="dashboard_trip/'+obj.trip_id+'" class="usa-button">Edit</a>';
+        //    card_foot.innerHTML = '<p><a href="dashboard_catch/'+obj.trip_id+'/'+obj.haul_num+'" class="usa-button">Catch</a>';
         //    card_foot.innerHTML += '<a href="" class=" usa-button usa-button--outline" data-tripid = '+obj.trip_id+' onClick="delete_trip(this.dataset.tripid); return false;">Delete</a>';
         //    card_foot.innerHTML += '</p><p><a href="" class=" usa-button usa-button--accent-warm" data-tripid = '+obj.trip_id+' onClick="submit_trip(this.dataset.tripid); return false;">Submit</a></p>';
         card.append(card_head);
