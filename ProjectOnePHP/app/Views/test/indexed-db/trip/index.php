@@ -3,13 +3,12 @@
 
 <head>
   <title>Trip List</title>
-  <div id="results"></div>
-<p id="demo"></p>
 </head>
 
 <body>
 
   <p>Trip list:</p>
+  <p id="results"></p>
   <ul id="listElem"></ul>
   <script>
     let results = [];
@@ -22,11 +21,11 @@
         if (cursor) {
           results.push(cursor.value)
           cursor.continue();
+          console.log(cursor.value)
+          listElem.innerHTML = "<li>" + cursor.value + "</li>";
         };
       };
     };
-
-    document.getElementById("results").value = results;
 
     async function list() {
       let tx = db.transaction('trips');
@@ -42,6 +41,54 @@
       }
     }
     console.log(results);
+
+    const arr = [{
+        "observer": "Z01",
+        "vessel": "884512",
+        "port": "220101",
+        "tripId": "Z01002"
+      },
+      {
+        "observer": "X97",
+        "vessel": "885215",
+        "port": "240403",
+        "tripId": "Z01003"
+      },
+      {
+        "observer": "Z01",
+        "vessel": "991234",
+        "port": "220101",
+        "tripId": "Z01004"
+      },
+      {
+        "observer": "Z01",
+        "vessel": "880639",
+        "port": "240403",
+        "tripId": "Z01005"
+      },
+      {
+        "observer": "Z01",
+        "vessel": "884512",
+        "port": "220101",
+        "tripId": "Z01006"
+      },
+      {
+        "observer": "Z01",
+        "vessel": "884512",
+        "port": "220101",
+        "tripId": "Z01007"
+      }
+    ];
+    results.forEach(element => console.log(element));
+
+    let text = "Results: ";
+    results.forEach(myFunction);
+    document.getElementById("results").innerHTML = text;
+
+    function myFunction(item, index) {
+      text += index + ": " + item + "<br>";
+    }
+    // document.getElementById("results").value = results;
 
     // const obj = JSON.parse(results);
     // document.getElementById("demo").innerHTML = obj.observer + ", " + obj.port;
