@@ -67,15 +67,17 @@ class Home extends BaseController
             . view('includes/footer');
   }
 
-  public function dashboard_haul()
+  public function dashboard_haul($trip_id=null, $haulnum=null)
   {
+     $data = array('trip_id' => $trip_id, 'haulnum' => $haulnum);
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
       array('name' => 'Trips', 'url' => '/home/dashboard'),
-      array('name' => 'Hauls', 'url' => null)
+      array('name' => 'Hauls', 'url' => '/home/dashboard_trip/'.$trip_id),
+      array('name' => $haulnum, 'url' => null)
     );
     return view('includes/header', $breadcrumbs)
-            . view('dashboard-haul')
+            . view('dashboard-haul', $data)
             // . view('js/main.js')
             . view('includes/footer');
   }
