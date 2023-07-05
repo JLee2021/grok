@@ -49,6 +49,7 @@ class Home extends BaseController
       return view('includes/header', $breadcrumbs)
               . view('dashboard-user')
               . $this->get_token_script()
+              . view('service-worker')
               . view('includes/footer');
     }
 
