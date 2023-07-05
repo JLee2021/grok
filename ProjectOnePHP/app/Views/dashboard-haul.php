@@ -70,11 +70,12 @@
                 card_head.classList.add('usa-card__header');
             let card_title = document.createElement('h2');
                 card_title.classList.add('usa-card__heading');
-                card_title.innerHTML = 'species: '+obj.species_itis;
+                card_title.innerHTML = obj.common_name;
                 card_head.append(card_title);
             let card_bod = document.createElement('div');
                 card_bod.classList.add('usa-card__body');
                 card_bod.innerHTML  = '<p style="margin-bottom:0px;">';
+                card_bod.innerHTML += '  species_itis: '+obj.species_itis+'<br>';
                 card_bod.innerHTML += '  grade: '+obj.grade_code+'<br>';
                 card_bod.innerHTML += '  disposition: '+obj.disposition_code+'<br>';
                 card_bod.innerHTML += '  weight: '+obj.weight+' '+obj.weight_uom+'<br>';
