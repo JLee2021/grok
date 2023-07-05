@@ -94,6 +94,8 @@
         for (const pair of formData.entries()) {
             thiscatch[pair[0]] = pair[1];
         }
+        let s = document.getElementById('species_itis');
+        thiscatch['common_name'] = s.options[s.selectedIndex].text;
 
         let openRequest = indexedDB.open('grok', 1);
 
