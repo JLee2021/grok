@@ -15,7 +15,7 @@ class BoatController extends BaseController
 
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
-      array('name' => 'All Boats', 'url' => null)
+      array('name' => 'All Vessels', 'url' => null)
     );
 
     return view('includes/header', $breadcrumbs)
@@ -27,8 +27,8 @@ class BoatController extends BaseController
   {
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
-      array('name' => 'All Boats', 'url' => 'BoatController/index'),
-      array('name' => 'New Boat', 'url' => null)
+      array('name' => 'All Vessels', 'url' => 'BoatController/index'),
+      array('name' => 'New Vessel', 'url' => null)
     );
     return view('includes/header', $breadcrumbs)
       . view('boats/create')
@@ -46,14 +46,42 @@ class BoatController extends BaseController
     return redirect()->to(site_url('BoatController/index'));
   }
 
-  public function edit($id)
+  public function edit()
   {
-    // TODO: Return view to update
+    $boat = new \App\Models\BoatModel();
+    $file = "https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/boat/boats.csv";
+    $readfile = $boat->read_file($file); 
+    $data = array(
+      'boats' => $readfile
+    );
+
+    $breadcrumbs['nav'] =  array(
+      array('name' => 'Home', 'url' => '/'),
+      array('name' => 'All Vessels', 'url' => 'BoatController/index'),
+      array('name' => 'Edit Vessels', 'url' => null)
+    );
+
+    return view('includes/header', $breadcrumbs)
+      . view('boats/edit', $data)
+      . view('includes/footer');
   }
 
-  public function update($id)
+  public function update()
   {
-    // TODO: save update to CSV 
+    $original = $this->request->getPost(['original-name']);
+    $boat_name = $this->request->getPost(['boat-name']);
+    $old_name = implode($original);
+    $new_name = implode($boat_name);
+    
+    $locate = "/var/www/html/grok/html/ProjectOnePHP/public/boat/boats.csv";
+    $file = file_get_contents($locate);
+
+    $replace = str_replace($old_name, $new_name, $file);
+    
+    file_put_contents($locate, $replace);
+
+    return redirect()->to(site_url('BoatController/edit'));
+  
   }
 
   public function delete()
@@ -67,8 +95,8 @@ class BoatController extends BaseController
 
     $breadcrumbs['nav'] =  array(
       array('name' => 'Home', 'url' => '/'),
-      array('name' => 'All Boats', 'url' => 'BoatController/index'),
-      array('name' => 'Delete Boats', 'url' => null)
+      array('name' => 'All Vessels', 'url' => 'BoatController/index'),
+      array('name' => 'Delete Vessels', 'url' => null)
     );
 
     return view('includes/header', $breadcrumbs)
@@ -79,10 +107,21 @@ class BoatController extends BaseController
   public function remove(){
     $boat_name = $this->request->getPost(['boat-name']);
     $implode = implode($boat_name);
-    $needle = $implode . ",";
+
+    $needle1 = "," . $implode;
+    $needle2 = $implode;
+
     $locate = "/var/www/html/grok/html/ProjectOnePHP/public/boat/boats.csv";
     $file = file_get_contents($locate);
-    $replace = str_replace($needle, "", $file);
+
+    if(strpos($file, $needle2) == 0){
+      $needle2 = $implode . ",";
+      $replace = str_replace($needle2, "", $file);
+    }
+    else{
+      $replace = str_replace($needle1, "", $file);
+    }
+
     file_put_contents($locate, $replace);
 
     return redirect()->to(site_url('BoatController/delete'));

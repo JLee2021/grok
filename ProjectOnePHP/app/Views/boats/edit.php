@@ -1,19 +1,23 @@
 <section id="test-section-id" class="usa-section">
     <div class="grid-container">
-        <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
-            <h1 class="site-preview-heading margin-0">Vessels</h1>
+        <div class="mobile-lg:grid-col-8 margin-top-4 mobile-lg:margin-top-0">
+            <h1 class="site-preview-heading margin-0">Update Vessels</h1>
             <h3>Network Connection: <span id="status"></span></h3>
-            <ul class="usa-list usa-list--unstyled">
-             <?php              
+            <div id="boats">
+             <?php
+                
                 foreach($boats as $boat){
-                    echo "<li>" . $boat . "</li>";
+                    echo "<form class='usa-form' id='boat-name' action='" . site_url('/BoatController/update') . "' method='post'>";
+                    csrf_field();
+                    echo "<input type='hidden' readonly class='usa-input' value='" . $boat . "' id='original-name' name='original-name' />
+                          <input class='usa-input' value='" . $boat . "' id='boat-name' name='boat-name' />
+                    <button style='background-color: #1a4480; color:white; border-radius:5px; padding: 5px 7px;'>Update</button> " ;
+                    echo "</form>";
                 }
              ?>
-            </ul>
+            </div>
             <br>
-            <a href="create"><button type="button" class="usa-button" id="btn1">Add</button></a>
-            <a href="edit"><button type="button" class="usa-button" id="btn2">Update</button></a>
-            <a href="delete"><button type="button" class="usa-button usa-button--secondary" id="btn3">Delete</button></a>
+            <a href="index"><button type="button" class="usa-button usa-button--base" id="button">Cancel</button></a> 
         </div>
     </div>
 </section>
@@ -31,15 +35,12 @@ const checkOnlineStatus = async () => {
 setInterval(async () => {
   const result = await checkOnlineStatus();
   const statusDisplay = document.getElementById("status");
-  const btn1Display = document.getElementById("btn1")
-  const btn2Display = document.getElementById("btn2")
-  const btn3Display = document.getElementById("btn3")
+  const buttonDisplay = document.getElementById("button")
+  const boatsDisplay = document.getElementById("boats")
   statusDisplay.textContent = result ? "Online" : "Offline";
   statusDisplay.style.color = result ? "#005ea2" : "#d83933";
-  btn1Display.style.display = result ? "" : "none";
-  btn2Display.style.display = result ? "" : "none";
-  btn3Display.style.display = result ? "" : "none";
-  
+  buttonDisplay.style.display = result ? "" : "none";
+  boatsDisplay.style.display = result ? "" : "none";
 }, 3000); // probably too often, try 30000 for every 30 seconds
 
 window.addEventListener("load", async (event) => {
