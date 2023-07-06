@@ -41,13 +41,18 @@ async function setupTripList(el, { vpNo = null } = { vpNo: null }) {
 // Fragments
 function listTrips(items) {
   console.log('trips: %o', items)
-  return `
-    <di>
-      ${items.map(item => `<li>
-        <button class="usa-list" data-id="${item.id}">${item.obsId} - ${item.id}</button>
-      </li>`).join('')}
-    </di>
-  `
+  return items.map(item => `
+    <tr>
+      <th scope="row" data-sort-value="3">
+        <button
+          class="usa-button usa-button--accent-cool"
+          data-id="${item.id}"
+        >
+          ${item.id}
+        </button>
+      </th>
+      <td>${item.obsId}</td>
+    </tr>`).join('')
 }
 
 // Actions
