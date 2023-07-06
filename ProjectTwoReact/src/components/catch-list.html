@@ -5,10 +5,21 @@
   List: speciesName+speciesCode;
    - catch-list
 -->
-
-<div>
-  <div>
-    <h3>Catch List</h3>
+<div class="margin-3">
+  <div class="usa-table-container--scrollable" tabindex="0">
+    <table class="usa-table usa-table--striped">
+      <caption>
+        Catch List
+      </caption>
+      <thead>
+        <tr>
+          <th data-sortable scope="col" role="columnheader">Species</th>
+          <th data-sortable scope="col" role="columnheader">Count</th>
+        </tr>
+      </thead>
+      <tbody id="catch-list">
+      </tbody>
+    </table>
   </div>
 
   <div class="margin-3">
@@ -16,8 +27,4 @@
       <button id="add-catch" class="usa-button" name="add-catch" type="button">Add Catch</button>
     </label>
   </div>
-
-  <div class="margin-3" id="catch-list">
-  </div>
-
 </div>

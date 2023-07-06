@@ -43,17 +43,20 @@ const haulId = (item) => `${item.tripId}-${item.id}`
 // Fragments
 function listHauls(items) {
   console.log('listing haul items: %o', items)
-  return `
-    <di>
-      <li>Catch List | GPS Start | Start Date </li>
-      ${items.map((item) => `
-        <li>
-          <button data-id="${haulId(item)}">${haulId(item)}</button> |
-          ${item.startGps} | ${item.startDate}
-        </li>
-      `).join("")}
-    </di>
-  `;
+
+  return items.map((item) => `
+    <tr>
+      <th scope="row" data-sort-value="3">
+        <button
+          class="usa-button usa-button usa-button--accent-warm"
+          data-id="${haulId(item)}"
+        >
+          ${haulId(item)}
+        </button>
+      </th>
+      <td data-sort-value="3">${item.startGps}</td>
+      <td data-sort-value="3">${item.startDate}</td>
+    </tr>`).join('')
 }
 
 // Actions

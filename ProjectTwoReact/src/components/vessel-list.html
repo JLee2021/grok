@@ -5,16 +5,24 @@
 -->
 
 <div>
-  <div>
-    <h3>Vessel List</h3>
-  </div>
-
-  <div>
-    <!-- <button id="start-trip" name="start-trip" type="button">Start Trip</button> -->
-    <!--<a id="start-trip" name="start-trip" type="button" href="void(0)">Start Trip</a>-->
-  </div>
-
-  <div id="vessel-list">
+  <div class="usa-table-container--scrollable" tabindex="0">
+    <table class="usa-table usa-table--borderless">
+      <caption>
+        Vessel List
+      </caption>
+      <thead>
+        <tr>
+          <th data-sortable scope="col" role="columnheader">Vessel Name</th>
+          <th data-sortable scope="col" role="columnheader">Vessel Permit No.</th>
+        </tr>
+      </thead>
+      <tbody id="vessel-list">
+      </tbody>
+    </table>
+    <div
+      class="usa-sr-only usa-table__announcement-region"
+      aria-live="polite"
+    ></div>
   </div>
 
 </div>
