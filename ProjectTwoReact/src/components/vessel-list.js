@@ -18,7 +18,7 @@ async function setupVesselList(el) {
   const vessels = await new VesselCtrl().getStore().getRef();
 
   // Don't show until after the login page.
-  setupAppCrumbs(document.querySelector("#app-crumbs"));
+  setupAppCrumbs(document.querySelector("#app-crumbs"), { reset: true });
 
   // Update Component
   async function update(el) {
