@@ -4,7 +4,7 @@ Btn: Start Haul
 */
 import { HaulCtrl } from "../controller/haul";
 import { setupHaulList } from "./haul-list";
-//import { getMap } from "/src/mapping.js";
+import { getMap } from "/src/mapping.js";
 import template from "./haul-start.html?raw";
 import { showPosition } from "/src/geo-location.js";
 
@@ -40,9 +40,7 @@ async function setupHaulStart(el, { tripId = null } = { tripId: null }) {
     .querySelector("#start-haul")
     .addEventListener("click", (e) => addHaul(e, tripId));
 
-  // document
-  //   .querySelector("#map-btn")
-  //   .addEventListener("click", (e) => getMap());
+  document.querySelector("#map-btn").addEventListener("click", (e) => getMap());
 
   // Update Species & Dispostion Lists
   // el.querySelector('#list-species').innerHTML = listSpecies()
