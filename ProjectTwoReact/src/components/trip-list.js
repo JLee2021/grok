@@ -9,12 +9,16 @@ import { watch } from "../app-lib"
 
 import { setupHaulList } from './haul-list'
 import { setupTripStart } from './trip-start'
+import { setupAppCrumbs } from './app-crumbs'
 
 const ctrl = new TripCtrl()
 
 // Setup
 async function setupTripList(el, { vpNo = null } = { vpNo: null }) {
   console.log('Setup TripList: %o', vpNo)
+  // async function (el, { vpNo = null, msg = null } = { vpNo: null, msg: null } ) {
+  setupAppCrumbs(null, { vpNo, msg: 'Trips' })
+
   const store = ctrl.getStore(vpNo)
 
   // Update Component
