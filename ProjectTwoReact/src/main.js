@@ -18,6 +18,13 @@ document.querySelector("#app").innerHTML = /*html*/ `
   </div>
 `;
 
+document.querySelector('#basic-nav-section-two').addEventListener('click', toVesselList)
+
+function toVesselList(e) {
+  e.preventDefault()
+  setupVesselList(document.querySelector("#main-content"))
+}
+
 setupLogin(document.querySelector("#main-content"));
 // setupAppNav(document.querySelector("#app-nav"));
 
