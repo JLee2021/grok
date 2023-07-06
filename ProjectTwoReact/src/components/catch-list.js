@@ -3,6 +3,7 @@ import { CatchCtrl } from '../controller/catch'
 import { watch } from '../app-lib'
 
 import { setupCatchAdd } from './catch-add'
+import { setupAppCrumbs } from './app-crumbs'
 
 /*
 List Catch
@@ -35,6 +36,8 @@ async function setupCatchList(el, { haulId = null } = { haulId: null }) {
 }
 
 function listCatches(items) {
+  setupAppCrumbs(null, { msg: 'We Caught!' })
+
   console.log('listing catches: %o', items)
   const catchId = (item) => `${item.haulId}-${item.id}`
 
