@@ -28,14 +28,19 @@ export function ref(obj, callback = null) {
  * @param {function} callback  the function to call when "set" action is intercepted.
  *
  */
-export function watch(ref, callback) {
-	// Wrap the current proxy with a new proxy and callback.
-	ref.value = new Proxy(ref.target, {
+export function watch(ref, callback, { id }) {
+	// Organize proxy's by a component ID.
+  console.info('Setting Watcher on Component ID: %o', id)
+  ! ref.components ? ref.components = []: undefined
+  ref.components[id] = new Proxy(ref.target, {
 		set(target, prop, val, ref) {
 			callback(val, ref[prop] || null)
 			target[prop] = val
 			return true
 		}
   })
+
+  // Return Proxy by ID.
+  return ref.components[id]
 }
 

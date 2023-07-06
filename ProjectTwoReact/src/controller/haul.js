@@ -4,10 +4,7 @@ import { HaulStore } from '../store/haul.js'
 const store = new HaulStore()
 
 export class HaulCtrl {
-	constructor() {}
+	getModel(parentId) { return new HaulModel(this.getStore(parentId)) }
 
-	getModel() { return new HaulModel(store) }
-
-  getStore() { return store }
+  getStore(parentId) { return new HaulStore(parentId) }
 }
-

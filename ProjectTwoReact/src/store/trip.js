@@ -17,20 +17,16 @@ const store = localforage.createInstance({
 
 
 export class TripStore {
-	construtor() {
-	}
+  constructor(parentId) {
+    this.vpNo = parentId
+  }
 
-  async update(vpNo) {
-    if (! vpNo) {
-      console.error('Update was passed an empty vpNo. ')
-    }
+  setParent(parentId) {
+    this.vpNo = parentId
+  }
 
-    return await store.getItem(vpNo).then(items => {
-      items = items || []
-      trips.value.splice(0)
-      items.forEach(item => trips.value.push(item))
-    })
-
+  async getMany(id) {
+    return await this._getVesselTrips(id || this.vpNo)
   }
 
 	async addMany(items) {
@@ -45,14 +41,18 @@ export class TripStore {
    * @returns Vessels Proxy.
    */
   async getRef() {
-    if (! trips.value.length) {
-      // load Trips from indexDB.
-      await store.iterate((value, key) => {
-        trips.value.push(value)
-      })
-    }
+    // if (! trips.value.length) {
+    //   // load Trips from indexDB.
+    //   await store.iterate((value, key) => {
+    //     trips.value.push(value)
+    //   })
+    // }
 
     return trips
+  }
+
+  async _getVesselTrips(vpNo) {
+    return await store.getItem(`${vpNo}`) || []
   }
 
   async addOne(item) {
@@ -61,24 +61,18 @@ export class TripStore {
       console.error('Missing property: vpNo, obsId, or id.')
       return
     }
+    const state = trips
+    let contents = await this._getVesselTrips(item.vpNo)
 
-    // Get trip list; Or start one.
-    let tripList = await store.getItem(item.vpNo) || []
-
-    const index = tripList.findIndex((t) => t.id == item.id)
-    if (index > -1) {
-      tripList[index] = { ...item } // Update
-    } else {
-      tripList.push({ ...item }) // Create
-    }
+    // Find trip or append a new one.
+    let index = contents.findIndex((val) => val.id == item.id)
+    contents[index < 0 ? contents.length :index] = { ...item }
 
     // Reset App State
-    trips.value.splice(0)
-    tripList.forEach(t => trips.value.push(t))
-    await this.update(item.vpNo)
+    state.value.splice(0, state.value.length, contents)
 
     // Push trips to indexDB
-    return await store.setItem(`${item.vpNo}`, tripList)
+    return await store.setItem(`${item.vpNo}`, contents)
   }
 
   async deleteAll() {

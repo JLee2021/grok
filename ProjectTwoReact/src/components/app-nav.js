@@ -31,7 +31,7 @@ async function setupAppNav(el, { $prop = 'default' } = { $prop: 'default' } ) {
 
 // Actions: navigation, updating the store, none template stuff, etc.
 // function toAppNavOther() {
-//   setupAppNavOther(document.querySelector('#main'))
+//   setupAppNavOther(document.querySelector('#main-content'))
 // }
 
 

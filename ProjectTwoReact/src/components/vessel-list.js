@@ -30,7 +30,7 @@ async function setupVesselList(el) {
     );
   }
 
-  watch(vessels, (n, o) => update(el));
+  watch(vessels, (n, o) => update(el), { id: 'vesselList' });
   update(el);
 }
 
@@ -57,7 +57,7 @@ function toTripList(el) {
   el.preventDefault();
   // Grab vessel permit no. from data-id attribute.
   const vpNo = el.target.dataset.id;
-  setupTripList(document.querySelector("#main"), { vpNo });
+  setupTripList(document.querySelector("#main-content"), { vpNo });
 }
 
 export { setupVesselList };
