@@ -32,7 +32,7 @@ async function setupLogin(el, { $prop = "default" } = { $prop: "default" }) {
     el.querySelector("#submit-login").addEventListener("click", toVesselList);
   }
 
-  watch(login, (n, o) => update(el));
+  watch(login, (n, o) => update(el), { id: 'login' });
   update(el);
 }
 
@@ -48,7 +48,7 @@ async function setupLogin(el, { $prop = "default" } = { $prop: "default" }) {
 // Actions: navigation, updating the store, none template stuff, etc.
 function toVesselList(el) {
   el.preventDefault();
-  setupVesselList(document.querySelector("#main"));
+  setupVesselList(document.querySelector("#main-content"));
 }
 
 export { setupLogin };

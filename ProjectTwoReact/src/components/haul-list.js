@@ -1,7 +1,9 @@
 import template from "./haul-list.html?raw";
-import { setupHaulStart } from "./haul-start";
 import { HaulCtrl } from "../controller/haul";
 import { watch } from "../app-lib";
+
+import { setupHaulStart } from "./haul-start";
+import { setupCatchList } from "./catch-list";
 
 /*
   List Haul
@@ -10,37 +12,54 @@ import { watch } from "../app-lib";
   List: Hauls -> haul-start.js
    - haul-list
 */
+const ctrl = new HaulCtrl()
 
 // Setup
-async function setupHaulList(el) {
-  const hauls = await new HaulCtrl().getStore().getRef();
+async function setupHaulList(el, { tripId = null} = { tripId: null }) {
+  console.log('Setup HaulList: %o', tripId)
+  const store = ctrl.getStore(tripId)
 
   // Update Component
-  async function update(el) {
-    console.info("Updating Haul List");
+  async function update() {
+    const hauls = await store.getMany()
+    // console.info("Updating Haul List: %o", tripId);
     el.innerHTML = template;
 
     // Update Trip List
-    el.querySelector("#haul-list").innerHTML = listHauls(hauls.value || []);
-    el.querySelector("#add-haul").addEventListener("click", toStartHaul);
+    el.querySelector("#haul-list").innerHTML = listHauls(hauls);
+    el.querySelector("#haul-list").addEventListener("click", toCatchList);
+    el.querySelector("#add-haul").addEventListener("click", () => toStartHaul(tripId));
   }
 
-  watch(hauls, (n, o) => update(el));
-  update(el);
+  const storeRef = await store.getRef()
+  watch(storeRef, (n, o) => update(), { id: 'haulList' });
+  update();
 }
+const haulId = (item) => `${item.tripId}-${item.id}`
 
 // Fragments
 function listHauls(items) {
+  console.log('listing haul items: %o', items)
   return `
     <di>
-      ${items.map((item) => `<li>${item.name} - ${item.id}</li>`).join("")}
+      <li>Catch List | GPS Start | Start Date </li>
+      ${items.map((item) => `
+        <li>
+          <button data-id="${haulId(item)}">${haulId(item)}</button> |
+          ${item.startGps} | ${item.startDate}
+        </li>
+      `).join("")}
     </di>
   `;
 }
 
 // Actions
-function toStartHaul() {
-  setupHaulStart(document.querySelector("#main"));
+function toStartHaul(tripId) {
+  setupHaulStart(document.querySelector("#main-content"), { tripId });
+}
+function toCatchList(e) {
+  const haulId = e.target.dataset.id
+  setupCatchList(document.querySelector("#main-content"), { haulId })
 }
 
 export { setupHaulList };

@@ -28,7 +28,7 @@ async function setup$name(el, { $prop = "default" } = { $prop: "default" }) {
     el.querySelector("#action").addEventListener("click", to$nameOther);
   }
 
-  watch($ref, (n, o) => update(el));
+  watch($ref, (n, o) => update(el), { id: 'A Unique Component ID'});
   update(el);
 }
 
@@ -43,7 +43,7 @@ function $frag(items) {
 
 // Actions: navigation, updating the store, none template stuff, etc.
 function to$nameOther() {
-  setup$nameOther(document.querySelector("#main"));
+  setup$nameOther(document.querySelector("#main-content"));
 }
 
 export { setup$name };

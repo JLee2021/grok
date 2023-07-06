@@ -12,13 +12,11 @@ document.querySelector("#app").innerHTML = /*html*/ `
 
     <div id="app-nav"></div>
 
-		<div id="main"></div>
-
     <main class="usa-layout-docs__main desktop:grid-col-9 usa-prose usa-layout-docs" id="main-content">
   </div>
 `;
 
-setupLogin(document.querySelector("#main"));
+setupLogin(document.querySelector("#main-content"));
 setupAppCrumbs(document.querySelector("#app-crumbs"));
 setupAppNav(document.querySelector("#app-nav"));
 

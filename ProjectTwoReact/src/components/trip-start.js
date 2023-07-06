@@ -16,18 +16,19 @@ const ctrl = new TripCtrl()
 
 // Setup
 async function setupTripStart(el, {vpNo = null} = {vpNo: null}) {
-  const hauls = await ctrl.getStore().getRef()
+  // const hauls = await ctrl.getStore().getRef()
 
   // Update Component
   async function update(el) {
     console.info('Updateing Start Trip: vpNo - %o', vpNo)
     el.innerHTML = template
+    document.querySelector('#trip-num').value = `${vpNo}-`
 
     // Actions
     el.querySelector('#start-trip').addEventListener('click', () => startTrip(vpNo))
   }
 
-  watch(hauls, (n, o) => update(el))
+  // watch(hauls, (n, o) => update(el))
   update(el)
 }
 
@@ -39,9 +40,7 @@ async function startTrip(vpNo) {
   const tripNum = document.querySelector('#trip-num').value
 
   await ctrl.getStore().addOne({ vpNo, obsId, id: tripNum })
-  // .then(() => {
-  setupTripList(document.querySelector('#main'), { vpNo })
-  // })
+  setupTripList(document.querySelector('#main-content'), { vpNo })
 }
 
 export {

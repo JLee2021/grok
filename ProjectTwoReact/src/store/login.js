@@ -17,7 +17,7 @@ const store = localforage.createInstance({
 
 
 export class LoginStore {
-	construtor() {
+	constructor() {
 	}
 
   async update() {
