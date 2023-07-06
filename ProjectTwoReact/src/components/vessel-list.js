@@ -9,12 +9,16 @@ import { vesselApi } from "../service/api";
 import { watch } from "../app-lib";
 
 import { setupTripList } from "./trip-list";
+import { setupAppCrumbs } from "./app-crumbs";
 
 vesselApi.get();
 
 // Setup
 async function setupVesselList(el) {
   const vessels = await new VesselCtrl().getStore().getRef();
+
+  // Don't show until after the login page.
+  setupAppCrumbs(document.querySelector("#app-crumbs"));
 
   // Update Component
   async function update(el) {
