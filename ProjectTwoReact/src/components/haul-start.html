@@ -6,24 +6,20 @@
    - start-haul
 -->
 
-<div>
-  <div>
-    <h3>Start Haul</h3>
-  </div>
+<div class="margin-3">
+  <form class="usa-form" id="grok_form_login" method="POST" action="${login}">
+    <fieldset class="usa-fieldset">
+      <legend class="usa-legend usa-legend--large">Start Haul</legend>
 
-  <div class="margin-3">
-    <label for="start-date">Start Date</label>
-    <input id="start-date" title="Start Date" name="start-date" />
-  </div>
+      <label class="usa-label" for="start-date">Start Date</label>
+      <input class="usa-input" id="start-date" title="Start Date" name="start-date" />
 
-  <div class="margin-3">
-    <label for="start-gps">Start GPS</label>
-    <input id="start-gps" title="Start GPS" name="start-gps" />
-  </div>
+      <label class="usa-label" for="start-gps">Start GPS</label>
+      <input class="usa-input" id="start-gps" title="Start GPS" name="start-gps" />
 
-  <div class="margin-3">
-    <button id="start-haul" name="start-haul" type="button">Start Haul</button>
-  </div>
+      <input id="start-haul" class="usa-button" type="submit" name="start-haul" value="Start Haul" />
+    </fieldset>
+  </form>
 
   <div id="map" class="margin-3"></div>
 </div>

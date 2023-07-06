@@ -7,21 +7,17 @@
 -->
 
 <div>
-  <div>
-    <h3>Start Trip</h3>
-  </div>
+  <form class="usa-form" id="grok_form_login" method="POST" action="${login}">
+    <fieldset class="usa-fieldset">
+      <legend class="usa-legend usa-legend--large">Start Trip</legend>
 
-  <div>
-    <label for="obs-id">Observer ID</label>
-    <input id="obs-id" title="Observer ID" name="obs-id" />
-  </div>
+      <label class="usa-label" for="obs-id">Observer ID</label>
+      <input class="usa-input" id="obs-id" title="Observer ID" name="obs-id" />
 
-  <div>
-    <label for="trip-num">Trip Number</label>
-    <input id="trip-num" title="Disposition Code" name="trip-num" />
-  </div>
+      <label class="usa-label" for="trip-num">Trip Number</label>
+      <input class="usa-input" id="trip-num" title="Disposition Code" name="trip-num" />
 
-  <div>
-    <button id="start-trip" name="start-trip" type="button">Start Trip</button>
-  </div>
+      <input id="start-trip" class="usa-button" type="submit" name="start-trip" value="Start Trip" />
+    </fieldset>
+  </form>
 </div>
