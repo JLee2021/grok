@@ -29,6 +29,7 @@ async function setupCatchAdd(el, { haulId = null } = { haulId: null }) {
 // Fragments
 function listSpecies() {
   return /*html*/`
+    <option value>- Select -</option>
     <option>Rainbow</option>
     <option>Dolly</option>
     <option>Sea Bass</option>
@@ -37,6 +38,7 @@ function listSpecies() {
 
 function listDispo() {
   return /*html*/`
+    <option value>- Select -</option>
     <option>Dispostion-1b</option>
     <option>Dispostion-2b</option>
     <option>Dispostion-3b</option>
@@ -45,6 +47,7 @@ function listDispo() {
 
 // Actions
 async function addCatch(e, haulId) {
+  e.preventDefault()
   const specName = document.querySelector('#list-species').value || 'unk'
   const dispCode = document.querySelector('#list-dispo').value || '4'
 

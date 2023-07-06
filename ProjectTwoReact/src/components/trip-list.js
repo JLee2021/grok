@@ -44,7 +44,7 @@ function listTrips(items) {
   return `
     <di>
       ${items.map(item => `<li>
-        <button data-id="${item.id}">${item.obsId} - ${item.id}</button>
+        <button class="usa-list" data-id="${item.id}">${item.obsId} - ${item.id}</button>
       </li>`).join('')}
     </di>
   `

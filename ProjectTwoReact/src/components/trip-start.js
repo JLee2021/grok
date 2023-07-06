@@ -25,7 +25,7 @@ async function setupTripStart(el, {vpNo = null} = {vpNo: null}) {
     document.querySelector('#trip-num').value = `${vpNo}-`
 
     // Actions
-    el.querySelector('#start-trip').addEventListener('click', () => startTrip(vpNo))
+    el.querySelector('#start-trip').addEventListener('click', (e) => startTrip(e, vpNo))
   }
 
   // watch(hauls, (n, o) => update(el))
@@ -35,7 +35,9 @@ async function setupTripStart(el, {vpNo = null} = {vpNo: null}) {
 // Fragments
 
 // Actions
-async function startTrip(vpNo) {
+async function startTrip(e, vpNo) {
+  e.preventDefault()
+
   const obsId = document.querySelector('#obs-id').value
   const tripNum = document.querySelector('#trip-num').value
 
