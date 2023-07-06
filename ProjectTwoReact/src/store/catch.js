@@ -17,15 +17,15 @@ const store = localforage.createInstance({
 
 export class CatchStore {
   constructor(parentId) {
-    this.catchId = parentId
+    this.haulId = parentId
 	}
 
-  async _getHaulCatches(tripId) {
-    return await store.getItem(`${tripId}`) || []
+  async _getHaulCatches(id) {
+    return await store.getItem(`${id}`) || []
   }
 
   async getMany(id = null) {
-   return await this._getHaulCatches(id || this.tripId)
+   return await this._getHaulCatches(id || this.haulId)
   }
 
 
