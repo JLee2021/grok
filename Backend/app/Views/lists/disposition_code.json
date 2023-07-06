@@ -31,6 +31,36 @@
     },
     {
         "column_name": "DISPOSITION_CODE",
+        "name": "100",
+        "value": "100",
+        "descr": "KEPT, GENERAL"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "110",
+        "value": "110",
+        "descr": "KEPT, TRANSFERRED TO ANOTHER VESSEL"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "170",
+        "value": "170",
+        "descr": "KEPT, USED FOR BAIT"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "171",
+        "value": "171",
+        "descr": "KEPT CONSUMED BY CAPTAIN/ CREW"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
+        "name": "199",
+        "value": "199",
+        "descr": "KEPT, OTHER"
+    },
+    {
+        "column_name": "DISPOSITION_CODE",
         "name": "900",
         "value": "900",
         "descr": "UNKNOWN KEPT OR DISCARDED"
