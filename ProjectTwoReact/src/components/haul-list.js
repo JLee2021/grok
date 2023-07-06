@@ -4,6 +4,7 @@ import { watch } from "../app-lib";
 
 import { setupHaulStart } from "./haul-start";
 import { setupCatchList } from "./catch-list";
+import { setupAppCrumbs } from "./app-crumbs";
 
 /*
   List Haul
@@ -16,6 +17,8 @@ const ctrl = new HaulCtrl()
 
 // Setup
 async function setupHaulList(el, { tripId = null} = { tripId: null }) {
+  setupAppCrumbs(null, { msg: 'Hauls' })
+
   console.log('Setup HaulList: %o', tripId)
   const store = ctrl.getStore(tripId)
 
