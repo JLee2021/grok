@@ -9,6 +9,7 @@ const assets = [  // List the files to precache
     'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/dashboard',
     'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/new_trip',
     'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/dashboard_trip',
+    'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/dashboard_trip/',
     'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/new_haul',
     'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/end_haul',
     'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/home/dashboard_haul',
@@ -24,9 +25,17 @@ const assets = [  // List the files to precache
 ];
 
 self.addEventListener("install", installEvent => {
-    installEvent.waitUntil(
+    self.skipWaiting(); // Activate immediately
+
+    installEvent.waitUntil( // install event to wait until we’ve cached our files before completing
       caches.open(staticDevGrok).then(cache => { // Cache Storage API
         cache.addAll(assets); // return promise
+      })
+      .then(() => {
+        console.log("Assets cached successfully");
+      })
+      .catch(error => {
+        console.log("Caching failed:", error);
       })
     );
 });
