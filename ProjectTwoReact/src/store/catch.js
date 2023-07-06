@@ -1,31 +1,31 @@
 import { ref } from "../app-lib"
 import localforage from 'localforage'
 
-// Setup in memory hauls reactive array.
-const hauls = ref([])
+// Setup in memory catchs reactive array.
+const catchs = ref([])
 const dbName = import.meta.env.VITE_DBNAME
 
 
 // Setup Database/Key-Value store.
 const store = localforage.createInstance({
   name: dbName,
-  storeName: 'hauls',
-  description: 'Fishing Vessel Hauls',
+  storeName: 'catch',
+  description: 'Fishing Vessel Catchs',
   version: 1
 })
 
 
-export class HaulStore {
+export class CatchStore {
   constructor(parentId) {
-    this.tripId = parentId
+    this.catchId = parentId
 	}
 
-  async _getTripHauls(tripId) {
+  async _getHaulCatches(tripId) {
     return await store.getItem(`${tripId}`) || []
   }
 
   async getMany(id = null) {
-   return await this._getTripHauls(id || this.tripId)
+   return await this._getHaulCatches(id || this.tripId)
   }
 
 
@@ -37,18 +37,18 @@ export class HaulStore {
 	}
 
   /**
-   * Load hauls from indexDB, return a proxy (Reactive).
-   * @returns Hauls Proxy.
+   * Load catchs from indexDB, return a proxy (Reactive).
+   * @returns Catchs Proxy.
    */
   async getRef() {
-    // if (! hauls.value.length) {
-    //   // load Hauls from indexDB.
+    // if (! catchs.value.length) {
+    //   // load Catchs from indexDB.
     //   await store.iterate((value, key) => {
-    //     hauls.value.push(value)
+    //     catchs.value.push(value)
     //   })
     // }
 
-    return hauls
+    return catchs
   }
 
   lastId(items) {
@@ -61,18 +61,18 @@ export class HaulStore {
 
   async addOne(item) {
     // { tripId, startGps, startDate }
-    if (! item.tripId || ! item.startGps || ! item.startDate) {
+    if (! item.dispCode || ! item.haulId || ! item.specName) {
       console.error('Missing a property: tripId, startGps, startDate.')
-      return
+      // return
     }
-
-    const state = hauls
-    let contents = await this._getTripHauls(item.tripId)
+    const id = item.haulId
+    const state = catchs
+    let contents = await this._getHaulCatches(id)
 
     // Setup Auto Increment ID
     item.id = 1 + this.lastId(contents)
 
-    // Find haul or append a new one.
+    // Find catch or append a new one.
     // let index = contents.findIndex((val) => val.id == item.id)
     contents.push(item)
 
@@ -80,12 +80,12 @@ export class HaulStore {
     state.value.splice(0, state.value.length, contents)
 
     // Push trips to indexDB
-    return await store.setItem(`${item.tripId}`, contents)
+    return await store.setItem(`${id}`, contents)
   }
 
   async deleteAll() {
     // Clear the proxy; Notify watchers.
-    hauls.value.splice(0)
+    catchs.value.splice(0)
 
     // Update indexDB??
     return await store.clear((err) => console.log('Store Error Detected: %o', err))

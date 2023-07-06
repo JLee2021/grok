@@ -1,13 +1,15 @@
 import { TripModel } from '../model/trip.js'
 import { TripStore } from '../store/trip.js'
 
-const store = new TripStore()
-
 export class TripCtrl {
 	constructor() {}
 
-	getModel() { return new TripModel(store) }
+	getModel(id) {
+    return new TripModel(this.getStore(id))
+  }
 
-  getStore() { return store }
+  getStore(id) {
+    return new TripStore(id)
+  }
 }
 

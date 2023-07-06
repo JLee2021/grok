@@ -31,7 +31,7 @@ async function setupAppCrumbs(el, { $prop = 'default' } = { $prop: 'default' } )
 
 // Actions: navigation, updating the store, none template stuff, etc.
 // function toAppCrumbsOther() {
-//   setupAppCrumbsOther(document.querySelector('#main'))
+//   setupAppCrumbsOther(document.querySelector('#main-content'))
 // }
 
 

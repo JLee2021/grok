@@ -16,7 +16,8 @@ const store = localforage.createInstance({
 
 
 export class VesselStore {
-	construtor() {
+	constructor(id) {
+    this.vpNo = id
 	}
 
 	async addMany(items) {
