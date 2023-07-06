@@ -8,15 +8,23 @@ const props = {
 }
 
 // Setup: Setup a compnent, Load it to the provided el.
-async function setupAppCrumbs(el, { vpNo = null, msg = null } = { vpNo: null, msg: null } ) {
+async function setupAppCrumbs(el,
+  { vpNo = null, msg = null, reset = false }
+   = { vpNo: null, msg: null, reset: false }) {
+
   // Default to #app-crumbs entry point.
   if (! el) {
     el = document.querySelector('#app-crumbs')
   }
 
   console.info('Do something with passed in property: $prop')
-  props.vpNo = vpNo ? vpNo :props.vpNo
-  props.msg = msg ? msg :props.msg
+  if (reset) {
+    props.vpNo = null
+    props.msg = null
+  } else {
+    props.vpNo = vpNo ? vpNo :props.vpNo
+    props.msg = msg ? msg :props.msg
+  }
 
   // Update Component
   async function update(el) {

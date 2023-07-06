@@ -41,16 +41,12 @@ function listCatches(items) {
   console.log('listing catches: %o', items)
   const catchId = (item) => `${item.haulId}-${item.id}`
 
-  return `
-    <di>
-      <li>Species | Count </li>
-      ${items.map((item) => `
-        <li>
-          ${item.specName} | ${item.dispCode}
-        </li>
-      `).join("")}
-    </di>
-  `;
+  return items.map((item) => `
+    <tr>
+      <th>${item.specName}</th>
+      <td>${item.dispCode}</td>
+    </tr>
+  `).join('');
 }
 function toCatchAdd(haulId) {
   setupCatchAdd(document.querySelector("#main-content"), { haulId })

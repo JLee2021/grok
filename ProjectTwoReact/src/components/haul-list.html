@@ -6,19 +6,27 @@
    - haul-list
 -->
 
-<div>
-  <div>
-    <h3>Haul List</h3>
-  </div>
+  <div class="margin-3">
+    <div class="usa-table-container--scrollable" tabindex="0">
+      <table class="usa-table usa-table--striped">
+        <caption>
+          Haul List
+        </caption>
+        <thead>
+          <tr>
+            <th data-sortable scope="col" role="columnheader">Catch List</th>
+            <th data-sortable scope="col" role="columnheader">GPS Start</th>
+            <th data-sortable scope="col" role="columnheader">Start Date</th>
+          </tr>
+        </thead>
+        <tbody id="haul-list">
+        </tbody>
+      </table>
+    </div>
 
-  <div>
-    <label for="add-haul">
-      Add Haul
-    </label>
-    <button id="add-haul" name="add-haul" type="button">Add Catch</button>
-  </div>
-
-  <div id="haul-list">
-  </div>
-
+    <div class="margin-3">
+      <label for="add-haul">
+        <button id="add-haul" class="usa-button" name="add-haul" type="button">Add Haul</button>
+      </label>
+    </div>
 </div>

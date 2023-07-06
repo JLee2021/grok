@@ -9,12 +9,16 @@ import { vesselApi } from "../service/api";
 import { watch } from "../app-lib";
 
 import { setupTripList } from "./trip-list";
+import { setupAppCrumbs } from "./app-crumbs";
 
 vesselApi.get();
 
 // Setup
 async function setupVesselList(el) {
   const vessels = await new VesselCtrl().getStore().getRef();
+
+  // Don't show until after the login page.
+  setupAppCrumbs(document.querySelector("#app-crumbs"), { reset: true });
 
   // Update Component
   async function update(el) {
@@ -37,18 +41,21 @@ async function setupVesselList(el) {
 // Fragments
 function listVessels(items) {
   return `
-    <div>
       ${items
         .map(
           (item) => `
-      <li>
-        <a class="vessel" href="javascript:void 0" data-id="${item.vpNo}">
-          ${item.name}
-        </a> - ${item.vpNo}
-      </li>`
+        <tr>
+          <th scope="row">
+            <a class="vessel" href="javascript:void 0" data-id="${item.vpNo}">
+              ${item.name}
+            </a>
+          </th>
+          <td data-sort-value="3">
+            ${item.vpNo}
+          </td>
+        </tr>`
         )
         .join("")}
-    </div>
   `;
 }
 
