@@ -19,11 +19,18 @@ document.querySelector("#app").innerHTML = /*html*/ `
 `;
 
 document.querySelector('#basic-nav-section-two').addEventListener('click', toVesselList)
+document.querySelector('#main-nav-login').addEventListener('click', toLogout)
+
 
 function toVesselList(e) {
   e.preventDefault()
   setupVesselList(document.querySelector("#main-content"))
 }
+function toLogout(e) {
+  e.preventDefault()
+  setupLogin(document.querySelector("#main-content"))
+}
+
 
 setupLogin(document.querySelector("#main-content"));
 // setupAppNav(document.querySelector("#app-nav"));
