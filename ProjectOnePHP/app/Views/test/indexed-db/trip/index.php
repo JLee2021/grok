@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Trip List</title>
+  <button class="online" id="online">ONLINE</button>
+  <button class="offline" id="offline">OFFLINE</button>
 </head>
 
 <body>
@@ -27,9 +28,20 @@
     };
 
     console.log(results);
+  </script>
+  <script>
+    window.addEventListener("offline", (event) => {
+      console.log("The network connection has been lost.");
+      document.getElementById("offline").style.display = "block";
+      document.getElementById("online").style.display = "none";
+    });
 
-   
+    window.addEventListener("online", (event) => {
+      console.log("You are now connected to the network.");
+      document.getElementById("offline").style.display = "none";
+      document.getElementById("online").style.display = "block";
+    });
   </script>
 </body>
 
-</html>
+</html>o
