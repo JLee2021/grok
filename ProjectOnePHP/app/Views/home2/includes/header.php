@@ -10,19 +10,6 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/styles.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/custom.css'); ?>">
     <link rel="manifest" href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/manifest.webmanifest">
-    <script>
-        window.addEventListener("offline", (event) => {
-            console.log("The network connection has been lost.");
-            document.getElementById("offline").style.display = "block";
-            document.getElementById("online").style.display = "none";
-        });
-
-        window.addEventListener("online", (event) => {
-            console.log("You are now connected to the network.");
-            document.getElementById("offline").style.display = "none";
-            document.getElementById("online").style.display = "block";
-        });
-    </script>
 </head>
 
 <body>
