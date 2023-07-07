@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,28 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/styles.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/assets/css/custom.css'); ?>">
     <link rel="manifest" href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/manifest.webmanifest">
-    <style>
-        .online {
-            display: block;
-            padding: 9px 12px;
-            color: white;
-            background-color: #006400;
-            border: none;
-        }
-
-        .offline {
-            display: none;
-            padding: 9px 12px;
-            color: white;
-            background-color: #d83933;
-            border: none;
-        }
-
-        .float-right {
-            float: right;
-        }
-    </style>
     <script>
         window.addEventListener("offline", (event) => {
             console.log("The network connection has been lost.");
@@ -65,9 +42,7 @@
             </ol>
         </nav>
         <div class="float-right">
-        <button class="online" id="online">ONLINE</button>
-        <button class="offline" id="offline">OFFLINE</button>
+            <button disabled class="circle online" id="online">ONLINE</button>
+            <button disabled class="circle offline" id="offline">OFFLINE</button>
+        </div>
     </div>
-    </div>
-
-    
