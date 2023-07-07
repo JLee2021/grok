@@ -15,7 +15,7 @@
                 <!-- <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/log_catch" target="_blank">Log Catch</a></li> -->
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/GPS" target="_blank">GPS - Location</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/end_haul" target="_blank">End Haul - Autofill</a></li>
-                <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/online_offline" target="_blank">Online Test</a></li>
+                <!-- <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/test/online_offline" target="_blank">Online Test</a></li> -->
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/BoatController/index" target="_blank">CSV CRUD Demo</a></li>
                 <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php/TripController/create" target="_blank">IndexedDB Autoincrement</a></li>
                 <!-- <li><a href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/demo/grok_erd.pdf" target="_blank">Entity Relationship Diagram</a></li>
