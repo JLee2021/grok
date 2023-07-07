@@ -1,0 +1,24 @@
+.circle {
+    display: block;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    border: none;
+}
+
+.online {
+    color: white;
+    background-color: #006400;
+    font-weight: 800;
+}
+
+.offline {
+    display: none;
+    color: white;
+    background-color: darkred;
+    font-weight: 800;
+}
+
+.float-right {
+    float: right;
+}
