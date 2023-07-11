@@ -32,5 +32,10 @@ class TripController extends BaseController
     {
         return view('test/indexed-db/trip/delete');
     }
+
+    public function get()
+    {
+        return view('test/indexed-db/trip/get');
+    }
 }
 

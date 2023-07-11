@@ -1,0 +1,211 @@
+<section id="test-section-id" class="usa-section">
+  <div class="grid-container">
+    <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
+        <form class="usa-form" id="new_haul" onsubmit="event.preventDefault();">
+            <fieldset class="usa-fieldset">
+                <legend class="usa-legend usa-legend--small">New Haul</legend>
+                <legend class="usa-legend usa-legend--large">Atlas Data Entry</legend>
+                <!--trip_id -->
+                <input type="hidden" id="trip_id" name="trip_id" value="<?php echo $trip_id; ?>" />
+
+                <!--haul_num -->
+                <label class="usa-label" for="haul_num">Haul Num</label>
+                <select class="usa-select" name="haul_num" id="haul_num">
+                    <option value='001' selected>001</option>
+                    <option value='002'>002</option>
+                    <option value='002'>003</option>
+                </select>
+
+                <!--gear -->
+                <label class="usa-label" for="accsp_gear_category">Gear Category</label>
+                <select class="usa-select" name="accsp_gear_category" id="accsp_gear_category">
+                    <option selected="" disabled>- Select -</option>
+        <?php
+        foreach($gear as $g)
+        {
+            $option  = '                        <option value="'.$g->value.'" title="'.$g->name.'"';
+            $option .= ' >'.$g->descr.'</option>';
+            echo $option;
+        }
+        ?>
+                </select>
+
+        <label class="usa-label" id="appointment-date-label" for="haul_start_date">Haul start date</label>
+        <!-- <div class="usa-hint" id="haul_start_date-hint">mm/dd/yyyy</div> -->
+        <div class="usa-date-picker">
+          <input class="usa-input" id="haul_start_date" name="haul_start_date" aria-labelledby="haul_start_date-label" aria-describedby="haul_start_date-hint" />
+        </div>
+      </div>
+      <div class="usa-form-group">
+        <label class="usa-label" id="haul_start_time-label" for="haul_start_time">Haul start time</label>
+        <input class="usa-input" id="haul_start_time" name="haul_start_time" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"/>
+        <!-- <div class="usa-hint" id="haul_start_time-hint">hh:mm</div> -->
+        <!-- <div class="usa-time-picker">
+          <input class="usa-input" id="haul_start_time" name="haul_start_time" aria-labelledby="haul_start_time-label" aria-describedby="haul_start_time-hint" />
+      </div> -->
+    </div>
+    <div class="usa-form-group">
+      <label class="usa-label" for="haul_start_lat">Haul start lat:</label>
+      <input class="usa-input" id="haul_start_lat" name="haul_start_lat" />
+      <label class="usa-label" for="haul_start_lon">Haul start lon:</label>
+      <input class="usa-input" id="haul_start_lon" name="haul_start_lon" />
+     </div>
+
+      <br><br>
+      <button type="submit" class="usa-button">Start Haul</button> <br><br>
+
+      <div class="usa-form-group">
+      <!-- ENd Haul -->
+      <label class="usa-label" id="haul_end_date-label" for="haul_end_date">Haul end date</label>
+      <div class="usa-date-picker">
+        <input class="usa-input" id="haul_end_date" name="haul_end_date" aria-labelledby="haul_end_date-label" aria-describedby="haul_end_date-hint" />
+      </div>
+    </div>
+    <div class="usa-form-group">
+      <label class="usa-label" id="haul_end_time-label" for="haul_end_time">Haul end time</label>
+      <input class="usa-input" id="haul_end_time" name="haul_end_time" pattern="/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/"/>
+  </div>
+  <div class="usa-form-group">
+        <label class="usa-label" for="haul_end_lat">Haul end lat:</label>
+        <input class="usa-input" id="haul_end_lat" name="haul_end_lat" />
+        <label class="usa-label" for="haul_end_lon">Haul end lon:</label>
+        <input class="usa-input" id="haul_end_lon" name="haul_end_lon" />
+    </div>
+    <br><br>
+    <button type="submit" class="usa-button">End Haul</button> <br><br>
+
+
+      </form>
+  </div>
+</section>
+
+<script>
+    let haulForm = document.getElementById("new_haul");
+
+    haulForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let halt = false; //todo: validate form
+
+        if (halt) {
+            alert("Ensure you input a value in all fields!");
+        } else {
+            insert_haul();
+        }
+    });
+    function insert_haul() {
+        let haulForm = document.getElementById("new_haul");
+        let formData = new FormData(haulForm);
+
+        //let data = {};
+        //    data['trip_id'] = document.getElementById('trip_id').value;
+        //    data['hauls'] = [];
+        let haul = {};
+        for (const pair of formData.entries()) {
+            haul[pair[0]] = pair[1];
+        }
+        //data['hauls'][haul['haul_num']] = haul;
+        let openRequest = indexedDB.open('grok', 1);
+
+        openRequest.onupgradeneeded = function() {
+          // triggers if the client had no database
+          // ...perform initialization...
+          let db = openRequest.result;
+          if (!db.objectStoreNames.contains('trips')) { // if there's no "trips" store
+            db.createObjectStore('trips', {keyPath: 'trip_id'}); // create it
+          }
+        };
+
+        openRequest.onerror = function() {
+          console.error("Error", openRequest.error);
+        };
+
+        openRequest.onsuccess = function() {
+          let db = openRequest.result;
+          // continue working with database using db object
+
+          try {
+              let trip_id = haul['trip_id'];
+              let tx = db.transaction('trips', 'readwrite');
+              let tripsStore = tx.objectStore('trips');
+              let trips = tripsStore.get(trip_id);
+              trips.onsuccess = function() {
+                if (trips.result !== undefined) {
+                    let data = trips.result;
+                    let hauls = data['hauls'];
+                        hauls.push(haul);
+
+                        data.hauls = hauls;
+
+                        tripsStore.delete(trip_id);
+
+                        tx.objectStore('trips').add(data);
+
+                        tx.complete;
+
+                } else {
+                  console.log("some problem");
+                }
+            };
+            window.location.assign("<?php echo site_url('/home/dashboard_trip/'.$trip_id); ?>");
+          } catch(err) {
+              console.log('ERROR');
+              if (err.name == 'ConstraintError') {
+                alert("Trip exists already");
+            } else {
+                throw err;
+            }
+          }
+
+
+        };
+
+
+    }
+
+    const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+    };
+
+    function success(pos) {
+      const crd = pos.coords;
+
+      var lat = crd.latitude;
+      var lon = crd.longitude;
+      document.getElementById("haul_start_lat").value = lat;
+      document.getElementById("haul_start_lon").value = lon;
+
+      console.log("Your current position is:");
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+    }
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+    function getDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if(dd<10) { dd = '0'+dd };
+      if(mm<10) { mm = '0'+mm };
+
+      document.getElementById("haul_start_date").value = yyyy + '/' + mm + '/' + dd;
+      document.getElementById("haul_start_time").value = ('0' + today.getHours()).slice(-2) + ":" + ('0' + today.getMinutes()).slice(-2);
+
+    }
+
+
+    window.onload = function() {
+      getDate();
+    };
+
+</script>
