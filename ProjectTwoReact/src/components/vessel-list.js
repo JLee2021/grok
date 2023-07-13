@@ -5,66 +5,49 @@
 */
 import template from "./vessel-list.html?raw";
 import { VesselCtrl } from "../controller/vessel";
-import { vesselApi } from "../service/api";
-import { watch } from "../app-lib";
+import { render, watch } from "../app-lib";
 
-import { setupTripList } from "./trip-list";
 import { setupAppCrumbs } from "./app-crumbs";
 
-vesselApi.get();
+// vesselApi.get();
 
 // Setup
-async function setupVesselList(el) {
-  const vessels = await new VesselCtrl().getStore().getRef();
+const ctrl = new VesselCtrl()
+async function setupVesselList(props) {
+  const store = ctrl.getStore()
+  const ref = await store.getRef();
+  const vessels = await store.getMany()
 
-  // Don't show until after the login page.
-  setupAppCrumbs(document.querySelector("#app-crumbs"), { reset: true });
+  return {
+    template,
+    onAfter: (el) => {
+      watch(ref, (n, o) => setupVesselList(props), { id: 'vesselList' });
 
-  // Update Component
-  async function update(el) {
-    console.info("Updating Vessel List");
-    el.innerHTML = template;
+      // Update the appCrumbs until after the login page.
+      render(setupAppCrumbs({ reset: true }), { id: false })
 
-    // Add Actions
-    el.querySelector("#vessel-list").innerHTML = listVessels(
-      vessels.value || []
-    );
-    Array.from(el.querySelectorAll(".vessel")).map((item) =>
-      item.addEventListener("click", toTripList)
-    );
+      // Add Actions
+      el.querySelector("#vessel-list").innerHTML = listVessels(
+        vessels.value || []
+      );
+    }
   }
-
-  watch(vessels, (n, o) => update(el), { id: 'vesselList' });
-  update(el);
 }
 
 // Fragments
 function listVessels(items) {
-  return `
-      ${items
-        .map(
-          (item) => `
-        <tr>
-          <th scope="row">
-            <a class="vessel" href="javascript:void 0" data-id="${item.vpNo}">
-              ${item.name}
-            </a>
-          </th>
-          <td data-sort-value="3">
-            ${item.vpNo}
-          </td>
-        </tr>`
-        )
-        .join("")}
-  `;
-}
-
-// Actions
-function toTripList(el) {
-  el.preventDefault();
-  // Grab vessel permit no. from data-id attribute.
-  const vpNo = el.target.dataset.id;
-  setupTripList(document.querySelector("#main-content"), { vpNo });
+  return items.map((item) => `
+    <tr>
+      <th scope="row">
+        <a class="vessel" href="/trips/${item.vpNo}" data-navigo>
+          ${item.name}
+        </a>
+      </th>
+      <td data-sort-value="3">
+        ${item.vpNo}
+      </td>
+    </tr>
+  `).join("")
 }
 
 export { setupVesselList };

@@ -9,41 +9,66 @@
   to$nameOther - nav example of loading another component (setupFunction)
 */
 
-import template from "./$html.html?raw";
+// Template & Supporting objects.
+import template from "./vessel-list.html?raw";
+// import { VesselCtrl } from "../controller/vessel";
+import { render, watch } from "../app-lib";
 
-// Setup: Setup a compnent, Loadit to the provided el.
-async function setup$name(el, { $prop = "default" } = { $prop: "default" }) {
-  console.info("Do something with passed in property: $prop");
+// Components
+import { setupAppCrumbs } from "./app-crumbs";
+
+// const ctrl = new VesselCtrl()
+
+// Setup a Component
+async function setup$name(props = { someProperty: "default" }) {
+  // Ideally this section of code would only be run once...
+
+  // const store = ctrl.getStore()
+  // const ref = await store.getRef();
+  // const vessels = await store.getMany()
 
   // example: get proxy reference
-  const $ref = await new TripCtrl().getStore().getRef();
+  // watch($ref, (n, o) => setup$name(props), { id: 'A Unique Component ID'});
 
-  // Update Component
-  async function update(el) {
-    console.info("Updating $name List");
-    el.innerHTML = template;
+  // Return component context to the render function.
+  return {
+    template,
+    onAfter: (el) => {
+      // Example using render
+      // Update the appCrumbs.
+      render(setupAppCrumbs({ reset: true }), { id: false })
 
-    // Add Actions
-    el.querySelector("#frag").innerHTML = $frag($ref.value || []);
-    el.querySelector("#action").addEventListener("click", to$nameOther);
+      // Update Fragments
+      el.querySelector("#frag").innerHTML = $frag($ref.value || []);
+
+      // Navigation is handled with navigo: router.navigate or <a href="route" data-navigo>
+
+      // Control action from the user.
+      el.querySelector("#action").addEventListener("click", (e) => {
+        // Do some stuff...
+        //  - get some data
+        //  - update some data
+        //  - Navigate somewhere
+      });
+    }
   }
 
-  watch($ref, (n, o) => update(el), { id: 'A Unique Component ID'});
-  update(el);
 }
 
 // Fragments: functions that return small sections of HTML.
 function $frag(items) {
-  return `
+  return /*html*/ `
     <div>
-      ${items.map((item) => `<li>${item.name} - ${item.id}</li>`).join("")}
+      <!-- Example Navigation: using navigo -->
+      <a class="vessel" href="/vessels/${item.id}" data-navigo>
+        ${item.name}
+      </a>
+
+      <ul>
+        ${items.map((item) => `<li>${item.name} - ${item.id}</li>`).join("")}
+      </ul>
     </div>
   `;
-}
-
-// Actions: navigation, updating the store, none template stuff, etc.
-function to$nameOther() {
-  setup$nameOther(document.querySelector("#main-content"));
 }
 
 export { setup$name };

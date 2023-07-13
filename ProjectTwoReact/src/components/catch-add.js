@@ -1,8 +1,7 @@
 import template from './catch-add.html?raw'
 import { watch } from '../app-lib'
-
-import { setupCatchList } from './catch-list'
 import { CatchCtrl } from '../controller/catch'
+import { router } from '../main'
 
 
 /*
@@ -14,16 +13,22 @@ import { CatchCtrl } from '../controller/catch'
 */
 
 const ctrl = new CatchCtrl()
-async function setupCatchAdd(el, { haulId = null } = { haulId: null }) {
+async function setupCatchAdd(props = { haulId: null }) {
+  const haulId = props.haulId
   console.log('Setting Catch for Haul: %o', haulId)
   const store = ctrl.getStore(haulId)
-  el.innerHTML = template;
 
-  document.querySelector('#add-catch').addEventListener('click', (e) => addCatch(e, haulId))
+  return {
+    template,
+    onAfter: (el) => {
+      document.querySelector('#add-catch').addEventListener('click', (e) => addCatch(e, haulId))
 
-  // Update Species & Dispostion Lists
-  el.querySelector('#list-species').innerHTML = listSpecies()
-  el.querySelector('#list-dispo').innerHTML = listDispo()
+      // Update Species & Dispostion Lists
+      el.querySelector('#list-species').innerHTML = listSpecies()
+      el.querySelector('#list-dispo').innerHTML = listDispo()
+    }
+  }
+
 }
 
 // Fragments
@@ -51,10 +56,10 @@ async function addCatch(e, haulId) {
   const specName = document.querySelector('#list-species').value || 'unk'
   const dispCode = document.querySelector('#list-dispo').value || '4'
 
+  // ToDo: Could be store.addOne(...)
   await ctrl.getStore(haulId).addOne({ haulId, specName, dispCode })
-  setupCatchList(document.querySelector('#main-content'), { haulId })
+  router.navigate(`/catch/${haulId}`)
 }
-
 
 
 export {

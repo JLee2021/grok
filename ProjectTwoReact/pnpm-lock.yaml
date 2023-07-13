@@ -1,12 +1,16 @@
 lockfileVersion: 5.4
 
 specifiers:
+  leaflet: ^1.9.4
   localforage: ^1.10.0
+  navigo: ^8.11.1
   vite: ^4.3.9
   vite-plugin-pwa: ^0.16.4
 
 dependencies:
+  leaflet: 1.9.4
   localforage: 1.10.0
+  navigo: 8.11.1
 
 devDependencies:
   vite: 4.3.9
@@ -2347,6 +2351,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /leaflet/1.9.4:
+    resolution: {integrity: sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==}
+    dev: false
+
   /leven/3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -2427,6 +2435,10 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: true
+
+  /navigo/8.11.1:
+    resolution: {integrity: sha512-e3sc1UzakF+bWquC8/dbPCgo7LgPEW1ekgwb4pmEcl8tOc/I7lML8r7HBql+b0VRk7tJWTZqtkeObwJAVR1pxg==}
+    dev: false
 
   /node-releases/2.0.12:
     resolution: {integrity: sha512-QzsYKWhXTWx8h1kIvqfnC++o0pEmpRQA/aenALsL2F4pqNVr7YzcdMlDij5WBnwftRbJCNJL/O7zdKaxKPHqgQ==}

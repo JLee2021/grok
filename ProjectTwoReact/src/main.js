@@ -1,53 +1,182 @@
 // import '../assets/style.css'
+import Navigo from "navigo";
+import { render } from "./app-lib";
+
 import { setupLogin } from "./components/login";
 import { setupVesselList } from "./components/vessel-list";
+import { setupTripList } from "./components/trip-list";
+import { setupTripStart } from "./components/trip-start";
+import { setupHaulList } from "./components/haul-list";
 import { setupHaulStart } from "./components/haul-start";
-import { setupAppCrumbs } from "./components/app-crumbs";
-// import { setupAppNav } from "./components/app-nav";
+import { setupCatchList } from "./components/catch-list";
+import { setupCatchAdd } from "./components/catch-add";
+import { vesselApi } from "./service/vessel-api";
 
-// Setup the First component inside the #app element.
-document.querySelector("#app").innerHTML = /*html*/ `
-  <div>
-    <div id="app-crumbs"></div>
+const hostPath = import.meta.env.VITE_HOST_PATH
+console.log('host path: %o', hostPath)
+const router = new Navigo(hostPath)
 
-    <!-- We are using bread crumbs for main navigation.
-    <div id="app-nav"></div>
-    -->
+// router.on({
+//   '/': {
+//     uses: () => {
+//       render(setupLogin())
+//     },
+//     hooks: {
+//       before: (done, match) => {
+//         document.querySelector('.usa-nav__close').click()
+//         done()
+//       }
+//     }
+//   },
+//   '/another': {
+//     uses: ({ data }) => {
 
-    <main class="usa-layout-docs__main desktop:grid-col-9 usa-prose usa-layout-docs" id="main-content">
-  </div>
-`;
+//     }
+//   }
+// })
 
-document.querySelector('#basic-nav-section-two').addEventListener('click', toVesselList)
-document.querySelector('#main-nav-login').addEventListener('click', toLogout)
+// router.on('/', async function() {
+//   // Root is currently: Login
+//   render(setupLogin())
+// }, {
+//   before(done, match) {
+//     // Routing does not close the nav bar; force it closed.
+//     document.querySelector('.usa-nav__close').click()
+//     done()
+//   }
+// })
+
+// .on('/vessels', async () => {
+//   // Try to update the w/API everytime.
+//   try {
+//     await vesselApi.get()
+//   } catch(e) {
+//     console.log('Error: ', e)
+//   }
+//   render(setupVesselList())
+
+// })
+
+// .on('/vessels/:id', ({ data }) => {
+//   render(setupVesselList({ vpNo: data.id }))
+
+// })
 
 
-function toVesselList(e) {
-  e.preventDefault()
-  setupVesselList(document.querySelector("#main-content"))
-}
-function toLogout(e) {
-  e.preventDefault()
-  setupLogin(document.querySelector("#main-content"))
-}
+router.on({
+  '/': {
+    uses: () => {
+      render(setupLogin())
+    },
+    hooks: {
+      before: (done, match) => {
+        // Only for the Login Component
+        // Close the nav bar before uswds lib errors out on key down event.
+        // uswds fires key down event for some reason during routing.
+        // email input related; possibly autocomplete??
+
+        // Close Nav Bar before navigating to /.
+        document.querySelector('.usa-nav__close').click()
+        done()
+      }
+    }
+  },
+  '/vessels': {
+    uses: async () => {
+      try {
+        // Try to update the w/API everytime.
+        await vesselApi.get()
+      } catch(e) {
+        console.log('Error: ', e)
+      }
+      render(setupVesselList())
+    }
+  },
+  '/vessels/:id': {
+    uses: ({ data }) => {
+      render(setupVesselList({ vpNo: data.id }))
+    },
+  },
+  '/trips/:id': {
+    uses: ({ data }) => {
+      render(setupTripList({ vpNo: data.id }))
+    }
+  },
+  '/trips/:id/start': {
+    uses: ({ data }) => {
+      render(setupTripStart({ vpNo: data.id }))
+    }
+  },
+  '/haul/:id': {
+    uses: ({ data }) => {
+      render(setupHaulList({ tripId: data.id }))
+    }
+  },
+  '/haul/:id/start': {
+    uses: ({ data }) => {
+      render(setupHaulStart({ tripId: data.id }))
+    }
+  },
+  '/catch/:id': {
+    uses: ({ data }) => {
+      render(setupCatchList({ haulId: data.id }))
+    }
+  },
+  '/catch/:id/add': {
+    uses: ({ data }) => {
+      render(setupCatchAdd({ haulId: data.id }))
+    }
+  },
+})
 
 
-setupLogin(document.querySelector("#main-content"));
-// setupAppNav(document.querySelector("#app-nav"));
+// router.on('/', async function() {
+//   // Root is currently: Login
+//   render(setupLogin())
+// }, {
+//   before(done, match) {
+//     document.querySelector('.usa-nav__close').click()
+//     done()
+//   }
 
-// Handle Navigation Links
-// document.querySelector("#nav-vessel").addEventListener("click", (e) => {
-//   e.preventDefault();
-//   setupVesselList(document.querySelector("#main-content"));
-//   return;
-// });
+// })
+// .on('/vessels', async () => {
+//   // Try to update the w/API everytime.
+//   try {
+//     await vesselApi.get()
+//   } catch(e) {
+//     console.log('Error: ', e)
+//   }
+//   render(setupVesselList())
 
-// document.querySelector("#nav-haulstart").addEventListener("click", (e) => {
-//   e.preventDefault();
-//   setupHaulStart(document.querySelector("#main-content"));
-//   return;
-// });
+// }).on('/vessels/:id', ({ data }) => {
+//   render(setupVesselList({ vpNo: data.id }))
 
-// setupCatchAdd(document.querySelector('#test'))
-// setupVesselList(document.querySelector('#main'))
-// setupCounter(document.querySelector('#counter'))
+// }).on('/trips/:id', ({ data }) => {
+//   render(setupTripList({ vpNo: data.id }))
+
+// }).on('/trips/:id/start', ({ data }) => {
+//   render(setupTripStart({ vpNo: data.id }))
+
+// }).on('/haul/:id', ({ data }) => {
+//   render(setupHaulList({ tripId: data.id }))
+
+// }).on('/haul/:id/start', ({ data }) => {
+//   render(setupHaulStart({ tripId: data.id }))
+
+// }).on('/catch/:id', ({ data }) => {
+//   render(setupCatchList({ haulId: data.id }))
+
+// }).on('/catch/:id/add', ({ data }) => {
+//   render(setupCatchAdd({ haulId: data.id }))
+
+// })
+
+// Routing does not close the nav bar; Force it closed.
+document.querySelector('.route-navigo').addEventListener('click', () => {
+  document.querySelector('.usa-nav__close').click()
+})
+
+router.resolve()
+
+export { router }

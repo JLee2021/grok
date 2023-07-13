@@ -3,6 +3,7 @@ import { TripCtrl } from '../controller/trip'
 import { watch } from '../app-lib'
 
 import { setupTripList } from './trip-list'
+import { router } from '../main'
 
 /*
   Start Trip
@@ -14,27 +15,20 @@ import { setupTripList } from './trip-list'
 
 const ctrl = new TripCtrl()
 
-// Setup
-async function setupTripStart(el, {vpNo = null} = {vpNo: null}) {
-  // const hauls = await ctrl.getStore().getRef()
-
-  // Update Component
-  async function update(el) {
-    console.info('Updateing Start Trip: vpNo - %o', vpNo)
-    el.innerHTML = template
-    document.querySelector('#trip-num').value = `${vpNo}-`
-
-    // Actions
-    el.querySelector('#start-trip').addEventListener('click', (e) => startTrip(e, vpNo))
+async function setupTripStart(props = {vpNo: null}) {
+  const vpNo = props.vpNo
+  return {
+    template,
+    onAfter: (el) => {
+      document.querySelector('#trip-num').value = `${vpNo}-`
+      el.querySelector('#start-trip').addEventListener('click', (e) => startTrip(e, vpNo))
+      // watch(hauls, (n, o) => update(el))
+    }
   }
 
-  // watch(hauls, (n, o) => update(el))
-  update(el)
 }
 
-// Fragments
-
-// Actions
+// Add a trip navigtate back to trip list.
 async function startTrip(e, vpNo) {
   e.preventDefault()
 
@@ -42,7 +36,9 @@ async function startTrip(e, vpNo) {
   const tripNum = document.querySelector('#trip-num').value
 
   await ctrl.getStore().addOne({ vpNo, obsId, id: tripNum })
-  setupTripList(document.querySelector('#main-content'), { vpNo })
+
+  console.log('naving to trips: %o', vpNo)
+  router.navigate(`/trips/${vpNo}`)
 }
 
 export {
