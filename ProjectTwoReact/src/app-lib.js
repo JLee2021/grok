@@ -1,3 +1,5 @@
+import { router } from "./main";
+
 /* Create a custom proxy object used for (watch)ing object changes.
  *
  * @param {object} obj  an object, array, or function: see MDN proxy API.
@@ -30,7 +32,7 @@ export function ref(obj, callback = null) {
  */
 export function watch(ref, callback, { id }) {
 	// Organize proxy's by a component ID.
-  console.info('Setting Watcher on Component ID: %o', id)
+  console.info(' - Set Watcher: %o', id)
   ! ref.components ? ref.components = []: undefined
   ref.components[id] = new Proxy(ref.target, {
 		set(target, prop, val, ref) {
@@ -44,3 +46,46 @@ export function watch(ref, callback, { id }) {
   return ref.components[id]
 }
 
+// export async function renderToDom(elId = 'main-content', component, props) {
+export async function render(context, options = { id: null }) {
+  // Default to add template to DOM: skip, #main-content, passed in id.
+  const id = (options.id === false) ? 'skip'
+    : options.id === null ? 'main-content'
+      : options.id
+  console.info(' - Rendering in: #%s', id)
+
+  context.then(ctx => {
+    /* Every component should return a context object with at least a
+      template to load into the DOM.
+
+      Example context object returned by a setupComponet: {
+        template: '<h1> this is a component </h1>',
+        onAfter: (el) => {
+          // run some sideaffects after the template is loaded to the DOM.
+        }
+      }
+
+      # Hooks
+      onAfter: The 'el' param is passed to the components onAfter hook if
+      it exists. El is a reference to the components location in the DOM.
+    */
+
+    // Skip template injection...the component wants to do it.
+    let el = null
+    if (id !== 'skip') {
+      el = document.getElementById(id)
+      el.innerHTML = ctx.template
+    }
+
+    // Run code after setting the element template.
+    if (ctx.onAfter) {
+      // Pass the mounted el if there was one, and the template.
+      ctx.onAfter(el, ctx?.template)
+    }
+
+    // Manually update all data-navigo anchor tags: Routing.
+    router.updatePageLinks()
+
+    return ctx
+  })
+}

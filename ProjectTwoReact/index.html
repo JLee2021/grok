@@ -28,18 +28,22 @@
         <div class="usa-logo">
           <em class="usa-logo__text"><a href="/" title="Project Atlas">Project Atlas</a></em>
         </div>
+
         <button type="button" class="usa-menu-btn">Menu</button>
       </div>
+
       <nav aria-label="Primary navigation" class="usa-nav">
         <button type="button" class="usa-nav__close">
           <img src="/uswds/img/usa-icons/close.svg" role="img" alt="Close" />
         </button>
+
         <ul class="usa-nav__primary usa-accordion">
           <li class="usa-nav__primary-item">
             <button type="button" class="usa-accordion__button usa-nav__link usa-current" aria-expanded="false"
               aria-controls="basic-nav-section-one">
               <span>&lt;Current section&gt;</span>
             </button>
+
             <ul id="basic-nav-section-one" class="usa-nav__submenu">
               <li class="usa-nav__submenu-item">
                 <a href="javascript:void(0);"><span>&lt;Navigation link&gt;</span></a>
@@ -55,14 +59,16 @@
               </li>
             </ul>
           </li>
+
           <li class="usa-nav__primary-item">
             <button type="button" class="usa-accordion__button usa-nav__link" aria-expanded="false"
               aria-controls="basic-nav-section-two">
               <span>Vessel</span>
             </button>
+
             <ul id="basic-nav-section-two" class="usa-nav__submenu">
               <li class="usa-nav__submenu-item">
-                <a href="javascript:void(0);"><span>Vessel List</span></a>
+                <a href="/vessels" class="route-navigo" data-navigo><span>Vessel List</span></a>
               </li>
               <li class="usa-nav__submenu-item">
                 <a href="javascript:void(0);"><span>&lt;Navigation link&gt;</span></a>
@@ -72,10 +78,12 @@
               </li>
             </ul>
           </li>
+
           <li class="usa-nav__primary-item">
-            <a id="main-nav-login" href="javascript:void(0);" class="usa-nav-link"><span>Logout</span></a>
+            <a href="/" class="usa-nav-link" data-navigo><span>Logout</span></a>
           </li>
         </ul>
+
         <section aria-label="Search component">
           <form class="usa-search usa-search--small" role="search">
             <label class="usa-sr-only" for="search-field">Search</label>
@@ -93,7 +101,20 @@
 
   <div class="usa-section">
     <div class="grid-container">
-      <div id="app"></div>
+      <div id="app">
+        <div id="app-crumbs"></div>
+
+        <main class="" id="main-content"></main>
+        <script>
+          // Ttrying out breaking long HTML attrbiutes; 80+ chars is hard on me.
+          document.getElementById("main-content").classList.add(
+            'usa-layout-docs__main',
+            'desktop:grid-col-9',
+            'usa-prose',
+            'usa-layout-docs'
+          )
+        </script>
+      </div>
     </div>
   </div>
 

@@ -1,4 +1,5 @@
 import template from "./login.html?raw";
+import { router } from "../main";
 import { LoginCtrl } from "../controller/login";
 import { setupVesselList } from "./vessel-list";
 import { watch, ref } from "../app-lib";
@@ -13,42 +14,21 @@ import { watch, ref } from "../app-lib";
 const login = ref({});
 
 // Setup: Setup a compnent, Load it to the provided el.
-async function setupLogin(el, { $prop = "default" } = { $prop: "default" }) {
-  console.info("Do something with passed in property: $prop");
+async function setupLogin(props = { }) {
 
-  // example: get proxy reference
-  // const login = await (new LoginCtrl()).getStore().getRef()
+  return {
+    template,
+    onAfter: (el) => {
+      watch(login, (n, o) => setupLogin(props), { id: 'login' });
 
-  // Update Component
-  async function update(el) {
-    console.info("Updating Login List");
-    el.innerHTML = template;
+      // Show/Hide failed auth.  ToDo: The Show part.
+      document.getElementById("auth_fail_div").style.visibility = "hidden";
 
-    // Show/Hide failed auth.  ToDo: The Show part.
-    document.getElementById("auth_fail_div").style.visibility = "hidden";
-
-    // Add Actions
-    // el.querySelector('#frag').innerHTML = $frag(login.value || [])
-    el.querySelector("#submit-login").addEventListener("click", toVesselList);
+      // Force data-navigo update; #submit-login is not updated;
+      router.updatePageLinks()
+    }
   }
-
-  watch(login, (n, o) => update(el), { id: 'login' });
-  update(el);
 }
 
-// Fragments: functions that return small sections of HTML.
-// function $frag(items) {
-//   return `
-//     <di>
-//       ${items.map(item => `<li>${item.name} - ${item.id}</li>`).join('')}
-//     </di>
-//   `
-// }
-
-// Actions: navigation, updating the store, none template stuff, etc.
-function toVesselList(el) {
-  el.preventDefault();
-  setupVesselList(document.querySelector("#main-content"));
-}
 
 export { setupLogin };

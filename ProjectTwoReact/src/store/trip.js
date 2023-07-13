@@ -1,6 +1,6 @@
 import { ref } from "../app-lib"
 import localforage from 'localforage'
-import { tripApi } from "../service/api"
+import { tripApi } from "../service/trip-api"
 
 // Setup in memory vessels reactive array.
 const trips = ref([])
@@ -14,18 +14,30 @@ const store = localforage.createInstance({
   description: 'Fishing Vessel Trips',
   version: 1
 })
+class Page {
+  constructor() {
+    // Links: next, previous, first, last
+    this.limit = 10
+    this.offset = 1
+  }
 
+}
 
 export class TripStore {
-  constructor(parentId) {
+  constructor(parentId, page) {
     this.vpNo = parentId
+    this.page = page || {}
   }
 
-  setParent(parentId) {
-    this.vpNo = parentId
+  updatePage(limit = null, offset = null) {
+    this.page.limit = limit
+    this.page.offset = offset
+  }
+  getPage() {
+    return this.page
   }
 
-  async getMany(id) {
+  async getMany(id, options = { limit: 4, offset: 1 }) {
     return await this._getVesselTrips(id || this.vpNo)
   }
 
@@ -52,7 +64,10 @@ export class TripStore {
   }
 
   async _getVesselTrips(vpNo) {
-    return await store.getItem(`${vpNo}`) || []
+    if (vpNo) {
+      return await store.getItem(`${vpNo}`) || []
+    }
+    // return await store.iterate(())
   }
 
   async addOne(item) {
@@ -69,7 +84,9 @@ export class TripStore {
     contents[index < 0 ? contents.length :index] = { ...item }
 
     // Reset App State
-    state.value.splice(0, state.value.length, contents)
+    state.value.splice(...[0, state.value.length].concat(contents))
+    // ToDo: Verify; Below line wasn't doing what I thought.  Fixed above.
+    // state.value.splice(0, state.value.length, contents)
 
     // Push trips to indexDB
     return await store.setItem(`${item.vpNo}`, contents)

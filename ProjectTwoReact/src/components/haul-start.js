@@ -2,11 +2,11 @@
 Input: Start Date, Start GPS;
 Btn: Start Haul
 */
-import { HaulCtrl } from "../controller/haul";
-import { setupHaulList } from "./haul-list";
-import { getMap } from "/src/mapping.js";
 import template from "./haul-start.html?raw";
+import { HaulCtrl } from "../controller/haul";
+import { getMap } from "/src/mapping.js";
 import { showPosition } from "/src/geo-location.js";
+import { router } from "../main";
 
 async function location() {
   let position = await showPosition();
@@ -29,22 +29,22 @@ function getHaulStartTime() {
 }
 
 const ctrl = new HaulCtrl();
-async function setupHaulStart(el, { tripId = null } = { tripId: null }) {
-  console.log("Setting Haul for Trip: %o", tripId);
+async function setupHaulStart(props = { tripId: null }) {
+  const tripId = props.tripId
   const store = ctrl.getStore(tripId);
-  el.innerHTML = template;
 
-  document.querySelector("#start-gps").value = await location();
-  document.querySelector("#start-date").value = getHaulStartTime();
-  document
-    .querySelector("#start-haul")
-    .addEventListener("click", (e) => addHaul(e, tripId));
+  return {
+    template,
+    onAfter: async (el) => {
+      el.querySelector("#start-gps").value = await location();
+      el.querySelector("#start-date").value = getHaulStartTime();
+      el.querySelector("#start-haul")
+        .addEventListener("click", (e) => addHaul(e, tripId));
 
-  document.querySelector("#map-btn").addEventListener("click", (e) => getMap());
+      el.querySelector("#map-btn").addEventListener("click", (e) => getMap());
+    }
+  }
 
-  // Update Species & Dispostion Lists
-  // el.querySelector('#list-species').innerHTML = listSpecies()
-  // el.querySelector('#list-dispo').innerHTML = listDispo()
 }
 
 async function addHaul(e, tripId) {
@@ -52,11 +52,9 @@ async function addHaul(e, tripId) {
   const startGps = document.querySelector("#start-gps").value;
   const startDate = document.querySelector("#start-date").value;
   await ctrl.getStore(tripId).addOne({ tripId, startGps, startDate });
-  toHaulList(tripId);
+
+  router.navigate(`/haul/${tripId}`)
 }
 
-function toHaulList(tripId) {
-  setupHaulList(document.querySelector("#main-content"), { tripId });
-}
 
 export { setupHaulStart };

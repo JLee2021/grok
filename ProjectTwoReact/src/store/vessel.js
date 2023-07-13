@@ -20,6 +20,19 @@ export class VesselStore {
     this.vpNo = id
 	}
 
+  async getMany() {
+    // load Vessels from indexDB.
+    const res = []
+    await store.iterate((value, key) => {
+      res.push(value)
+    })
+
+    // Update Vessel Proxy; splice takes 'n arguements at the end for append.
+    vessels.value.splice(...[0, vessels.value.length].concat(res))
+
+    return vessels
+  }
+
 	async addMany(items) {
     // items = items.length ? items :[]
     // this.deleteAll()
@@ -50,9 +63,8 @@ export class VesselStore {
       console.error('Missing vessel.name or vessel.vpNo param.')
     } else {
       await store.setItem(`${vessel.vpNo}`, vessel)
+      return await this.getMany()
     }
-
-    vessels.value.push(vessel)
   }
 
   async deleteAll() {
