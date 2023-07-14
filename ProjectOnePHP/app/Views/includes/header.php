@@ -10,6 +10,28 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/styles.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/custom.css'); ?>">
     <link rel="manifest" href="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/manifest.webmanifest">
+    <style>
+        .online {
+            display: block;
+            padding: 9px 12px;
+            color: white;
+            background-color: #006400;
+            border: none;
+        }
+
+        .offline {
+            display: none;
+            padding: 9px 12px;
+            color: white;
+            background-color: #d83933;
+            border: none;
+        }
+
+        .float-right {
+            float: right;
+        }
+    </style>
+
     <script>
         window.addEventListener("offline", (event) => {
             console.log("The network connection has been lost.");
@@ -46,3 +68,4 @@
             <button disabled class="circle offline" id="offline">OFFLINE</button>
         </div>
     </div>
+

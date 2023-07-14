@@ -50,9 +50,7 @@
               let trips = tripsStore.get(trip_id);
 
               trips.onsuccess = function() {
-                  console.log(trips.result);
                 if (trips.result !== undefined) {
-                  //alert(JSON.stringify(trips.result));
                   alert(JSON.stringify(trips.result, null, 2));
                 } else {
                   console.log("No such trips");
@@ -61,7 +59,6 @@
           };
         }
         function make_button(obj) {
-            console.log(obj.vessel_permit_num);
             let card = document.createElement('div');
                 card.classList.add('usa-card__container');
             let card_head = document.createElement('div');
