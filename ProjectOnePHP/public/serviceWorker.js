@@ -1,5 +1,5 @@
 const staticDevGrok = 'dev-grok-v1';
-const assets1 = [  // List the files to precache
+const assets = [  // List the files to precache
     //'/',
     'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/',
     'https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/index.php',
@@ -24,15 +24,6 @@ const assets1 = [  // List the files to precache
 
 ];
 
-const assets = [  // List the files to precache
-    //'/',
-    //'http://127.0.0.1:8080/grok/ProjectOnePHP/public/',
-    //'http://127.0.0.1:8080/grok/ProjectOnePHP/public/index.php',
-    'http://127.0.0.1:8080/grok/ProjectOnePHP/public/assets/css/styles.css',
-    'http://127.0.0.1:8080/grok/ProjectOnePHP/public/assets/js/app.js',
-    'http://127.0.0.1:8080/grok/ProjectOnePHP/public/assets/uswds/uswds/js/',
-    'http://127.0.0.1:8080/grok/ProjectOnePHP/public/index.php/home/dashboard'
-];
 
 self.addEventListener("install", installEvent => {
     self.skipWaiting(); // Activate immediately
