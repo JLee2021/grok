@@ -14,7 +14,7 @@ import { vesselApi } from "./service/vessel-api";
 
 const hostPath = import.meta.env.VITE_HOST_PATH
 console.log('host path: %o', hostPath)
-const router = new Navigo(hostPath)
+const router = new Navigo(hostPath, { hash: true })
 
 // router.on({
 //   '/': {
