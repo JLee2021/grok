@@ -70,6 +70,11 @@ export class TripStore {
     // return await store.iterate(())
   }
 
+  async getOne(tripId, vpNo) {
+    const trips = await store.getItem(`${vpNo}`) || []
+    return trips.find((value) => value.id == tripId)
+  }
+
   async addOne(item) {
     // ctrl.getStore().addOne({ vpNo, obsId, id: tripNum })
     if (! item.vpNo || ! item.obsId || ! item.id) {

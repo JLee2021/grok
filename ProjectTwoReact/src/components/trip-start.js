@@ -1,8 +1,5 @@
 import template from './trip-start.html?raw'
 import { TripCtrl } from '../controller/trip'
-import { watch } from '../app-lib'
-
-import { setupTripList } from './trip-list'
 import { router } from '../main'
 
 /*

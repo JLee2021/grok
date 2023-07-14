@@ -11,10 +11,12 @@ import { setupHaulStart } from "./components/haul-start";
 import { setupCatchList } from "./components/catch-list";
 import { setupCatchAdd } from "./components/catch-add";
 import { vesselApi } from "./service/vessel-api";
+import { setupTripEnd } from "./components/trip-end";
 
 const hostPath = import.meta.env.VITE_HOST_PATH
 console.log('host path: %o', hostPath)
 const router = new Navigo(hostPath, { hash: true })
+
 
 // router.on({
 //   '/': {
@@ -107,6 +109,17 @@ router.on({
       render(setupTripStart({ vpNo: data.id }))
     }
   },
+  '/trips/:id/end': {
+    uses: ({ data, params}) => {
+      const opts = params.opts ? JSON.parse(params.opts) :{}
+      render(setupTripEnd({ vpNo: opts?.vpNo, tripId: data.id }))
+    }
+  },
+  // '/trips/:id/edit': {
+  //   uses: ({ data }) => {
+  //     render(setupTripEdit({ vpNo: data.id }))
+  //   }
+  // },
   '/haul/:id': {
     uses: ({ data }) => {
       render(setupHaulList({ tripId: data.id }))
