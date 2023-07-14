@@ -24,6 +24,7 @@ const assets = [  // List the files to precache
 
 ];
 
+
 self.addEventListener("install", installEvent => {
     self.skipWaiting(); // Activate immediately
 
@@ -39,6 +40,11 @@ self.addEventListener("install", installEvent => {
       })
     );
 });
+
+self.addEventListener('activate', (event) => {
+  console.log('Service worker activate event!');
+});
+
 
 self.addEventListener("fetch", fetchEvent => {
     fetchEvent.respondWith(
