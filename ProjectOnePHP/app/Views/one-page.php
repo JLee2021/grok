@@ -2,7 +2,7 @@
         <legend class="usa-legend usa-legend--large">Atlas Data Entry</legend>
         <!-- <section class="grok_page_section" id="page_login"></section> -->
         <section class="grok_page_section" id="page_dashboard-user">
-            <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
+            <div class="mobile-lg:grid-col-8 margin-top-4 mobile-lg:margin-top-0">
                 <!-- trip list cards -->
                 <div id="grok_trip_list"></div>
                 <!-- new trip button -->
@@ -10,7 +10,7 @@
             </div>
         </section> <!-- END page_dashboard-user -->
         <section class="grok_page_section" id="page_dashboard-trip">
-            <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
+            <div class="mobile-lg:grid-col-8 margin-top-4 mobile-lg:margin-top-0">
                 <h1 class="site-preview-heading margin-0">Trip ID: <span id="grok_trip_id"></span></h1>
                 <div id="grok_trip_info"></div>
                 <div id="grok_hauls_list"></div>
@@ -20,7 +20,7 @@
             </div>
         </section> <!-- END page_dashboard-trip -->
         <section class="grok_page_section" id="page_new-trip">
-            <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
+            <div class="mobile-lg:grid-col-8 margin-top-4 mobile-lg:margin-top-0">
                 <form class="usa-form" id="new_trip" onsubmit="event.preventDefault();">
                     <fieldset class="usa-fieldset">
                         <legend class="usa-legend usa-legend--small">New Trip</legend>
@@ -92,7 +92,7 @@
             </div>
         </section> <!-- END page_new-trip -->
         <section class="grok_page_section" id="page_dashboard-haul">
-            <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
+            <div class="mobile-lg:grid-col-8 margin-top-4 mobile-lg:margin-top-0">
                 <h1 class="site-preview-heading margin-0">Trip ID: <span id="grok_haul_trip_id"></span></h1>
                 <div id="grok_haul_trip_info"></div>
                 <h3 class="site-preview-heading margin-0">Haul Num: <span id="grok_haul_haulnum"></span></h3>
@@ -103,7 +103,7 @@
             </div>
         </section> <!-- END page_dashboard-haul -->
         <section class="grok_page_section" id="page_new-haul">
-            <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
+            <div class="mobile-lg:grid-col-8 margin-top-4 mobile-lg:margin-top-0">
                 <form class="usa-form" id="new_haul" onsubmit="event.preventDefault();">
                     <fieldset class="usa-fieldset">
                         <legend class="usa-legend usa-legend--small">New Haul</legend>
@@ -181,7 +181,7 @@
             </div>
         </section> <!-- END page_new-haul -->
         <section class="grok_page_section" id="page_new-catch">
-            <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
+            <div class="mobile-lg:grid-col-8 margin-top-4 mobile-lg:margin-top-0">
               <h1 class="site-preview-heading margin-0">New Catch</h1>
 
               <form class="usa-form" id="new_catch" onsubmit="event.preventDefault();">
