@@ -1,9 +1,9 @@
 import { ref } from "../app-lib"
 import localforage from 'localforage'
-import { tripApi } from "../service/trip-api"
+import { Store } from "./base-store"
 
 // Setup in memory vessels reactive array.
-const trips = ref([])
+const state = ref([])
 const dbName = import.meta.env.VITE_DBNAME
 
 
@@ -23,22 +23,19 @@ class Page {
 
 }
 
-export class TripStore {
-  constructor(parentId, page) {
-    this.vpNo = parentId
-    this.page = page || {}
+export class TripStore extends Store {
+  constructor(vpNo) {
+    super()
+    this.vpNo = vpNo
   }
 
-  updatePage(limit = null, offset = null) {
-    this.page.limit = limit
-    this.page.offset = offset
-  }
-  getPage() {
-    return this.page
+  async getMany(key) {
+    key = this.getKey(key)
+    return await store.getItem(key) || []
   }
 
-  async getMany(id, options = { limit: 4, offset: 1 }) {
-    return await this._getVesselTrips(id || this.vpNo)
+  getKey(vpNo) {
+    return vpNo || this.vpNo
   }
 
 	async addMany(items) {
@@ -53,53 +50,43 @@ export class TripStore {
    * @returns Vessels Proxy.
    */
   async getRef() {
-    // if (! trips.value.length) {
+    // if (! state.value.length) {
     //   // load Trips from indexDB.
     //   await store.iterate((value, key) => {
-    //     trips.value.push(value)
+    //     state.value.push(value)
     //   })
     // }
 
-    return trips
-  }
-
-  async _getVesselTrips(vpNo) {
-    if (vpNo) {
-      return await store.getItem(`${vpNo}`) || []
-    }
-    // return await store.iterate(())
+    return state
   }
 
   async getOne(tripId, vpNo) {
-    const trips = await store.getItem(`${vpNo}`) || []
-    return trips.find((value) => value.id == tripId)
+    const state = await store.getItem(`${vpNo}`) || []
+    return state.find((value) => value.id == tripId)
   }
 
   async addOne(item) {
     // ctrl.getStore().addOne({ vpNo, obsId, id: tripNum })
-    if (! item.vpNo || ! item.obsId || ! item.id) {
-      console.error('Missing property: vpNo, obsId, or id.')
+    if (! item.vpNo || ! item.obsId) {
+      console.error('Missing property: vpNo, obsId.')
       return
     }
-    const state = trips
-    let contents = await this._getVesselTrips(item.vpNo)
 
-    // Find trip or append a new one.
-    let index = contents.findIndex((val) => val.id == item.id)
-    contents[index < 0 ? contents.length :index] = { ...item }
+    const key = this.getKey(item.vpNo)
+    let contents = await this.getMany(key)
+    contents = super.addUpdate(item, contents)
 
-    // Reset App State
-    state.value.splice(...[0, state.value.length].concat(contents))
-    // ToDo: Verify; Below line wasn't doing what I thought.  Fixed above.
-    // state.value.splice(0, state.value.length, contents)
+    // Update state & indexDB
+    super.updateState(state, contents)
+    await store.setItem(key, contents)
 
-    // Push trips to indexDB
-    return await store.setItem(`${item.vpNo}`, contents)
+    // Return trip
+    return item
   }
 
   async deleteAll() {
     // Clear the proxy; Notify watchers.
-    trips.value.splice(0)
+    state.value.splice(0)
 
     // Update indexDB??
     return await store.clear((err) => console.log('Store Error Detected: %o', err))

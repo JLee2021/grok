@@ -1,32 +1,54 @@
-import template from './trip-end.html?raw'
+// import template from './trip-end.html?raw'
+import { render } from '../app-lib'
 import { TripCtrl } from '../controller/trip'
 import { router } from '../main'
-
-/*
-  Start Trip
-  Inputs: Observer ID, Trip Number;
-  - obs-id, trip-num
-  Btn: Start Trip;
-  - end-trip
-*/
+import { setupAppCrumbs } from './app-crumbs'
 
 const ctrl = new TripCtrl()
 
-async function setupTripEnd(props = {tripId: null, vpNo: null}) {
+async function setupTripEnd(props = {id: null, vpNo: null}) {
   const vpNo = props.vpNo
-  const tripId = props.tripId
+  const tripId = props.id
   const store = ctrl.getStore(vpNo)
-  console.log('trip - vpNo: %o, %o', tripId, vpNo)
   const trip = await store.getOne(tripId, vpNo)
-  console.log('Got a trip: %o', trip)
 
+  render(setupAppCrumbs({ vpNo, tripId } ), { id: false })
+
+  /*
+    Start Trip
+    Inputs: Observer ID, Trip Number;
+    - obs-id, trip-num
+    Btn: Start Trip;
+    - end-trip
+  */
   return {
-    template,
+    template: /*html*/ `
+<div>
+  <form class="usa-form" method="POST" action="">
+    <fieldset class="usa-fieldset">
+      <legend class="usa-legend usa-legend--large">End Trip</legend>
+
+      <label class="usa-label" for="obs-id">Observer ID</label>
+      <input class="usa-input" id="obs-id"
+        title="Observer ID"
+        name="obs-id"
+        value="${trip?.obsId || 'null'}"
+      ></input>
+
+      <label class="usa-label" for="trip-num">Trip Number</label>
+      <input class="usa-input" id="trip-num"
+        title="Disposition Code"
+        name="trip-num"
+        value="${tripId}"
+      ></input>
+
+      <input id="end-trip" class="usa-button" type="submit" name="end-trip" value="End Trip" />
+    </fieldset>
+  </form>
+</div>
+    `,
     onAfter: (el) => {
-      document.querySelector('#trip-num').value = tripId
-      document.querySelector('#obs-id').value = trip.obsId || 'Unk'
       el.querySelector('#end-trip').addEventListener('click', (e) => endTrip(e, trip))
-      // watch(hauls, (n, o) => update(el))
     }
   }
 
@@ -37,9 +59,6 @@ async function setupTripEnd(props = {tripId: null, vpNo: null}) {
 async function endTrip(e, trip) {
   e.preventDefault()
 
-  const obsId = document.querySelector('#obs-id').value
-  const tripNum = document.querySelector('#trip-num').value
-
   // Notice: This is similar to how an edit/update will occur.
   // Update the trip.
   await ctrl.getStore().addOne({
@@ -49,8 +68,7 @@ async function endTrip(e, trip) {
     dateEnd: Date.now()
   })
 
-  console.log('naving to trips: %o', trip.vpNo)
-  router.navigate(`/trips/${trip.vpNo}`)
+  router.navigate(`/trip/${trip.id}?vpNo=${trip.vpNo}`)
 }
 
 export {

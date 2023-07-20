@@ -36,10 +36,10 @@ async function setupVesselList(props) {
 
 // Fragments
 function listVessels(items) {
-  return items.map((item) => `
+  return items.map((item) => /*html*/ `
     <tr>
       <th scope="row">
-        <a class="vessel" href="/trips/${item.vpNo}" data-navigo>
+        <a class="vessel" href="/vessel/${item.vpNo}" data-navigo>
           ${item.name}
         </a>
       </th>

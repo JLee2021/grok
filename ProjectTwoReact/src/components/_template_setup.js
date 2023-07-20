@@ -60,7 +60,7 @@ function $frag(items) {
   return /*html*/ `
     <div>
       <!-- Example Navigation: using navigo -->
-      <a class="vessel" href="/vessels/${item.id}" data-navigo>
+      <a class="vessel" href="/vessel/${item.id}" data-navigo>
         ${item.name}
       </a>
 

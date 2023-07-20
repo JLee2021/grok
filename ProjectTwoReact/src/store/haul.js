@@ -1,8 +1,9 @@
 import { ref } from "../app-lib"
 import localforage from 'localforage'
+import { Store } from "./base-store"
 
-// Setup in memory hauls reactive array.
-const hauls = ref([])
+// Setup in memory state reactive array.
+const state = ref([])
 const dbName = import.meta.env.VITE_DBNAME
 
 
@@ -14,18 +15,26 @@ const store = localforage.createInstance({
   version: 1
 })
 
-
-export class HaulStore {
-  constructor(parentId) {
-    this.tripId = parentId
+export class HaulStore extends Store {
+  constructor(arg = { vpNo: null, tripId: null }) {
+    super()
+    this.tripId = arg.tripId
+    this.vpNo = arg.vpNo
 	}
 
-  async _getTripHauls(tripId) {
-    return await store.getItem(`${tripId}`) || []
+  getKey(vpNo = null, tripId = null) {
+    if (vpNo && tripId) {
+      return `${vpNo}-${tripId}`
+    } else if (this.vpNo && this.tripId) {
+      return `${this.vpNo}-${this.tripId}`
+    }
+
+    console.log(' - Warning: Haul -> GetId is missing: vpNo, or tripId.')
   }
 
-  async getMany(id = null) {
-   return await this._getTripHauls(id || this.tripId)
+  async getMany(key = null) {
+    key = key ? `${key}` :this.getKey()
+    return await store.getItem(key) || []
   }
 
 
@@ -41,23 +50,26 @@ export class HaulStore {
    * @returns Hauls Proxy.
    */
   async getRef() {
-    // if (! hauls.value.length) {
+    // if (! state.value.length) {
     //   // load Hauls from indexDB.
     //   await store.iterate((value, key) => {
-    //     hauls.value.push(value)
+    //     state.value.push(value)
     //   })
     // }
 
-    return hauls
+    return state
   }
 
-  lastId(items) {
-    return items.reduce((res, cur) => {
-      return cur.id > res
-        ? cur.id
-        : res
-    }, 0)
+
+  async getOne(haulId) {
+    const trips = await store.getItem(this.getKey()) || []
+    return trips.find((value) => value.id == haulId)
   }
+
+  nextId(items) {
+    return super.nextId(items)
+  }
+
 
   async addOne(item) {
     // { tripId, startGps, startDate }
@@ -66,26 +78,21 @@ export class HaulStore {
       return
     }
 
-    const state = hauls
-    let contents = await this._getTripHauls(item.tripId)
+    // Get the store sub array and update it.
+    const key = this.getKey(item.vpNo, item.tripId)
+    let contents = await this.getMany(key)
+    contents = this.addUpdate(item, contents)
 
-    // Setup Auto Increment ID
-    item.id = 1 + this.lastId(contents)
+    // Update state & indexDB
+    super.updateState(state, contents)
+    await store.setItem(key, contents)
 
-    // Find haul or append a new one.
-    // let index = contents.findIndex((val) => val.id == item.id)
-    contents.push(item)
-
-    // Reset App State
-    state.value.splice(0, state.value.length, contents)
-
-    // Push trips to indexDB
-    return await store.setItem(`${item.tripId}`, contents)
+    return item
   }
 
   async deleteAll() {
     // Clear the proxy; Notify watchers.
-    hauls.value.splice(0)
+    state.value.splice(0)
 
     // Update indexDB??
     return await store.clear((err) => console.log('Store Error Detected: %o', err))

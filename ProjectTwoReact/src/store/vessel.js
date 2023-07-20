@@ -20,6 +20,10 @@ export class VesselStore {
     this.vpNo = id
 	}
 
+  async getOne(id) {
+    return await store.getItem(id || this.vpNo)
+  }
+
   async getMany() {
     // load Vessels from indexDB.
     const res = []
