@@ -40,7 +40,7 @@ router.on({
       }
     }
   },
-  '/vessel': ({ data }) => (setupVesselList(data)),
+  '/vessel': ({ data }) => render(setupVesselList(data)),
   '/vessel/:id': async ({ data }) => {
     try { // Refresh from API.
       await vesselApi.get()
