@@ -18,7 +18,7 @@
       </div>
       <nav aria-label="Primary navigation," class="usa-nav">
         <button type="button" class="usa-nav__close">
-          <img src="/assets/img/usa-icons/close.svg" role="img" alt="Close" />
+          <img src="https://nefsctest.nmfs.local/grok/html/ProjectOnePHP/public/assets/img/usa-icons/close.svg" role="img" alt="Close" />
         </button>
         <ul class="usa-nav__primary usa-accordion">
           <li class="usa-nav__primary-item">
