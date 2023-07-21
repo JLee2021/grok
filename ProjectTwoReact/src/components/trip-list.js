@@ -17,8 +17,8 @@ async function setupTripList(props = { vpNo: null }) {
   const vpNo = props.vpNo
   render(setupAppCrumbs({ vpNo, msg: "Trips" }), { id: false })
   const store = ctrl.getStore(vpNo);
-  const storeRef = await store.getRef();
-  watch(storeRef, (n, o) => setupTripList(props), { id: "tripList" });
+  // const storeRef = await store.getRef();
+  // watch(storeRef, (n, o) => setupTripList(props), { id: "tripList" });
 
   // Update Component
   return {
@@ -28,7 +28,7 @@ async function setupTripList(props = { vpNo: null }) {
 
       // Add Actions
       el.querySelector("#trip-list").innerHTML = await listTrips(trips || []);
-      el.querySelector("#start-trip").href = `/trips/${vpNo}/start`
+      el.querySelector("#start-trip").href = `/trip/start?vpNo=${vpNo}`
       router.updatePageLinks()
     }
   }
@@ -41,7 +41,7 @@ function listTrips(items) {
     <tr>
       <th scope="row" data-sort-value="3">
         <a class="usa-button usa-button--accent-cool"
-          href="/haul/${item.id}"
+          href="/trip/${item.id}?vpNo=${item.vpNo}"
           data-navigo
         > ${item.id} </a>
       </th>

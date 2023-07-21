@@ -27,3 +27,9 @@ export async function showPosition() {
 // position.coords.latitude
 // position.coords.longitude
 // position.coords.speed
+
+
+export async function location() {
+  let position = await showPosition();
+  return `${position.coords.latitude}, ${position.coords.longitude}`;
+}

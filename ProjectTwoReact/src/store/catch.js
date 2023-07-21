@@ -1,10 +1,10 @@
-import { ref } from "../app-lib"
 import localforage from 'localforage'
+import { ref } from "../app-lib"
+import { Store } from "./base-store"
 
-// Setup in memory catchs reactive array.
-const catchs = ref([])
+// Setup state reactive array.
+const state = ref([])
 const dbName = import.meta.env.VITE_DBNAME
-
 
 // Setup Database/Key-Value store.
 const store = localforage.createInstance({
@@ -14,20 +14,28 @@ const store = localforage.createInstance({
   version: 1
 })
 
-
-export class CatchStore {
-  constructor(parentId) {
-    this.haulId = parentId
+export class CatchStore extends Store {
+  constructor(arg = {vpNo, tripId, haulId}) {
+    super()
+    this.vpNo = arg.vpNo
+    this.tripId = arg.tripId
+    this.haulId = arg.haulId
 	}
 
-  async _getHaulCatches(id) {
-    return await store.getItem(`${id}`) || []
+  getKey(vpNo = null, tripId = null, haulId = null) {
+    if (vpNo && tripId && haulId) {
+      return `${vpNo}-${tripId}-${haulId}`
+    } else if (this.vpNo && this.tripId && this.haulId) {
+      return `${this.vpNo}-${this.tripId}-${this.haulId}`
+    }
+
+    console.log(' - Warning: Catch -> is missing: vpNo, tripId, or haulId.')
   }
 
-  async getMany(id = null) {
-   return await this._getHaulCatches(id || this.haulId)
+  async getMany(key = null) {
+    key = key ? `${key}` :this.getKey()
+    return await store.getItem(key)
   }
-
 
 	async addMany(items) {
 		// Update indexDB
@@ -41,22 +49,14 @@ export class CatchStore {
    * @returns Catchs Proxy.
    */
   async getRef() {
-    // if (! catchs.value.length) {
+    // if (! state.value.length) {
     //   // load Catchs from indexDB.
     //   await store.iterate((value, key) => {
-    //     catchs.value.push(value)
+    //     state.value.push(value)
     //   })
     // }
 
-    return catchs
-  }
-
-  lastId(items) {
-    return items.reduce((res, cur) => {
-      return cur.id > res
-        ? cur.id
-        : res
-    }, 0)
+    return state
   }
 
   async addOne(item) {
@@ -65,27 +65,26 @@ export class CatchStore {
       console.error('Missing a property: tripId, startGps, startDate.')
       // return
     }
-    const id = item.haulId
-    const state = catchs
-    let contents = await this._getHaulCatches(id)
 
-    // Setup Auto Increment ID
-    item.id = 1 + this.lastId(contents)
-
-    // Find catch or append a new one.
-    // let index = contents.findIndex((val) => val.id == item.id)
-    contents.push(item)
+    // Get store key, and contents; Update or add an item.
+    const key = this.getKey(item.vpNo, item.tripId, item.haulId)
+    let contents = await this.getMany(key)
+    contents = this.addUpdate(item, contents)
 
     // Reset App State
     state.value.splice(0, state.value.length, contents)
+    await store.setItem(`${key}`, contents)
 
-    // Push trips to indexDB
-    return await store.setItem(`${id}`, contents)
+    // Update state & indexDB
+    this.updateState(state, contents)
+    await store.setItem(key, contents)
+
+    return item
   }
 
   async deleteAll() {
     // Clear the proxy; Notify watchers.
-    catchs.value.splice(0)
+    state.value.splice(0)
 
     // Update indexDB??
     return await store.clear((err) => console.log('Store Error Detected: %o', err))

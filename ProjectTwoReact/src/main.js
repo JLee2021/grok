@@ -1,69 +1,26 @@
 // import '../assets/style.css'
 import Navigo from "navigo";
 import { render } from "./app-lib";
+import { vesselApi } from "./service/vessel-api";
+import 'leaflet/dist/leaflet.css'
 
 import { setupLogin } from "./components/login";
+import { setupVesselDetail } from "./components/vessel-detail";
 import { setupVesselList } from "./components/vessel-list";
+import { setupTripDetail } from "./components/trip-detail";
 import { setupTripList } from "./components/trip-list";
 import { setupTripStart } from "./components/trip-start";
+import { setupTripEnd } from "./components/trip-end";
+import { setupHaulDetail } from "./components/haul-detail";
 import { setupHaulList } from "./components/haul-list";
 import { setupHaulStart } from "./components/haul-start";
+import { setupHaulEnd } from "./components/haul-end";
 import { setupCatchList } from "./components/catch-list";
 import { setupCatchAdd } from "./components/catch-add";
-import { vesselApi } from "./service/vessel-api";
-import { setupTripEnd } from "./components/trip-end";
 
 const hostPath = import.meta.env.VITE_HOST_PATH
 console.log('host path: %o', hostPath)
 const router = new Navigo(hostPath, { hash: true })
-
-
-// router.on({
-//   '/': {
-//     uses: () => {
-//       render(setupLogin())
-//     },
-//     hooks: {
-//       before: (done, match) => {
-//         document.querySelector('.usa-nav__close').click()
-//         done()
-//       }
-//     }
-//   },
-//   '/another': {
-//     uses: ({ data }) => {
-
-//     }
-//   }
-// })
-
-// router.on('/', async function() {
-//   // Root is currently: Login
-//   render(setupLogin())
-// }, {
-//   before(done, match) {
-//     // Routing does not close the nav bar; force it closed.
-//     document.querySelector('.usa-nav__close').click()
-//     done()
-//   }
-// })
-
-// .on('/vessels', async () => {
-//   // Try to update the w/API everytime.
-//   try {
-//     await vesselApi.get()
-//   } catch(e) {
-//     console.log('Error: ', e)
-//   }
-//   render(setupVesselList())
-
-// })
-
-// .on('/vessels/:id', ({ data }) => {
-//   render(setupVesselList({ vpNo: data.id }))
-
-// })
-
 
 router.on({
   '/': {
@@ -83,107 +40,49 @@ router.on({
       }
     }
   },
-  '/vessels': {
-    uses: async () => {
-      try {
-        // Try to update the w/API everytime.
-        await vesselApi.get()
-      } catch(e) {
-        console.log('Error: ', e)
-      }
-      render(setupVesselList())
+  '/vessel': ({ data }) => render(setupVesselList(data)),
+  '/vessel/:id': async ({ data }) => {
+    try { // Refresh from API.
+      await vesselApi.get()
+    } catch(e) {
+      console.log('Error: ', e)
     }
+    render(setupVesselDetail(data))
   },
-  '/vessels/:id': {
-    uses: ({ data }) => {
-      render(setupVesselList({ vpNo: data.id }))
-    },
+
+  // Trips
+  '/trip': ({ params }) => render(setupTripList(params)),
+  '/trip/:id': ({ data, params }) => {
+    if (data.id === 'start') { return }
+    render(setupTripDetail({ ...data, ...params }))
   },
-  '/trips/:id': {
-    uses: ({ data }) => {
-      render(setupTripList({ vpNo: data.id }))
-    }
+  '/trip/start': ({ params }) => render(setupTripStart(params)),
+  '/trip/:id/end': ({ data, params }) =>
+    render(setupTripEnd({ ...data, ...params })),
+  // '/trips/:id/edit': ({ data, params }) =>
+  //   render(setupTripEdit({ ...data, ...params })),
+
+  // Hauls or Efforts
+  '/haul': ({ params }) => render(setupHaulList(params)),
+  '/haul/:id': ({ data, params }) => {
+    if (data.id === 'start') { return }
+    render(setupHaulDetail({ ...data, ...params }))
   },
-  '/trips/:id/start': {
-    uses: ({ data }) => {
-      render(setupTripStart({ vpNo: data.id }))
-    }
+  '/haul/start': ({ params }) => render(setupHaulStart(params)),
+  '/haul/:id/end': ({ data, params }) =>
+    render(setupHaulEnd({ ...data, ...params })),
+
+  // Catches
+  '/catch': ({ params}) => render(setupCatchList(params)),
+  '/catch/:id': ({ data, params }) => {
+    if (data.id === 'start') { return }
+    render(setupCatchDetail({ ...data, ...params }))
   },
-  '/trips/:id/end': {
-    uses: ({ data, params}) => {
-      const opts = params.opts ? JSON.parse(params.opts) :{}
-      render(setupTripEnd({ vpNo: opts?.vpNo, tripId: data.id }))
-    }
-  },
-  // '/trips/:id/edit': {
-  //   uses: ({ data }) => {
-  //     render(setupTripEdit({ vpNo: data.id }))
-  //   }
-  // },
-  '/haul/:id': {
-    uses: ({ data }) => {
-      render(setupHaulList({ tripId: data.id }))
-    }
-  },
-  '/haul/:id/start': {
-    uses: ({ data }) => {
-      render(setupHaulStart({ tripId: data.id }))
-    }
-  },
-  '/catch/:id': {
-    uses: ({ data }) => {
-      render(setupCatchList({ haulId: data.id }))
-    }
-  },
-  '/catch/:id/add': {
-    uses: ({ data }) => {
-      render(setupCatchAdd({ haulId: data.id }))
-    }
-  },
+  '/catch/:id/add': ({ data, params}) =>
+    render(setupCatchAdd({ ...data, ...params })),
+
 })
 
-
-// router.on('/', async function() {
-//   // Root is currently: Login
-//   render(setupLogin())
-// }, {
-//   before(done, match) {
-//     document.querySelector('.usa-nav__close').click()
-//     done()
-//   }
-
-// })
-// .on('/vessels', async () => {
-//   // Try to update the w/API everytime.
-//   try {
-//     await vesselApi.get()
-//   } catch(e) {
-//     console.log('Error: ', e)
-//   }
-//   render(setupVesselList())
-
-// }).on('/vessels/:id', ({ data }) => {
-//   render(setupVesselList({ vpNo: data.id }))
-
-// }).on('/trips/:id', ({ data }) => {
-//   render(setupTripList({ vpNo: data.id }))
-
-// }).on('/trips/:id/start', ({ data }) => {
-//   render(setupTripStart({ vpNo: data.id }))
-
-// }).on('/haul/:id', ({ data }) => {
-//   render(setupHaulList({ tripId: data.id }))
-
-// }).on('/haul/:id/start', ({ data }) => {
-//   render(setupHaulStart({ tripId: data.id }))
-
-// }).on('/catch/:id', ({ data }) => {
-//   render(setupCatchList({ haulId: data.id }))
-
-// }).on('/catch/:id/add', ({ data }) => {
-//   render(setupCatchAdd({ haulId: data.id }))
-
-// })
 
 // Routing does not close the nav bar; Force it closed.
 document.querySelector('.route-navigo').addEventListener('click', () => {

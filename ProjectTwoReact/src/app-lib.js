@@ -89,3 +89,25 @@ export async function render(context, options = { id: null }) {
     return ctx
   })
 }
+
+/**
+ * Get current date based on device datestamp.
+ * Uses 24hr clock, GB time.
+ *
+ * Note: I prefer GB time also, but found this -> interesting. - https://technology.blog.gov.uk/2018/01/31/its-time-to-use-iso-8601-across-government/
+ * @returns English date time stamp.
+ */
+export function getDateNow() {
+  let date = new Date(); // based on device being correct
+
+  const options = {
+    year: "2-digit",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "numeric",
+    second: "numeric",
+  };
+
+  return date.toLocaleDateString("en-GB", options); // I want dd mmm yy, hh:mm:ss (24hr clock, GB does it right)
+}

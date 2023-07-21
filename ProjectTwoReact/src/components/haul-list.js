@@ -1,44 +1,68 @@
-import template from "./haul-list.html?raw";
-import { HaulCtrl } from "../controller/haul";
-import { render, watch } from "../app-lib";
+// import { HaulCtrl } from "../controller/haul";
+import { render } from "../app-lib";
+import { HaulStore } from "../store/haul";
 
 import { setupAppCrumbs } from "./app-crumbs";
-import { router } from "../main";
-
-/*
-  List Haul
-  Btn: Add New Haul;
-   - add-haul
-  List: Hauls -> haul-start.js
-   - haul-list
-*/
-const ctrl = new HaulCtrl()
 
 // Setup
-async function setupHaulList(props = { tripId: null }) {
-  render(setupAppCrumbs({ msg: 'Hauls' }), { id: false })
-
+async function setupHaulList(props = { tripId: null, vpNo: null }) {
   const tripId = props.tripId
-  const store = ctrl.getStore(tripId)
-  const storeRef = await store.getRef()
-  watch(storeRef, (n, o) => update(), { id: 'haulList' });
+  const vpNo = props.vpNo
+  render(setupAppCrumbs({ tripId, vpNo, msg: 'Hauls' }), { id: false })
 
+  const store = new HaulStore({vpNo, tripId})
+  const hauls = await store.getMany()
+  /*
+    List Haul
+    Btn: Add New Haul;
+      - add-haul
+    List: Hauls -> haul-start.js
+      - haul-list
+  */
   return {
-    template,
+    template: /*html*/ `
+<div class="margin-3">
+  <div class="usa-table-container--scrollable" tabindex="0">
+    <table class="usa-table usa-table--striped">
+      <caption>
+        Haul List
+      </caption>
+
+      <thead>
+        <tr>
+          <th data-sortable scope="col" role="columnheader">Catch List</th>
+          <th data-sortable scope="col" role="columnheader">GPS Start</th>
+          <th data-sortable scope="col" role="columnheader">Start Date</th>
+        </tr>
+      </thead>
+
+      <tbody id="haul-list">
+        ${ listHauls(hauls) }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="margin-3">
+    <label for="add-haul">
+      <a class="usa-button"
+        href="/haul/start?vpNo=${vpNo}&tripId=${tripId}"
+        id="add-haul"
+        name="add-haul"
+        data-navigo
+      >Add Haul</a>
+    </label>
+  </div>
+</div>
+    `,
     onAfter: async (el) => {
-      const hauls = await store.getMany()
-
-      // Update Trip List
-      el.querySelector("#haul-list").innerHTML = listHauls(hauls);
-      el.querySelector("#add-haul").href = `/haul/${tripId}/start`
-
-      router.updatePageLinks()
+      // Update Haul List
+      // Note: Haul items could be rendered in the after hook.
+      // const hauls = await store.getMany()
+      // el.querySelector("#haul-list").innerHTML = listHauls(hauls);
     },
   }
 
 }
-
-const haulId = (item) => `${item.tripId}-${item.id}`
 
 // Fragments
 function listHauls(items) {
@@ -46,10 +70,10 @@ function listHauls(items) {
     <tr>
       <th scope="row" data-sort-value="3">
         <a class="usa-button usa-button usa-button--accent-warm"
-          href="/catch/${haulId(item)}"
+          href="/haul/${item.id}?vpNo=${item.vpNo}&tripId=${item.tripId}"
           data-navigo
         >
-          ${haulId(item)}
+          ${item.id}
         </a>
       </th>
       <td data-sort-value="3">${item.startGps}</td>
