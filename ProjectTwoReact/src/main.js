@@ -2,7 +2,9 @@
 import Navigo from "navigo";
 import { render } from "./app-lib";
 import { vesselApi } from "./service/vessel-api";
+
 import 'leaflet/dist/leaflet.css'
+import '@uswds/uswds/css/uswds.min.css'
 
 import { setupLogin } from "./components/login";
 import { setupVesselDetail } from "./components/vessel-detail";
@@ -17,10 +19,23 @@ import { setupHaulStart } from "./components/haul-start";
 import { setupHaulEnd } from "./components/haul-end";
 import { setupCatchList } from "./components/catch-list";
 import { setupCatchAdd } from "./components/catch-add";
+import { setupAppMain } from './app-main.js';
 
 const hostPath = import.meta.env.VITE_HOST_PATH
 console.log('host path: %o', hostPath)
+
+// console.log('template: %o', template)
+render(setupAppMain(), { id: 'app-main' })
+
+
+
 const router = new Navigo(hostPath, { hash: true })
+
+// Always route to root if no route is found.
+router.notFound(() => {
+  console.log(' navigo: No route found.')
+  router.navigate('/')
+});
 
 router.on({
   '/': {
@@ -34,8 +49,8 @@ router.on({
         // uswds fires key down event for some reason during routing.
         // email input related; possibly autocomplete??
 
-        // Close Nav Bar before navigating to /.
-        document.querySelector('.usa-nav__close').click()
+        // Close Nav Bar before navigating to /; Ignore on app load.
+        document.querySelector('.usa-nav__close')?.click()
         done()
       }
     }
@@ -84,10 +99,13 @@ router.on({
 })
 
 
-// Routing does not close the nav bar; Force it closed.
-document.querySelector('.route-navigo').addEventListener('click', () => {
-  document.querySelector('.usa-nav__close').click()
-})
+// Initialize Main date components.
+// const b = document.getElementById('test-a2')
+// console.log(b)
+// datePicker.on()
+// datePicker.init(b)
+// initComponets
+
 
 router.resolve()
 

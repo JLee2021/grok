@@ -9,113 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0054a4" />
   <meta name="description" content="Proof of Concept for Mobile 1st, PWA: offline, IndexDB and US Web Design spec." />
-  <script src="/uswds/js/uswds-init.min.js" type="module"></script>
-  <link rel="stylesheet" href="/uswds/css/uswds.min.css" />
+  <!-- <script src="/uswds/js/uswds-init.min.js" type="module"></script> -->
+  <!-- <link rel="stylesheet" href="/uswds/css/uswds.min.css" /> -->
   <title>NOAA Fisheries - Atlas</title>
 </head>
 
 <body>
-  <script src="/uswds/js/uswds.min.js" type="module"></script>
-  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
-
-  <!-- begin header exp -->
-  <div class="usa-overlay"></div>
-  <header class="usa-header usa-header--basic">
-    <div class="usa-nav-container">
-      <div class="usa-navbar">
-        <div class="usa-logo">
-          <em class="usa-logo__text"><a href="/" title="Project Atlas">Project Atlas</a></em>
-        </div>
-
-        <button type="button" class="usa-menu-btn">Menu</button>
-      </div>
-
-      <nav aria-label="Primary navigation" class="usa-nav">
-        <button type="button" class="usa-nav__close">
-          <img src="/uswds/img/usa-icons/close.svg" role="img" alt="Close" />
-        </button>
-
-        <ul class="usa-nav__primary usa-accordion">
-          <li class="usa-nav__primary-item">
-            <button type="button" class="usa-accordion__button usa-nav__link usa-current" aria-expanded="false"
-              aria-controls="basic-nav-section-one">
-              <span>&lt;Current section&gt;</span>
-            </button>
-
-            <ul id="basic-nav-section-one" class="usa-nav__submenu">
-              <li class="usa-nav__submenu-item">
-                <a href="javascript:void(0);"><span>&lt;Navigation link&gt;</span></a>
-              </li>
-              <li class="usa-nav__submenu-item">
-                <a href="javascript:void(0);"><span>&lt;Navigation link&gt;</span></a>
-              </li>
-              <li class="usa-nav__submenu-item">
-                <a href="javascript:void(0);"><span>&lt;Navigation link&gt;</span></a>
-              </li>
-              <li class="usa-nav__submenu-item">
-                <a href="javascript:void(0);"><span>&lt;Navigation link&gt;</span></a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="usa-nav__primary-item">
-            <button type="button" class="usa-accordion__button usa-nav__link" aria-expanded="false"
-              aria-controls="basic-nav-section-two">
-              <span>Vessel</span>
-            </button>
-
-            <ul id="basic-nav-section-two" class="usa-nav__submenu">
-              <li class="usa-nav__submenu-item">
-                <a href="/vessel" class="route-navigo" data-navigo><span>Vessel List</span></a>
-              </li>
-              <li class="usa-nav__submenu-item">
-                <a href="javascript:void(0);"><span>&lt;Navigation link&gt;</span></a>
-              </li>
-              <li class="usa-nav__submenu-item">
-                <a href="javascript:void(0);"><span>&lt;Navigation link&gt;</span></a>
-              </li>
-            </ul>
-          </li>
-
-          <li class="usa-nav__primary-item">
-            <a href="/" class="usa-nav-link" data-navigo><span>Logout</span></a>
-          </li>
-        </ul>
-
-        <section aria-label="Search component">
-          <form class="usa-search usa-search--small" role="search">
-            <label class="usa-sr-only" for="search-field">Search</label>
-            <input class="usa-input" id="search-field" type="search" name="search" />
-            <button class="usa-button" type="submit">
-              <img src="/uswds/img/usa-icons-bg/search--white.svg" class="usa-search__submit-icon" alt="Search" />
-            </button>
-          </form>
-        </section>
-      </nav>
-    </div>
-  </header>
-  <!-- end header exp -->
-
-
-  <div class="usa-section">
-    <div class="grid-container">
-      <div id="app">
-        <div id="app-crumbs"></div>
-
-        <main class="" id="main-content"></main>
-        <script>
-          // Ttrying out breaking long HTML attrbiutes; 80+ chars is hard on me.
-          document.getElementById("main-content").classList.add(
-            'usa-layout-docs__main',
-            'desktop:grid-col-9',
-            'usa-prose',
-            'usa-layout-docs'
-          )
-        </script>
-      </div>
-    </div>
-  </div>
-
+  <div id="app-main"></div>
   <script type="module" src="/src/main.js"></script>
 </body>
 

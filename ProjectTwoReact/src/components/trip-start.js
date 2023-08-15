@@ -1,6 +1,7 @@
 // import template from './trip-start.html?raw'
 import { TripCtrl } from '../controller/trip'
 import { router } from '../main'
+import { datePicker } from '@uswds/uswds/js'
 
 const ctrl = new TripCtrl()
 
@@ -24,6 +25,24 @@ async function setupTripStart(props = {vpNo: null}) {
       <label class="usa-label" for="obs-id">Observer ID</label>
       <input class="usa-input" id="obs-id" title="Observer ID" name="obs-id" />
 
+
+      <div class="usa-form-group">
+        <label class="usa-label" id="appointment-date-label"
+          for="appointment-date"
+        >Trip Start (Date Picker Demo)</label>
+
+        <div class="usa-hint" id="appointment-date-hint">mm/dd/yyyy</div>
+        <div class="usa-date-picker">
+          <input
+            class="usa-input"
+            id="appointment-date"
+            name="appointment-date"
+            aria-labelledby="appointment-date-label"
+            aria-describedby="appointment-date-hint"
+          />
+        </div>
+      </div>
+
       <input id="start-trip" class="usa-button" type="submit" name="start-trip" value="Start Trip" />
     </fieldset>
   </form>
@@ -31,6 +50,9 @@ async function setupTripStart(props = {vpNo: null}) {
     `,
     onAfter: (el) => {
       el.querySelector('#start-trip').addEventListener('click', (e) => startTrip(e, vpNo))
+
+      // Init Date Picker
+      datePicker.on(el)
     }
   }
 

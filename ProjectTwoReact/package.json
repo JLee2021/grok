@@ -13,6 +13,7 @@
     "vite-plugin-pwa": "^0.16.4"
   },
   "dependencies": {
+    "@uswds/uswds": "^3.5.0",
     "leaflet": "^1.9.4",
     "localforage": "^1.10.0",
     "navigo": "^8.11.1"
